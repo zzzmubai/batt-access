@@ -1,0 +1,58 @@
+Start testing: Oct 19 07:56 EDT
+----------------------------------------------------------
+1/2 Testing: core
+1/2 Test: core
+Command: "/home/book/batt-access/build-asan/core_test"
+Directory: /home/book/batt-access/build-asan
+"core" start time: Oct 19 07:56 EDT
+Output:
+----------------------------------------------------------
+core_test: 402 checks passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"core" end time: Oct 19 07:56 EDT
+"core" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/2 Testing: network
+2/2 Test: network
+Command: "/usr/bin/python3" "/home/book/batt-access/tests/network_test.py" "/home/book/batt-access/build-asan/batt-access" "/home/book/batt-access/build-asan/batt-sim"
+Directory: /home/book/batt-access/build-asan
+"network" start time: Oct 19 07:56 EDT
+Output:
+----------------------------------------------------------
+test_32_concurrent_independent_devices (__main__.NetworkTests) ... ok
+test_balanced_bad_json_does_not_eat_next_login (__main__.NetworkTests) ... ok
+test_bound_connection_cannot_rebind_using_login (__main__.NetworkTests) ... ok
+test_bound_connection_cannot_spoof_other_device (__main__.NetworkTests) ... ok
+test_closed_oversized_object_is_rejected (__main__.NetworkTests) ... ok
+test_connection_limit_does_not_stop_existing_clients (__main__.NetworkTests) ... ok
+test_cpp_relogin_demo (__main__.NetworkTests) ... ok
+test_cpp_simulator_32_simultaneous_connections (__main__.NetworkTests) ... ok
+test_invalid_frame_is_atomic_and_does_not_ack (__main__.NetworkTests) ... ok
+test_invalid_new_login_does_not_kick_old_session (__main__.NetworkTests) ... ok
+test_login_fragmented_then_glued_messages (__main__.NetworkTests) ... ok
+test_real_fd_reuse_has_distinct_connection_ids (__main__.NetworkTests) ... ok
+test_replacement_closes_only_old_connection (__main__.NetworkTests) ... ok
+test_same_connection_login_is_idempotent (__main__.NetworkTests) ... ok
+test_signal_exit_with_live_client (__main__.NetworkTests) ... ok
+test_simulator_alarm_lifecycle (__main__.NetworkTests) ... ok
+test_stale_state_retains_connection_and_alarm_does_not_refresh (__main__.NetworkTests) ... ok
+test_unauthed_message_does_not_change_state (__main__.NetworkTests) ... ok
+test_unclosed_frame_times_out_without_claiming_recovery (__main__.NetworkTests) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 7.671s
+
+OK
+<end of output>
+Test time =   7.75 sec
+----------------------------------------------------------
+Test Passed.
+"network" end time: Oct 19 07:56 EDT
+"network" time elapsed: 00:00:07
+----------------------------------------------------------
+
+End testing: Oct 19 07:56 EDT

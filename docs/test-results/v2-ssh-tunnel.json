@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "path": "Windows loopback -> SSH 2222 -> Ubuntu loopback HTTP",
+  "windows_port": 9355,
+  "ubuntu_http_port": 38267,
+  "device": {
+    "alarm_history": 0,
+    "current_a": -1.25,
+    "devId": "BT000",
+    "open_alarms": 0,
+    "requestId": 1,
+    "session_token": 1,
+    "soc": 80,
+    "state": "online_fresh",
+    "temperature_c": 28,
+    "voltage_v": 52.8
+  }
+}

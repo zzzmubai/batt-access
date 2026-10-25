@@ -1,0 +1,19 @@
+{
+  "environment": "Ubuntu 18.04.2, GCC 7.4, Debug",
+  "test_hook_business_delay_ms": 300,
+  "samples": [
+    {
+      "BT001_ms": 326.63,
+      "BT002_ms": 326.36,
+      "slow_worker": 0,
+      "workers": 1
+    },
+    {
+      "BT001_ms": 0.94,
+      "BT002_ms": 294.53,
+      "slow_worker": 1,
+      "workers": 2
+    }
+  ],
+  "note": "One reproducible fault-injection comparison; not a throughput benchmark."
+}

@@ -1,0 +1,190 @@
+Start testing: Oct 19 22:38 EDT
+----------------------------------------------------------
+1/7 Testing: core
+1/7 Test: core
+Command: "/home/book/batt-access/build/core_test"
+Directory: /home/book/batt-access/build
+"core" start time: Oct 19 22:38 EDT
+Output:
+----------------------------------------------------------
+core_test: 402 checks passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"core" end time: Oct 19 22:38 EDT
+"core" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/7 Testing: query_unit
+2/7 Test: query_unit
+Command: "/home/book/batt-access/build/query_test"
+Directory: /home/book/batt-access/build
+"query_unit" start time: Oct 19 22:38 EDT
+Output:
+----------------------------------------------------------
+query_test: 31 checks passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"query_unit" end time: Oct 19 22:38 EDT
+"query_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/7 Testing: storage_unit
+3/7 Test: storage_unit
+Command: "/home/book/batt-access/build/store_test"
+Directory: /home/book/batt-access/build
+"storage_unit" start time: Oct 19 22:38 EDT
+Output:
+----------------------------------------------------------
+store_test: 42 checks passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"storage_unit" end time: Oct 19 22:38 EDT
+"storage_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/7 Testing: network
+4/7 Test: network
+Command: "/usr/bin/python3" "/home/book/batt-access/tests/network_test.py" "/home/book/batt-access/build/batt-access" "/home/book/batt-access/build/batt-sim"
+Directory: /home/book/batt-access/build
+"network" start time: Oct 19 22:38 EDT
+Output:
+----------------------------------------------------------
+test_32_concurrent_independent_devices (__main__.NetworkTests) ... ok
+test_balanced_bad_json_does_not_eat_next_login (__main__.NetworkTests) ... ok
+test_bound_connection_cannot_rebind_using_login (__main__.NetworkTests) ... ok
+test_bound_connection_cannot_spoof_other_device (__main__.NetworkTests) ... ok
+test_closed_oversized_object_is_rejected (__main__.NetworkTests) ... ok
+test_connection_limit_does_not_stop_existing_clients (__main__.NetworkTests) ... ok
+test_cpp_relogin_demo (__main__.NetworkTests) ... ok
+test_cpp_simulator_32_simultaneous_connections (__main__.NetworkTests) ... ok
+test_invalid_frame_is_atomic_and_does_not_ack (__main__.NetworkTests) ... ok
+test_invalid_new_login_does_not_kick_old_session (__main__.NetworkTests) ... ok
+test_login_fragmented_then_glued_messages (__main__.NetworkTests) ... ok
+test_real_fd_reuse_has_distinct_connection_ids (__main__.NetworkTests) ... ok
+test_replacement_closes_only_old_connection (__main__.NetworkTests) ... ok
+test_same_connection_login_is_idempotent (__main__.NetworkTests) ... ok
+test_signal_exit_with_live_client (__main__.NetworkTests) ... ok
+test_simulator_alarm_lifecycle (__main__.NetworkTests) ... ok
+test_stale_state_retains_connection_and_alarm_does_not_refresh (__main__.NetworkTests) ... ok
+test_unauthed_message_does_not_change_state (__main__.NetworkTests) ... ok
+test_unclosed_frame_times_out_without_claiming_recovery (__main__.NetworkTests) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 10.285s
+
+OK
+<end of output>
+Test time =  10.36 sec
+----------------------------------------------------------
+Test Passed.
+"network" end time: Oct 19 22:38 EDT
+"network" time elapsed: 00:00:10
+----------------------------------------------------------
+
+5/7 Testing: query_network
+5/7 Test: query_network
+Command: "/usr/bin/python3" "/home/book/batt-access/tests/query_network_test.py" "/home/book/batt-access/build/batt-access" "/home/book/batt-access/build/batt-sim"
+Directory: /home/book/batt-access/build
+"query_network" start time: Oct 19 22:38 EDT
+Output:
+----------------------------------------------------------
+test_cpp_persistent_simulator_answers_queries (__main__.QueryNetworkTests) ... ok
+test_full_queue_closes_sender_without_blocking_other_shard (__main__.QueryNetworkTests) ... ok
+test_half_close_keeps_admitted_ack_until_worker_finishes (__main__.QueryNetworkTests) ... ok
+test_interactive_terminal_automatically_uses_quiet_mode (__main__.QueryNetworkTests) ... ok
+test_invalid_response_does_not_complete_pending (__main__.QueryNetworkTests) ... ok
+test_offline_and_unknown_device_are_explicit (__main__.QueryNetworkTests) ... ok
+test_pending_disconnect_becomes_link_lost (__main__.QueryNetworkTests) ... ok
+test_queued_old_login_cannot_take_back_replaced_session (__main__.QueryNetworkTests) ... ok
+test_quiet_console_keeps_status_and_query_results_visible (__main__.QueryNetworkTests) ... ok
+test_relogin_and_old_response_do_not_complete_new_session (__main__.QueryNetworkTests) ... ok
+test_same_device_second_pending_is_busy (__main__.QueryNetworkTests) ... ok
+test_same_device_work_order_is_preserved (__main__.QueryNetworkTests) ... ok
+test_shutdown_drains_admitted_work_and_finishes_pending (__main__.QueryNetworkTests) ... ok
+test_stale_worker_send_result_cannot_reach_reused_socket (__main__.QueryNetworkTests) ... ok
+test_success_task_lookup_and_duplicate (__main__.QueryNetworkTests) ... ok
+test_timeout_late_frames_cannot_reverse_terminal_state (__main__.QueryNetworkTests) ... ok
+test_worker_isolation_comparison (__main__.QueryNetworkTests) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 7.884s
+
+OK
+WORKER_COMPARISON [{"BT001_ms": 304.57, "BT002_ms": 304.46, "slow_worker": 0, "workers": 1}, {"BT001_ms": 2.09, "BT002_ms": 284.18, "slow_worker": 1, "workers": 2}]
+<end of output>
+Test time =   7.96 sec
+----------------------------------------------------------
+Test Passed.
+"query_network" end time: Oct 19 22:38 EDT
+"query_network" time elapsed: 00:00:07
+----------------------------------------------------------
+
+6/7 Testing: persistence
+6/7 Test: persistence
+Command: "/usr/bin/python3" "/home/book/batt-access/tests/persistence_test.py" "/home/book/batt-access/build/batt-access" "/home/book/batt-access/build/batt-sim"
+Directory: /home/book/batt-access/build
+"persistence" start time: Oct 19 22:38 EDT
+Output:
+----------------------------------------------------------
+test_alarm_ack_means_committed_and_restart_keeps_open_only (__main__.PersistenceTests) ... ok
+test_alarm_crash_before_during_and_after_commit_is_atomic (__main__.PersistenceTests) ... ok
+test_autoincrement_not_reused_after_deleting_highest_history (__main__.PersistenceTests) ... ok
+test_complete_query_json_survives_restart_missing_and_empty_are_distinct (__main__.PersistenceTests) ... ok
+test_external_writer_lock_has_bounded_failure (__main__.PersistenceTests) ... ok
+test_failed_alarm_rolls_back_every_row_and_no_411_success (__main__.PersistenceTests) ... ok
+test_failed_login_does_not_ack_or_replace_committed_identity (__main__.PersistenceTests) ... ok
+test_failed_query_begin_does_not_send_910_or_publish_pending (__main__.PersistenceTests) ... ok
+test_failed_query_success_leaves_pending_for_recovery (__main__.PersistenceTests) ... ok
+test_normal_stop_commits_pending_terminal_state (__main__.PersistenceTests) ... ok
+test_query_allocation_crash_committed_pending_is_recovered (__main__.PersistenceTests) ... ok
+test_query_success_crash_does_not_publish_uncommitted_result (__main__.PersistenceTests) ... ok
+test_recovery_failure_never_listens_or_partially_changes_pending (__main__.PersistenceTests) ... ok
+test_replacement_login_and_old_pending_are_one_transaction (__main__.PersistenceTests) ... ok
+test_same_database_cannot_be_owned_by_two_servers (__main__.PersistenceTests) ... ok
+test_schema_constraints_and_invalid_database_startup (__main__.PersistenceTests) ... ok
+test_shutdown_deadline_exits_nonzero_with_unfinished_statistics (__main__.PersistenceTests) ... ok
+test_sigkill_pending_recovers_once_and_old_answer_is_orphan (__main__.PersistenceTests) ... ok
+test_timeout_and_disconnect_are_persisted_and_late_cannot_change_them (__main__.PersistenceTests) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 8.369s
+
+OK
+<end of output>
+Test time =   8.45 sec
+----------------------------------------------------------
+Test Passed.
+"persistence" end time: Oct 19 22:38 EDT
+"persistence" time elapsed: 00:00:08
+----------------------------------------------------------
+
+7/7 Testing: final_demo
+7/7 Test: final_demo
+Command: "/usr/bin/python3" "/home/book/batt-access/scripts/demo-final.py" "--build-dir" "/home/book/batt-access/build"
+Directory: /home/book/batt-access/build
+"final_demo" start time: Oct 19 22:38 EDT
+Output:
+----------------------------------------------------------
+{"acknowledgements": 256, "alarm_history": 96, "devices": 32, "step": "1/7 C++模拟器32终端闭环通过"}
+{"current_a": -1.25, "devices": 32, "invalid_frame": "整帧拒绝", "step": "2/7 独立固定样例与32条连接通过", "voltage_v": 52.8}
+{"first_id": 1, "new_id": 2, "open_alarms": 1, "step": "3/7 告警持续、恢复、再次触发通过"}
+{"freshness_test_ms": 2000, "old_task_state": "link_lost", "replaced_device": "BT002", "stale_device": "BT001", "step": "4/7 数据过期与会话替换通过"}
+{"query_timeout_ms": 3000, "scheduled_response_ms": 5000, "step": "5/7 查询成功、3秒超时、5秒迟到通过", "success_id": 2, "timeout_id": 3}
+{"devices": 32, "pending_id": 4, "reason": "server_restart", "recovered_state": "link_lost", "step": "6/7 崩溃后32设备离线，告警及终态保留"}
+{"database_integrity": "ok", "devices": 32, "new_id": 5, "previous_id": 4, "step": "7/7 32设备重新采集，编号继续增长"}
+{"evidence_dir": "临时库已清理", "result": "PASS", "step": "最终验收完成"}
+<end of output>
+Test time =  14.69 sec
+----------------------------------------------------------
+Test Passed.
+"final_demo" end time: Oct 19 22:38 EDT
+"final_demo" time elapsed: 00:00:14
+----------------------------------------------------------
+
+End testing: Oct 19 22:38 EDT

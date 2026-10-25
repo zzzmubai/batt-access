@@ -1,0 +1,112 @@
+Start testing: Oct 19 09:39 EDT
+----------------------------------------------------------
+1/4 Testing: core
+1/4 Test: core
+Command: "/home/book/batt-access/build/core_test"
+Directory: /home/book/batt-access/build
+"core" start time: Oct 19 09:39 EDT
+Output:
+----------------------------------------------------------
+core_test: 402 checks passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"core" end time: Oct 19 09:39 EDT
+"core" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/4 Testing: query_unit
+2/4 Test: query_unit
+Command: "/home/book/batt-access/build/query_test"
+Directory: /home/book/batt-access/build
+"query_unit" start time: Oct 19 09:39 EDT
+Output:
+----------------------------------------------------------
+query_test: 31 checks passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"query_unit" end time: Oct 19 09:39 EDT
+"query_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/4 Testing: network
+3/4 Test: network
+Command: "/usr/bin/python3" "/home/book/batt-access/tests/network_test.py" "/home/book/batt-access/build/batt-access" "/home/book/batt-access/build/batt-sim"
+Directory: /home/book/batt-access/build
+"network" start time: Oct 19 09:39 EDT
+Output:
+----------------------------------------------------------
+test_32_concurrent_independent_devices (__main__.NetworkTests) ... ok
+test_balanced_bad_json_does_not_eat_next_login (__main__.NetworkTests) ... ok
+test_bound_connection_cannot_rebind_using_login (__main__.NetworkTests) ... ok
+test_bound_connection_cannot_spoof_other_device (__main__.NetworkTests) ... ok
+test_closed_oversized_object_is_rejected (__main__.NetworkTests) ... ok
+test_connection_limit_does_not_stop_existing_clients (__main__.NetworkTests) ... ok
+test_cpp_relogin_demo (__main__.NetworkTests) ... ok
+test_cpp_simulator_32_simultaneous_connections (__main__.NetworkTests) ... ok
+test_invalid_frame_is_atomic_and_does_not_ack (__main__.NetworkTests) ... ok
+test_invalid_new_login_does_not_kick_old_session (__main__.NetworkTests) ... ok
+test_login_fragmented_then_glued_messages (__main__.NetworkTests) ... ok
+test_real_fd_reuse_has_distinct_connection_ids (__main__.NetworkTests) ... ok
+test_replacement_closes_only_old_connection (__main__.NetworkTests) ... ok
+test_same_connection_login_is_idempotent (__main__.NetworkTests) ... ok
+test_signal_exit_with_live_client (__main__.NetworkTests) ... ok
+test_simulator_alarm_lifecycle (__main__.NetworkTests) ... ok
+test_stale_state_retains_connection_and_alarm_does_not_refresh (__main__.NetworkTests) ... ok
+test_unauthed_message_does_not_change_state (__main__.NetworkTests) ... ok
+test_unclosed_frame_times_out_without_claiming_recovery (__main__.NetworkTests) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 9.146s
+
+OK
+<end of output>
+Test time =   9.21 sec
+----------------------------------------------------------
+Test Passed.
+"network" end time: Oct 19 09:39 EDT
+"network" time elapsed: 00:00:09
+----------------------------------------------------------
+
+4/4 Testing: query_network
+4/4 Test: query_network
+Command: "/usr/bin/python3" "/home/book/batt-access/tests/query_network_test.py" "/home/book/batt-access/build/batt-access" "/home/book/batt-access/build/batt-sim"
+Directory: /home/book/batt-access/build
+"query_network" start time: Oct 19 09:39 EDT
+Output:
+----------------------------------------------------------
+test_cpp_persistent_simulator_answers_queries (__main__.QueryNetworkTests) ... ok
+test_full_queue_closes_sender_without_blocking_other_shard (__main__.QueryNetworkTests) ... ok
+test_half_close_keeps_admitted_ack_until_worker_finishes (__main__.QueryNetworkTests) ... ok
+test_interactive_terminal_automatically_uses_quiet_mode (__main__.QueryNetworkTests) ... ok
+test_invalid_response_does_not_complete_pending (__main__.QueryNetworkTests) ... ok
+test_offline_and_unknown_device_are_explicit (__main__.QueryNetworkTests) ... ok
+test_pending_disconnect_becomes_link_lost (__main__.QueryNetworkTests) ... ok
+test_queued_old_login_cannot_take_back_replaced_session (__main__.QueryNetworkTests) ... ok
+test_quiet_console_keeps_status_and_query_results_visible (__main__.QueryNetworkTests) ... ok
+test_relogin_and_old_response_do_not_complete_new_session (__main__.QueryNetworkTests) ... ok
+test_same_device_second_pending_is_busy (__main__.QueryNetworkTests) ... ok
+test_same_device_work_order_is_preserved (__main__.QueryNetworkTests) ... ok
+test_shutdown_drains_admitted_work_and_finishes_pending (__main__.QueryNetworkTests) ... ok
+test_stale_worker_send_result_cannot_reach_reused_socket (__main__.QueryNetworkTests) ... ok
+test_success_task_lookup_and_duplicate (__main__.QueryNetworkTests) ... ok
+test_timeout_late_frames_cannot_reverse_terminal_state (__main__.QueryNetworkTests) ... ok
+test_worker_isolation_comparison (__main__.QueryNetworkTests) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 7.614s
+
+OK
+WORKER_COMPARISON [{"BT001_ms": 313.64, "BT002_ms": 313.5, "slow_worker": 0, "workers": 1}, {"BT001_ms": 1.09, "BT002_ms": 318.25, "slow_worker": 1, "workers": 2}]
+<end of output>
+Test time =   7.67 sec
+----------------------------------------------------------
+Test Passed.
+"query_network" end time: Oct 19 09:39 EDT
+"query_network" time elapsed: 00:00:07
+----------------------------------------------------------
+
+End testing: Oct 19 09:39 EDT

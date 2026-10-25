@@ -1,0 +1,214 @@
+{
+  "environment": {
+    "kernel": "5.4.0-150-generic",
+    "cpus": 4,
+    "build_dir": "/home/book/batt-access-v2/build"
+  },
+  "note": "Debug虚拟机短时基线；混合读状态/创建/重放；按结果类别分别统计时延，不以错误吞吐作为收益",
+  "profiles": [
+    {
+      "profile": "light",
+      "devices": 1,
+      "http_clients": 1,
+      "attempts": 30,
+      "seconds": 3.13,
+      "report_interval_seconds": 1,
+      "cpu_percent_one_core": 2.56,
+      "peak_rss_kib": 5908,
+      "outcomes": {
+        "created": 3,
+        "replayed": 3,
+        "state_ok": 24
+      },
+      "queues": [
+        {
+          "peak": 0,
+          "pending": 0,
+          "processing": false,
+          "queued": 0,
+          "worker": 0
+        },
+        {
+          "peak": 1,
+          "pending": 0,
+          "processing": false,
+          "queued": 0,
+          "worker": 1
+        }
+      ],
+      "http_stats": {
+        "bridge": {
+          "admitted": 30,
+          "application_timeouts": 0,
+          "queue_peak": 1,
+          "rejected": 0
+        },
+        "event": "http_stats",
+        "http": {
+          "conflicts": 0,
+          "created": 3,
+          "errors": 0,
+          "http_requests": 30,
+          "replayed": 3
+        }
+      },
+      "latency_ms_by_outcome": {
+        "created": {
+          "p50": 6.879,
+          "p95": 9.419,
+          "p99": 9.419
+        },
+        "replayed": {
+          "p50": 3.492,
+          "p95": 8.71,
+          "p99": 8.71
+        },
+        "state_ok": {
+          "p50": 2.551,
+          "p95": 6.714,
+          "p99": 8.418
+        }
+      }
+    },
+    {
+      "profile": "reporting",
+      "devices": 32,
+      "http_clients": 4,
+      "attempts": 120,
+      "seconds": 3.138,
+      "report_interval_seconds": 1,
+      "cpu_percent_one_core": 7.65,
+      "peak_rss_kib": 6264,
+      "outcomes": {
+        "created": 12,
+        "replayed": 12,
+        "state_ok": 96
+      },
+      "queues": [
+        {
+          "peak": 2,
+          "pending": 0,
+          "processing": false,
+          "queued": 0,
+          "worker": 0
+        },
+        {
+          "peak": 3,
+          "pending": 0,
+          "processing": false,
+          "queued": 0,
+          "worker": 1
+        }
+      ],
+      "http_stats": {
+        "bridge": {
+          "admitted": 120,
+          "application_timeouts": 0,
+          "queue_peak": 2,
+          "rejected": 0
+        },
+        "event": "http_stats",
+        "http": {
+          "conflicts": 0,
+          "created": 12,
+          "errors": 0,
+          "http_requests": 120,
+          "replayed": 12
+        }
+      },
+      "latency_ms_by_outcome": {
+        "created": {
+          "p50": 5.558,
+          "p95": 12.901,
+          "p99": 12.901
+        },
+        "replayed": {
+          "p50": 4.926,
+          "p95": 7.891,
+          "p99": 7.891
+        },
+        "state_ok": {
+          "p50": 3.205,
+          "p95": 5.806,
+          "p99": 11.495
+        }
+      }
+    },
+    {
+      "profile": "burst",
+      "devices": 32,
+      "http_clients": 16,
+      "attempts": 128,
+      "seconds": 0.415,
+      "report_interval_seconds": 1,
+      "cpu_percent_one_core": 21.7,
+      "peak_rss_kib": 6104,
+      "outcomes": {
+        "created": 11,
+        "transport_BrokenPipeError": 12,
+        "transport_RemoteDisconnected": 36,
+        "replayed": 9,
+        "state_ok": 60
+      },
+      "queues": [
+        {
+          "peak": 4,
+          "pending": 0,
+          "processing": false,
+          "queued": 0,
+          "worker": 0
+        },
+        {
+          "peak": 5,
+          "pending": 0,
+          "processing": false,
+          "queued": 0,
+          "worker": 1
+        }
+      ],
+      "http_stats": {
+        "bridge": {
+          "admitted": 80,
+          "application_timeouts": 0,
+          "queue_peak": 2,
+          "rejected": 0
+        },
+        "event": "http_stats",
+        "http": {
+          "conflicts": 0,
+          "created": 11,
+          "errors": 0,
+          "http_requests": 80,
+          "replayed": 9
+        }
+      },
+      "latency_ms_by_outcome": {
+        "created": {
+          "p50": 31.637,
+          "p95": 51.392,
+          "p99": 51.392
+        },
+        "transport_BrokenPipeError": {
+          "p50": 1.642,
+          "p95": 3.344,
+          "p99": 3.344
+        },
+        "transport_RemoteDisconnected": {
+          "p50": 1.208,
+          "p95": 3.246,
+          "p99": 3.469
+        },
+        "replayed": {
+          "p50": 52.344,
+          "p95": 53.098,
+          "p99": 53.098
+        },
+        "state_ok": {
+          "p50": 51.99,
+          "p95": 53.712,
+          "p99": 54.725
+        }
+      }
+    }
+  ]
+}

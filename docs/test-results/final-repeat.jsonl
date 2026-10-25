@@ -1,0 +1,8 @@
+{"acknowledgements": 256, "alarm_history": 96, "devices": 32, "step": "1/7 C++模拟器32终端闭环通过"}
+{"current_a": -1.25, "devices": 32, "invalid_frame": "整帧拒绝", "step": "2/7 独立固定样例与32条连接通过", "voltage_v": 52.8}
+{"first_id": 1, "new_id": 2, "open_alarms": 1, "step": "3/7 告警持续、恢复、再次触发通过"}
+{"freshness_test_ms": 2000, "old_task_state": "link_lost", "replaced_device": "BT002", "stale_device": "BT001", "step": "4/7 数据过期与会话替换通过"}
+{"query_timeout_ms": 3000, "scheduled_response_ms": 5000, "step": "5/7 查询成功、3秒超时、5秒迟到通过", "success_id": 2, "timeout_id": 3}
+{"devices": 32, "pending_id": 4, "reason": "server_restart", "recovered_state": "link_lost", "step": "6/7 崩溃后32设备离线，告警及终态保留"}
+{"database_integrity": "ok", "devices": 32, "new_id": 5, "previous_id": 4, "step": "7/7 32设备重新采集，编号继续增长"}
+{"evidence_dir": "临时库已清理", "result": "PASS", "step": "最终验收完成"}

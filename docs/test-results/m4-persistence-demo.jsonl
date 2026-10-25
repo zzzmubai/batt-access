@@ -1,0 +1,4 @@
+{"step": "崩溃前：一个成功任务、一个pending、一条open告警", "success_id": 1, "pending_id": 2}
+{"step": "重启后：离线、告警保留、旧成功结果保留、pending结束", "state": "offline", "open_alarms": 1, "recovered_task": {"connection_id": "f9e039b5-886e-4d4d-a831-beb14babd589:1", "created_ms": 1792462302721, "devId": "BT000", "event": "task", "finished_ms": 1792462302736, "reason": "server_restart", "response": null, "state": "link_lost", "txnNo": 2, "worker": 0}}
+{"step": "重新登录上报：新编号继续增长，重复集合没有新增告警", "new_id": 3, "state": "online_fresh", "alarm_history": 1}
+{"step": "全部断言通过；只终止演示脚本自己启动的服务，临时库已清理"}

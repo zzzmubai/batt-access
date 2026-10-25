@@ -1,0 +1,7 @@
+--- upstream/httplib.h
++++ batt-access/httplib.h
+@@
+-  virtual bool process_and_close_socket(socket_t sock);
++protected: // batt-access lifecycle hook; no HTTP parsing/serving logic changed.
++  virtual bool process_and_close_socket(socket_t sock);
++private:

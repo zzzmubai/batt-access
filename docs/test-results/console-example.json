@@ -1,0 +1,6 @@
+{
+  "status": "[STATUS] BT000 | online_fresh（在线，数据新鲜） | 电压=52.80V | 电流=-1.25A | SOC=80% | 温度=28C | worker=1",
+  "pending": "[QUERY #1] BT000 | pending（等待终端应答）",
+  "success": "[QUERY #1] BT000 | success（查询成功）",
+  "result": "[RESULT #1] {\"attrList\":[{\"delay\":1000,\"id\":\"8001\",\"protect\":4150,\"recovery\":4100}],\"devId\":\"BT000\",\"msgType\":911,\"txnNo\":1}"
+}

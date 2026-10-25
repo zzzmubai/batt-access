@@ -1,0 +1,38 @@
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/book/batt-access-v2/build-tsan
+[ 19%] Built target batt_sqlite
+[ 19%] Built target batt_http
+[ 28%] Built target batt-sim
+[ 52%] Built target batt_worker
+[ 52%] Built target batt-db
+[ 61%] Built target store_test
+[ 71%] Built target api_test
+[ 80%] Built target query_test
+[ 90%] Built target batt-access
+[100%] Built target core_test
+Test project /home/book/batt-access-v2/build-tsan
+      Start  1: core
+ 1/10 Test  #1: core .............................   Passed    0.08 sec
+      Start  2: query_unit
+ 2/10 Test  #2: query_unit .......................   Passed    0.02 sec
+      Start  3: storage_unit
+ 3/10 Test  #3: storage_unit .....................   Passed    0.09 sec
+      Start  4: api_unit
+ 4/10 Test  #4: api_unit .........................   Passed    0.05 sec
+      Start  5: network
+ 5/10 Test  #5: network ..........................   Passed   12.34 sec
+      Start  6: query_network
+ 6/10 Test  #6: query_network ....................   Passed    8.86 sec
+      Start  7: persistence
+ 7/10 Test  #7: persistence ......................   Passed   19.97 sec
+      Start  8: final_demo
+ 8/10 Test  #8: final_demo .......................   Passed   16.36 sec
+      Start  9: http_network
+ 9/10 Test  #9: http_network .....................   Passed    9.84 sec
+      Start 10: http_demo
+10/10 Test #10: http_demo ........................   Passed    0.93 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Total Test time (real) =  68.54 sec

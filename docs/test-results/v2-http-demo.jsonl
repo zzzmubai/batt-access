@@ -1,0 +1,6 @@
+{"step": "1/5 HTTP读取设备与告警", "state": "online_fresh", "voltage_v": 52.8, "alarms": {"items": [{"clear_ms": null, "desc": "03", "devId": "BT000", "event_no": 1, "first_ms": 1792765931484, "id": 1, "last_ms": 1792765931484, "state": "open"}], "nextBeforeId": null, "requestId": 2}}
+{"step": "2/5 HTTP响应丢失，同号重试返回原任务", "status": 200, "txnNo": 1, "replayed": true}
+{"step": "3/5 原任务成功，重复请求不重发910", "task": {"clientRequestId": "lost-response", "connection_id": "93331bfe-5283-4506-8b4a-32a94ce66f56:1", "created_ms": 1792765931527, "devId": "BT000", "event": "task", "finished_ms": 1792765931650, "reason": "", "requestId": 5, "response": {"attrList": [{"delay": 1000, "id": "8001", "protect": 4150, "recovery": 4100}], "devId": "BT000", "msgType": 911, "txnNo": 1}, "state": "success", "txnNo": 1}}
+{"step": "4/5 重启后仍按原请求号找回任务", "task": {"clientRequestId": "restart-pending", "connection_id": "93331bfe-5283-4506-8b4a-32a94ce66f56:1", "created_ms": 1792765931682, "devId": "BT000", "event": "task", "finished_ms": 1792765932090, "reason": "server_restart", "replayed": true, "requestId": 1, "response": null, "state": "link_lost", "txnNo": 2}}
+{"step": "5/5 跨设备请求号冲突被拒绝，记录数保持2", "http_status": 409, "error": {"code": "request_id_conflict", "message": "Query not created"}}
+{"step": "HTTP演示全部通过", "result": "PASS", "evidence_dir": "/tmp/batt-v2-demo2"}

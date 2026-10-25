@@ -1,0 +1,8 @@
+{
+  "result": "passed",
+  "query_timeout_ms": 3000,
+  "simulator_response_delay_ms": 5000,
+  "observed_timeout_after_ms": 3007.76,
+  "observed_late_after_ms": 5024.06,
+  "task_state_after_late": "timeout"
+}

@@ -1,0 +1,7 @@
+test_worker_isolation_comparison (query_network_test.QueryNetworkTests) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.380s
+
+OK
+WORKER_COMPARISON [{"BT001_ms": 304.47, "BT002_ms": 304.38, "slow_worker": 0, "workers": 1}, {"BT001_ms": 4.21, "BT002_ms": 310.19, "slow_worker": 1, "workers": 2}]

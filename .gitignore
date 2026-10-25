@@ -1,0 +1,12 @@
+/build*/
+*.log
+__pycache__/
+*.tar.gz
+*.db
+*.db-*
+*.db.lock
+/artifacts/
+/.local/
+
+# Personal study notes (keep locally)
+/src/docs_me.md/

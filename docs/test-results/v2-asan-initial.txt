@@ -1,0 +1,149 @@
+-- The C compiler identification is GNU 7.4.0
+-- The CXX compiler identification is GNU 7.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.6.9", minimum required is "3") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/book/batt-access-v2/build-asan
+Scanning dependencies of target batt_http
+[  4%] Building CXX object CMakeFiles/batt_http.dir/src/http_api.cpp.o
+Scanning dependencies of target batt_sqlite
+[  9%] Building C object CMakeFiles/batt_sqlite.dir/third_party/sqlite/sqlite3.c.o
+[ 14%] Linking C static library libbatt_sqlite.a
+[ 14%] Built target batt_sqlite
+Scanning dependencies of target batt-sim
+[ 19%] Building CXX object CMakeFiles/batt-sim.dir/src/sim.cpp.o
+[ 23%] Linking CXX static library libbatt_http.a
+[ 23%] Built target batt_http
+Scanning dependencies of target batt_worker
+[ 28%] Building CXX object CMakeFiles/batt_worker.dir/src/worker.cpp.o
+[ 33%] Linking CXX executable batt-sim
+[ 33%] Built target batt-sim
+Scanning dependencies of target batt-db
+[ 38%] Building C object CMakeFiles/batt-db.dir/third_party/sqlite/shell.c.o
+[ 42%] Linking C executable batt-db
+[ 42%] Built target batt-db
+[ 47%] Building CXX object CMakeFiles/batt_worker.dir/src/store.cpp.o
+[ 52%] Linking CXX static library libbatt_worker.a
+[ 52%] Built target batt_worker
+Scanning dependencies of target store_test
+Scanning dependencies of target api_test
+[ 61%] Building CXX object CMakeFiles/api_test.dir/tests/api_test.cpp.o
+[ 61%] Building CXX object CMakeFiles/store_test.dir/tests/store_test.cpp.o
+[ 66%] Linking CXX executable api_test
+[ 66%] Built target api_test
+Scanning dependencies of target query_test
+[ 71%] Building CXX object CMakeFiles/query_test.dir/tests/query_test.cpp.o
+[ 76%] Linking CXX executable store_test
+[ 76%] Built target store_test
+Scanning dependencies of target batt-access
+[ 80%] Building CXX object CMakeFiles/batt-access.dir/src/access.cpp.o
+[ 85%] Linking CXX executable query_test
+[ 85%] Built target query_test
+Scanning dependencies of target core_test
+[ 90%] Building CXX object CMakeFiles/core_test.dir/tests/core_test.cpp.o
+[ 95%] Linking CXX executable batt-access
+[ 95%] Built target batt-access
+[100%] Linking CXX executable core_test
+[100%] Built target core_test
+Test project /home/book/batt-access-v2/build-asan
+    Start 1: core
+1/9 Test #1: core .............................   Passed    0.04 sec
+    Start 2: query_unit
+2/9 Test #2: query_unit .......................   Passed    0.02 sec
+    Start 3: storage_unit
+3/9 Test #3: storage_unit .....................   Passed    0.06 sec
+    Start 4: api_unit
+4/9 Test #4: api_unit .........................   Passed    0.05 sec
+    Start 5: network
+5/9 Test #5: network ..........................   Passed   12.70 sec
+    Start 6: query_network
+6/9 Test #6: query_network ....................   Passed    9.62 sec
+    Start 7: persistence
+7/9 Test #7: persistence ......................   Passed   10.70 sec
+    Start 8: final_demo
+8/9 Test #8: final_demo .......................   Passed   16.38 sec
+    Start 9: http_network
+9/9 Test #9: http_network .....................***Failed   10.73 sec
+test_before_and_after_commit_crash_never_split_key_and_task (__main__.HttpRecoveryTests) ... ok
+test_migration_failure_and_mid_ddl_crash_are_atomic (__main__.HttpRecoveryTests) ... ok
+test_restart_returns_same_request_and_preserves_completed_task (__main__.HttpRecoveryTests) ... ok
+test_schema_one_migrates_without_losing_records_or_sequence (__main__.HttpRecoveryTests) ... ok
+test_sql_failure_rolls_back_task_key_and_exits_nonzero (__main__.HttpRecoveryTests) ... ok
+test_alarm_cursor_filters_and_new_insert_no_duplicate_ids (__main__.HttpTests) ... ok
+test_application_timeout_before_execution_skips_task_and_late_reply (__main__.HttpTests) ... ok
+test_body_header_bounds_and_device_io_progress (__main__.HttpTests) ... ok
+test_busy_rejection_does_not_reserve_request_key (__main__.HttpTests) ... ok
+test_cli_and_http_have_one_pending_guard (__main__.HttpTests) ... ok
+test_client_response_lost_keeps_task_and_deduplicates (__main__.HttpTests) ... ok
+test_concurrent_results_have_unique_request_ids (__main__.HttpTests) ... ok
+test_connection_queue_is_bounded_without_blocking_devices (__main__.HttpTests) ... ok
+test_cross_shard_same_key_conflict_is_not_storage_failure (__main__.HttpTests) ... ok
+test_disabled_by_default_and_fixed_loopback (__main__.HttpTests) ... ok
+test_occupied_http_port_fails_startup_without_ready (__main__.HttpTests) ... ERROR
+test_offline_is_durable_terminal_unknown_is_not_persisted (__main__.HttpTests) ... ok
+test_post_commit_location_and_complete_result (__main__.HttpTests) ... ok
+test_replay_before_busy_and_after_terminal_does_not_resend (__main__.HttpTests) ... ok
+test_simultaneous_same_key_only_one_task (__main__.HttpTests) ... ok
+test_state_and_cli_share_snapshot (__main__.HttpTests) ... ok
+test_stopping_with_slow_drip_body_releases_http_threads (__main__.HttpTests) ... ok
+test_timeout_during_sql_commit_can_be_recovered_by_same_key (__main__.HttpTests) ... ok
+test_timeout_late_and_polling_preserve_terminal_state (__main__.HttpTests) ... ok
+test_validation_method_and_media_errors_are_nonfatal (__main__.HttpTests) ... ok
+
+======================================================================
+ERROR: test_occupied_http_port_fails_startup_without_ready (__main__.HttpTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/subprocess.py", line 425, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 863, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 1535, in _communicate
+    self._check_timeout(endtime, orig_timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 891, in _check_timeout
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['/home/book/batt-access-v2/build-asan/batt-access', '--port', '0', '--http-port', '49689', '--db', '/tmp/batt-http-bind-tayuzek6/test.db']' timed out after 5 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/book/batt-access-v2/tests/http_test.py", line 70, in test_occupied_http_port_fails_startup_without_ready
+    stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,universal_newlines=True,timeout=5)
+  File "/usr/lib/python3.6/subprocess.py", line 430, in run
+    stderr=stderr)
+subprocess.TimeoutExpired: Command '['/home/book/batt-access-v2/build-asan/batt-access', '--port', '0', '--http-port', '49689', '--db', '/tmp/batt-http-bind-tayuzek6/test.db']' timed out after 5 seconds
+
+----------------------------------------------------------------------
+Ran 25 tests in 10.631s
+
+FAILED (errors=1)
+
+
+89% tests passed, 1 tests failed out of 9
+
+Total Test time (real) =  60.30 sec
+
+The following tests FAILED:
+	  9 - http_network (Failed)
+Errors while running CTest

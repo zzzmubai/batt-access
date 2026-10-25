@@ -1,0 +1,5 @@
+# SQLite's WAL header uses double-read/checksum and shared-memory barriers.
+# Upstream tag-20200519-1 documents possible TSAN false positives here.
+# Suppress this exact WAL reader only; do not suppress batt code or all SQLite.
+# https://github.com/sqlite/sqlite/blob/master/src/wal.c
+race:walIndexTryHdr

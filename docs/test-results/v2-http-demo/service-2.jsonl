@@ -1,0 +1,7 @@
+{"boot_id": "80a2667e-dc1f-4e3a-bc17-b9c27a46d526", "cli": true, "database": "/tmp/batt-http-demo-qsu15vhz/demo.db", "event": "ready", "freshness_ms": 90000, "host": "127.0.0.1", "http_port": 43345, "max_clients": 128, "milestone": 4, "persistence": "sqlite", "port": 35155, "query_timeout_ms": 3000, "quiet": false, "sqlite_version": "3.51.3", "version": "2.0.0", "workers": 2}
+{"alarm_history": 1, "connection_id": null, "current_a": null, "devId": "BT000", "event": "device_state", "open_alarms": 1, "session_token": 0, "soc": null, "state": "offline", "temperature_c": null, "voltage_v": null, "worker": 1}
+{"event": "stopping", "reason": "requested", "unaccepted_bytes": 0}
+{"connection_id": null, "duplicate_response": 0, "event": "worker_stats", "late_frames": 0, "late_tasks": 0, "orphan_response": 0, "pending": 0, "queue_peak": 1, "tasks": 0, "worker": 0}
+{"connection_id": null, "duplicate_response": 0, "event": "worker_stats", "late_frames": 0, "late_tasks": 0, "orphan_response": 0, "pending": 0, "queue_peak": 1, "tasks": 0, "worker": 1}
+{"bad_json": 0, "event": "stopped", "overloaded": 0, "peak_clients": 0, "registered_devices": 1, "replacements": 0, "stale_events": 0, "stale_results": 0}
+{"bridge": {"admitted": 4, "application_timeouts": 0, "queue_peak": 1, "rejected": 0}, "event": "http_stats", "http": {"conflicts": 1, "created": 0, "errors": 0, "http_requests": 4, "replayed": 2}}

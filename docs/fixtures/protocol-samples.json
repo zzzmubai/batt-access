@@ -1,0 +1,38 @@
+{
+  "source": "手工固定样例；devId和txnNo在演示中按连接/请求替换；预期独立于C++业务状态机",
+  "login": {
+    "request": {"msgType":110,"devId":"BT000","imsi":"SIM000","devType":1,"txnNo":1},
+    "expected_ack": {"msgType":111,"devId":"BT000","txnNo":1,"result":1},
+    "expected_state": "connected_no_data"
+  },
+  "attributes": {
+    "request": {"msgType":310,"devId":"BT000","txnNo":2,"attrList":[
+      {"id":"01111001","value":5280}, {"id":"01112001","value":-125},
+      {"id":"01113001","value":80}, {"id":"01119001","value":28},
+      {"id":"01102001","value":120.12}]},
+    "expected_ack": {"msgType":311,"devId":"BT000","txnNo":2,"result":1},
+    "expected_snapshot": {"state":"online_fresh","voltage_v":52.8,"current_a":-1.25,"soc":80,"temperature_c":28}
+  },
+  "invalid_soc": {
+    "request": {"msgType":310,"devId":"BT000","txnNo":3,"attrList":[
+      {"id":"01111001","value":6000}, {"id":"01113001","value":101}]},
+    "expected_ack": null,
+    "expected_reason": "invalid_attributes",
+    "expected_unchanged": {"voltage_v":52.8,"soc":80}
+  },
+  "alarm_open": {
+    "request": {"msgType":410,"devId":"BT000","txnNo":4,"alarmList":[{"id":"01003001","alarmDesc":"03","alarmFlag":1}]},
+    "expected_ack": {"msgType":411,"devId":"BT000","txnNo":4,"result":1},
+    "expected": {"open_alarms":1,"alarm_history":1,"repeat_history":1}
+  },
+  "alarm_clear": {
+    "request": {"msgType":410,"devId":"BT000","txnNo":5,"alarmList":[{"id":"01003001","alarmDesc":"000","alarmFlag":0}]},
+    "expected_ack": {"msgType":411,"devId":"BT000","txnNo":5,"result":1},
+    "expected": {"open_alarms":0,"alarm_history":1,"reopen_history":2}
+  },
+  "query": {
+    "request": {"msgType":910,"devId":"BT000","txnNo":1},
+    "response": {"msgType":911,"devId":"BT000","txnNo":1,"attrList":[{"id":"8001","protect":4150,"recovery":4100,"delay":1000}]},
+    "expected": {"timely":"success","late":"timeout","restart_pending":"link_lost","restart_reason":"server_restart"}
+  }
+}

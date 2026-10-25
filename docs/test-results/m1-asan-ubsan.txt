@@ -1,0 +1,47 @@
+Start testing: Oct 19 05:31 EDT
+----------------------------------------------------------
+1/2 Testing: core
+1/2 Test: core
+Command: "/home/book/batt-access/build-asan/core_test"
+Directory: /home/book/batt-access/build-asan
+"core" start time: Oct 19 05:31 EDT
+Output:
+----------------------------------------------------------
+core_test: 378 checks passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"core" end time: Oct 19 05:31 EDT
+"core" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/2 Testing: network
+2/2 Test: network
+Command: "/usr/bin/python3" "/home/book/batt-access/tests/network_test.py" "/home/book/batt-access/build-asan/batt-access" "/home/book/batt-access/build-asan/batt-sim"
+Directory: /home/book/batt-access/build-asan
+"network" start time: Oct 19 05:31 EDT
+Output:
+----------------------------------------------------------
+test_balanced_bad_json_does_not_eat_next_login (__main__.NetworkTests) ... ok
+test_closed_oversized_object_is_rejected (__main__.NetworkTests) ... ok
+test_invalid_frame_is_atomic_and_does_not_ack (__main__.NetworkTests) ... ok
+test_login_fragmented_then_glued_messages (__main__.NetworkTests) ... ok
+test_signal_exit_with_live_client (__main__.NetworkTests) ... ok
+test_simulator_alarm_lifecycle (__main__.NetworkTests) ... ok
+test_unauthed_message_does_not_change_state (__main__.NetworkTests) ... ok
+test_unclosed_frame_times_out_without_claiming_recovery (__main__.NetworkTests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 5.267s
+
+OK
+<end of output>
+Test time =   5.32 sec
+----------------------------------------------------------
+Test Passed.
+"network" end time: Oct 19 05:31 EDT
+"network" time elapsed: 00:00:05
+----------------------------------------------------------
+
+End testing: Oct 19 05:31 EDT

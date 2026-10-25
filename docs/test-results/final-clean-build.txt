@@ -1,0 +1,79 @@
+-- The C compiler identification is GNU 7.4.0
+-- The CXX compiler identification is GNU 7.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.6.9", minimum required is "3") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/book/batt-access/build-final-clean-v1
+Scanning dependencies of target batt-sim
+[  5%] Building CXX object CMakeFiles/batt-sim.dir/src/sim.cpp.o
+Scanning dependencies of target batt_sqlite
+[ 11%] Building C object CMakeFiles/batt_sqlite.dir/third_party/sqlite/sqlite3.c.o
+[ 17%] Linking C static library libbatt_sqlite.a
+[ 17%] Built target batt_sqlite
+Scanning dependencies of target batt_worker
+[ 23%] Building CXX object CMakeFiles/batt_worker.dir/src/worker.cpp.o
+[ 29%] Linking CXX executable batt-sim
+[ 29%] Built target batt-sim
+[ 35%] Building CXX object CMakeFiles/batt_worker.dir/src/store.cpp.o
+Scanning dependencies of target batt-db
+[ 41%] Building C object CMakeFiles/batt-db.dir/third_party/sqlite/shell.c.o
+[ 47%] Linking CXX static library libbatt_worker.a
+[ 47%] Built target batt_worker
+Scanning dependencies of target store_test
+[ 52%] Building CXX object CMakeFiles/store_test.dir/tests/store_test.cpp.o
+[ 58%] Linking C executable batt-db
+[ 58%] Built target batt-db
+Scanning dependencies of target query_test
+[ 64%] Building CXX object CMakeFiles/query_test.dir/tests/query_test.cpp.o
+[ 70%] Linking CXX executable store_test
+[ 70%] Built target store_test
+Scanning dependencies of target batt-access
+[ 76%] Building CXX object CMakeFiles/batt-access.dir/src/access.cpp.o
+[ 82%] Linking CXX executable query_test
+[ 82%] Built target query_test
+Scanning dependencies of target core_test
+[ 88%] Building CXX object CMakeFiles/core_test.dir/tests/core_test.cpp.o
+[ 94%] Linking CXX executable core_test
+[100%] Linking CXX executable batt-access
+[100%] Built target core_test
+[100%] Built target batt-access
+Test project /home/book/batt-access/build-final-clean-v1
+    Start 1: core
+1/7 Test #1: core .............................   Passed    0.01 sec
+    Start 2: query_unit
+2/7 Test #2: query_unit .......................   Passed    0.00 sec
+    Start 3: storage_unit
+3/7 Test #3: storage_unit .....................   Passed    0.02 sec
+    Start 4: network
+4/7 Test #4: network ..........................   Passed   10.43 sec
+    Start 5: query_network
+5/7 Test #5: query_network ....................   Passed    7.95 sec
+    Start 6: persistence
+6/7 Test #6: persistence ......................   Passed    8.71 sec
+    Start 7: final_demo
+7/7 Test #7: final_demo .......................   Passed   15.16 sec
+
+100% tests passed, 0 tests failed out of 7
+
+Total Test time (real) =  42.29 sec

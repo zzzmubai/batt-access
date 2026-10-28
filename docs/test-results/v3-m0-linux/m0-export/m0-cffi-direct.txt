@@ -1,0 +1,9 @@
+Collecting cffi
+  Downloading cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+Collecting pycparser (from cffi)
+  Downloading pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
+Downloading cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+Downloading pycparser-3.12-py3-none-any.whl (62 kB)
+Installing collected packages: pycparser, cffi
+
+Successfully installed cffi-2.1.1 pycparser-3.12

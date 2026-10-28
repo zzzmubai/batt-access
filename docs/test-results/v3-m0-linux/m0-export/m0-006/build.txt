@@ -1,0 +1,3 @@
+[ 75%] Linking CXX executable mysql_smoke
+[ 75%] Built target config_test
+[100%] Built target mysql_smoke

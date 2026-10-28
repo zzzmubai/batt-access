@@ -1,0 +1,76 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+CMake Warning (dev) at CMakeLists.txt:64 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.12.3", minimum required is "3") 
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/book/batt-access-v2-baseline/build
+[  9%] Building C object CMakeFiles/batt_sqlite.dir/third_party/sqlite/sqlite3.c.o
+[  9%] Building CXX object CMakeFiles/batt_http.dir/src/http_api.cpp.o
+In file included from /home/book/batt-access-v2-baseline/src/http_api.hpp:2,
+                 from /home/book/batt-access-v2-baseline/src/http_api.cpp:7:
+/home/book/batt-access-v2-baseline/src/api.hpp:81:19: error: ‘ApiCall’ was not declared in this scope
+   81 |     std::optional<ApiCall> take() { return input_.try_pop(); }
+      |                   ^~~~~~~
+/home/book/batt-access-v2-baseline/src/api.hpp:81:26: error: template argument 1 is invalid
+   81 |     std::optional<ApiCall> take() { return input_.try_pop(); }
+      |                          ^
+/home/book/batt-access-v2-baseline/src/api.hpp:94:18: error: ‘ApiCall’ was not declared in this scope
+   94 |     BoundedQueue<ApiCall> input_;
+      |                  ^~~~~~~
+/home/book/batt-access-v2-baseline/src/api.hpp:94:25: error: template argument 1 is invalid
+   94 |     BoundedQueue<ApiCall> input_;
+      |                         ^
+/home/book/batt-access-v2-baseline/src/api.hpp: In constructor ‘batt::ApiBridge::ApiBridge(std::chrono::milliseconds, std::size_t)’:
+/home/book/batt-access-v2-baseline/src/api.hpp:62:18: warning: conversion from ‘std::size_t’ {aka ‘long unsigned int’} to ‘int’ may change value [-Wconversion]
+   62 |         : input_(capacity), wait_(wait) {}
+      |                  ^~~~~~~~
+/home/book/batt-access-v2-baseline/src/api.hpp: In member function ‘batt::ApiReply batt::ApiBridge::call(batt::Command)’:
+/home/book/batt-access-v2-baseline/src/api.hpp:70:63: error: request for member ‘try_push’ in ‘((batt::ApiBridge*)this)->batt::ApiBridge::input_’, which is of non-class type ‘int’
+   70 |             if (closed_ || contexts_.size() >= 160 || !input_.try_push({std::move(command), context})) {
+      |                                                               ^~~~~~~~
+/home/book/batt-access-v2-baseline/src/api.hpp: In member function ‘int batt::ApiBridge::take()’:
+/home/book/batt-access-v2-baseline/src/api.hpp:81:51: error: request for member ‘try_pop’ in ‘((batt::ApiBridge*)this)->batt::ApiBridge::input_’, which is of non-class type ‘int’
+   81 |     std::optional<ApiCall> take() { return input_.try_pop(); }
+      |                                                   ^~~~~~~
+/home/book/batt-access-v2-baseline/src/api.hpp: In member function ‘void batt::ApiBridge::close()’:
+/home/book/batt-access-v2-baseline/src/api.hpp:84:32: error: request for member ‘close’ in ‘((batt::ApiBridge*)this)->batt::ApiBridge::input_’, which is of non-class type ‘int’
+   84 |         closed_ = true; input_.close();
+      |                                ^~~~~
+/home/book/batt-access-v2-baseline/src/api.hpp: In member function ‘batt::Json batt::ApiBridge::stats() const’:
+/home/book/batt-access-v2-baseline/src/api.hpp:92:72: error: request for member ‘peak’ in ‘((const batt::ApiBridge*)this)->batt::ApiBridge::input_’, which is of non-class type ‘const int’
+   92 |         {"application_timeouts",timeouts_.load()},{"queue_peak",input_.peak()}}; }
+      |                                                                        ^~~~
+/home/book/batt-access-v2-baseline/src/api.hpp:92:79: error: could not convert ‘{{"admitted", ((const batt::ApiBridge*)this)->batt::ApiBridge::admitted_.std::atomic<long unsigned int>::<anonymous>.std::__atomic_base<long unsigned int>::load(std::memory_order_seq_cst)}, {"rejected", ((const batt::ApiBridge*)this)->batt::ApiBridge::rejected_.std::atomic<long unsigned int>::<anonymous>.std::__atomic_base<long unsigned int>::load(std::memory_order_seq_cst)}, {"application_timeouts", ((const batt::ApiBridge*)this)->batt::ApiBridge::timeouts_.std::atomic<long unsigned int>::<anonymous>.std::__atomic_base<long unsigned int>::load(std::memory_order_seq_cst)}, {"queue_peak", <expression error>}}’ from ‘<brace-enclosed initializer list>’ to ‘batt::Json’ {aka ‘nlohmann::json_abi_v3_11_3::basic_json<>’}
+   92 |         {"application_timeouts",timeouts_.load()},{"queue_peak",input_.peak()}}; }
+      |                                                                               ^
+      |                                                                               |
+      |                                                                               <brace-enclosed initializer list>
+[ 14%] Linking C static library libbatt_sqlite.a
+[ 14%] Built target batt_sqlite
+[ 19%] Building CXX object CMakeFiles/batt-sim.dir/src/sim.cpp.o
+gmake[2]: *** [CMakeFiles/batt_http.dir/build.make:76: CMakeFiles/batt_http.dir/src/http_api.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:235: CMakeFiles/batt_http.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+[ 23%] Linking CXX executable batt-sim
+[ 23%] Built target batt-sim
+gmake: *** [Makefile:101: all] Error 2

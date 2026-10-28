@@ -1,0 +1,21 @@
+[1/12] Automatic MOC for target m0_window
+FAILED: [code=1] m0_window_autogen/timestamp m0_window_autogen/mocs_compilation.cpp E:/4G模块/batt-access/build-qt-m0-ascii/m0_window_autogen/timestamp E:/4G模块/batt-access/build-qt-m0-ascii/m0_window_autogen/mocs_compilation.cpp 
+C:\WINDOWS\system32\cmd.exe /C "cd /D E:\4G模块\batt-access\build-qt-m0-ascii && E:\Visual_Studio_2026\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -E cmake_autogen E:/4G模块/batt-access/build-qt-m0-ascii/CMakeFiles/m0_window_autogen.dir/AutogenInfo.json "" && E:\Visual_Studio_2026\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -E touch E:/4G模块/batt-access/build-qt-m0-ascii/m0_window_autogen/timestamp && E:\Visual_Studio_2026\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -E cmake_transform_depfile Ninja gccdepfile E:/4G模块/batt-access/tools/m0/qt E:/4G模块/batt-access/tools/m0/qt E:/4G模块/batt-access/build-qt-m0-ascii E:/4G模块/batt-access/build-qt-m0-ascii E:/4G模块/batt-access/build-qt-m0-ascii/m0_window_autogen/deps E:/4G模块/batt-access/build-qt-m0-ascii/CMakeFiles/d/85490e8838520fbaf1924eef05ba8bf2ae8c2c9810d70904f37a6718f9589be3.d"
+
+AutoMoc subprocess error
+------------------------
+The moc process failed to compile
+  "SRC:/window.hpp"
+into
+  "BIN:/m0_window_autogen/EWIEGA46WW/moc_window.cpp"
+Process failed with return value 1
+
+Command
+-------
+E:/batt-v3-tools/6.8.3/mingw_64/bin/moc.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IE:/batt-v3-tools/6.8.3/mingw_64/include/QtWidgets -IE:/batt-v3-tools/6.8.3/mingw_64/include -IE:/batt-v3-tools/6.8.3/mingw_64/include/QtCore -IE:/batt-v3-tools/6.8.3/mingw_64/mkspecs/win32-g++ -IE:/batt-v3-tools/6.8.3/mingw_64/include/QtGui -IE:/batt-v3-tools/6.8.3/mingw_64/include/QtNetwork -IE:/batt-v3-tools/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IE:/batt-v3-tools/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IE:/batt-v3-tools/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IE:/batt-v3-tools/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IE:/batt-v3-tools/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IE:/batt-v3-tools/Tools/mingw1310_64/x86_64-w64-mingw32/include --include E:/4G模块/batt-access/build-qt-m0-ascii/m0_window_autogen/moc_predefs.h --output-dep-file -o E:/4G模块/batt-access/build-qt-m0-ascii/m0_window_autogen/EWIEGA46WW/moc_window.cpp E:/4G模块/batt-access/tools/m0/qt/window.hpp
+
+Output
+------
+moc: Cannot create E:/4G模块/batt-access/build-qt-m0-ascii/m0_window_autogen/EWIEGA46WW/moc_window.cpp. Error: No such file or directory
+
+ninja: build stopped: subcommand failed.

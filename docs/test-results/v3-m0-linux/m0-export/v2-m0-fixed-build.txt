@@ -1,0 +1,27 @@
+[  9%] Built target batt_sqlite
+[ 14%] Building CXX object CMakeFiles/batt_http.dir/src/http_api.cpp.o
+[ 23%] Built target batt-sim
+[ 28%] Building CXX object CMakeFiles/batt_worker.dir/src/worker.cpp.o
+[ 33%] Building CXX object CMakeFiles/batt_worker.dir/src/store.cpp.o
+[ 38%] Linking CXX static library libbatt_worker.a
+[ 38%] Built target batt_worker
+[ 42%] Building C object CMakeFiles/batt-db.dir/third_party/sqlite/shell.c.o
+[ 47%] Linking CXX static library libbatt_http.a
+[ 47%] Built target batt_http
+[ 52%] Building CXX object CMakeFiles/core_test.dir/tests/core_test.cpp.o
+[ 57%] Linking C executable batt-db
+[ 57%] Built target batt-db
+[ 61%] Building CXX object CMakeFiles/query_test.dir/tests/query_test.cpp.o
+[ 66%] Linking CXX executable core_test
+[ 66%] Built target core_test
+[ 71%] Building CXX object CMakeFiles/store_test.dir/tests/store_test.cpp.o
+[ 76%] Linking CXX executable query_test
+[ 76%] Built target query_test
+[ 80%] Building CXX object CMakeFiles/api_test.dir/tests/api_test.cpp.o
+[ 85%] Linking CXX executable api_test
+[ 90%] Linking CXX executable store_test
+[ 90%] Built target api_test
+[ 95%] Building CXX object CMakeFiles/batt-access.dir/src/access.cpp.o
+[ 95%] Built target store_test
+[100%] Linking CXX executable batt-access
+[100%] Built target batt-access

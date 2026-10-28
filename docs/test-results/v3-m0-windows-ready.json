@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-10-28T11:46:39.896329+00:00",
+  "platform": "Windows-11-10.0.22631-SP0",
+  "python": "3.12.14",
+  "scope": "inventory only; M0 requires actual MySQL and Qt smoke results",
+  "cmake": {
+    "available": true,
+    "path": "E:\\Visual_Studio_2026\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+    "exit_code": 0,
+    "version_output": "cmake version 4.2.3-msvc3\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake)."
+  },
+  "compiler": {
+    "available": true,
+    "path": "E:\\batt-v3-tools\\Tools\\mingw1310_64\\bin\\g++.exe",
+    "exit_code": 0,
+    "version_output": "g++.exe (x86_64-posix-seh-rev1, Built by MinGW-Builds project) 13.1.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+  },
+  "qmake": {
+    "available": true,
+    "path": "E:\\batt-v3-tools\\6.8.3\\mingw_64\\bin\\qmake.exe",
+    "exit_code": 0,
+    "version_output": "QMake version 3.1\nUsing Qt version 6.8.3 in E:/batt-v3-tools/6.8.3/mingw_64/lib"
+  },
+  "mysql_client": {
+    "available": false
+  },
+  "git": {
+    "available": true,
+    "path": "D:\\Git\\cmd\\git.EXE",
+    "exit_code": 0,
+    "version_output": "224a608fb57f0d39d6a21c3f9ef2ac1a4f974ff4"
+  },
+  "blockers": [],
+  "pymysql": null,
+  "inventory_ready": true
+}

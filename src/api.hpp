@@ -55,7 +55,12 @@ private:
     std::optional<ApiReply> result_;
     std::atomic<bool> done_{false};
 };
- 
+// A queued API request owns values and a shared completion context, never a socket.
+struct ApiCall {
+    Command command;
+    std::shared_ptr<ApiContext> context;
+};
+
 class ApiBridge {
 public:
     explicit ApiBridge(std::chrono::milliseconds wait = std::chrono::seconds(1), std::size_t capacity = 16)

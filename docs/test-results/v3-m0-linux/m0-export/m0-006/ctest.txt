@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/book/batt-access-v3/build-m0
+Test project /home/book/batt-access-v3/build-m0
+    Start 1: m0_config_guards
+1/1 Test #1: m0_config_guards .................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.00 sec

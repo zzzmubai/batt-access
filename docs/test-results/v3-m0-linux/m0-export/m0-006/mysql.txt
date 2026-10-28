@@ -1,0 +1,2 @@
+client=8.4.13 server=8.4.13 isolation=READ-COMMITTED flush=1 binlog=1 sync_binlog=1
+M0_MYSQL_PASS parameter_binding integer64 binary_length null commit explicit_rollback raii_rollback

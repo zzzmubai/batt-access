@@ -1,0 +1,12 @@
+[1/12] Automatic MOC for target m0_window
+[2/12] Building CXX object CMakeFiles/m0_window.dir/m0_window_autogen/mocs_compilation.cpp.obj
+[3/12] Building CXX object CMakeFiles/m0_window.dir/window.cpp.obj
+[4/12] Linking CXX static library libm0_window.a
+[5/12] Automatic MOC for target qt_smoke
+[6/12] Building CXX object CMakeFiles/qt_smoke.dir/qt_smoke_autogen/mocs_compilation.cpp.obj
+[7/12] Automatic MOC for target qt_smoke_test
+[8/12] Building CXX object CMakeFiles/qt_smoke_test.dir/qt_smoke_test_autogen/mocs_compilation.cpp.obj
+[9/12] Building CXX object CMakeFiles/qt_smoke.dir/main.cpp.obj
+[10/12] Linking CXX executable qt_smoke.exe
+[11/12] Building CXX object CMakeFiles/qt_smoke_test.dir/smoke_test.cpp.obj
+[12/12] Linking CXX executable qt_smoke_test.exe

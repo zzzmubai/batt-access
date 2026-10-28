@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCase name="Admission">
+  <Environment>
+    <QtVersion>6.8.3</QtVersion>
+    <QtBuild>Qt 6.8.3 (x86_64&#x002D;little_endian&#x002D;llp64 shared (dynamic) release build; by GCC 13.1.0)</QtBuild>
+    <QTestVersion>6.8.3</QTestVersion>
+  </Environment>
+  <TestFunction name="initTestCase">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="0.1224"/>
+  </TestFunction>
+  <TestFunction name="integerPrecision">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="0.2759"/>
+  </TestFunction>
+  <TestFunction name="asynchronousRequest">
+  <Message type="qwarn" file="" line="0">
+    <Description><![CDATA[QFontDatabase: Cannot find font directory E:/batt-v3-tools/6.8.3/mingw_64/lib/fonts.
+Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.]]></Description>
+  </Message>
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="314.835"/>
+  </TestFunction>
+  <TestFunction name="deadlineAndClose">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="218.44"/>
+  </TestFunction>
+  <TestFunction name="cleanupTestCase">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="0.0402"/>
+  </TestFunction>
+  <Duration msecs="536.367"/>
+</TestCase>

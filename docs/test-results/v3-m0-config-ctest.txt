@@ -1,0 +1,19 @@
+Start testing: Oct 28 18:44 中国标准时间
+----------------------------------------------------------
+1/1 Testing: m0_config_guards
+1/1 Test: m0_config_guards
+Command: "E:/4G妯″潡/batt-access/build-m0/ninja/config_test.exe"
+Directory: E:/4G妯″潡/batt-access/build-m0/ninja
+"m0_config_guards" start time: Oct 28 18:44 中国标准时间
+Output:
+----------------------------------------------------------
+M0_CONFIG_PASS checks=40
+<end of output>
+Test time =   0.23 sec
+----------------------------------------------------------
+Test Passed.
+"m0_config_guards" end time: Oct 28 18:44 中国标准时间
+"m0_config_guards" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 28 18:44 中国标准时间

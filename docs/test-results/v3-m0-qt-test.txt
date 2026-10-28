@@ -1,0 +1,22 @@
+UpdateCTestConfiguration  from :E:/batt-v3-tools/m0-build-e42610456b51458ab28810dd854d8713/DartConfiguration.tcl
+Parse Config file:E:/batt-v3-tools/m0-build-e42610456b51458ab28810dd854d8713/DartConfiguration.tcl
+Test project E:/batt-v3-tools/m0-build-e42610456b51458ab28810dd854d8713
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: qt_m0_admission
+
+1: Test command: E:\batt-v3-tools\m0-build-e42610456b51458ab28810dd854d8713\qt_smoke_test.exe "-o" "qt-m0-results.xml,xml" "-o" "-,txt"
+1: Working Directory: E:/batt-v3-tools/m0-build-e42610456b51458ab28810dd854d8713
+1: Environment variables: 
+1:  QT_QPA_PLATFORM=offscreen
+1: Test timeout computed to be: 20
+1/1 Test #1: qt_m0_admission ..................   Passed    0.90 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.90 sec

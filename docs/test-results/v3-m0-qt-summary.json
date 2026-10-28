@@ -1,0 +1,8 @@
+{
+  "result": "M0_QT_PASS",
+  "compiler": "MinGW 13.1.0",
+  "qt": "6.8.3",
+  "source": "E:\\batt-v3-tools\\m0-source-e42610456b51458ab28810dd854d8713",
+  "evidence": "E:\\4G模块\\batt-access\\artifacts\\qt-m0-e42610456b51458ab28810dd854d8713",
+  "build": "E:\\batt-v3-tools\\m0-build-e42610456b51458ab28810dd854d8713"
+}

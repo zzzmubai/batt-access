@@ -1,0 +1,13 @@
+[ 25%] Building CXX object CMakeFiles/config_test.dir/config_test.cpp.o
+[ 50%] Building CXX object CMakeFiles/mysql_smoke.dir/mysql_smoke.cpp.o
+[ 75%] Linking CXX executable config_test
+[100%] Linking CXX executable mysql_smoke
+/usr/bin/ld: cannot find -lz: No such file or directory
+/usr/bin/ld: cannot find -lssl: No such file or directory
+/usr/bin/ld: cannot find -lcrypto: No such file or directory
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [CMakeFiles/mysql_smoke.dir/build.make:97: mysql_smoke] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:867: CMakeFiles/mysql_smoke.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+[100%] Built target config_test
+gmake: *** [Makefile:101: all] Error 2

@@ -1,0 +1,68 @@
+-- The CXX compiler identification is GNU 13.1.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - failed
+-- Check for working CXX compiler: Q:/qt/Tools/mingw1310_64/bin/g++.exe
+-- Check for working CXX compiler: Q:/qt/Tools/mingw1310_64/bin/g++.exe - broken
+CMake Error at E:/Visual_Studio_2026/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:73 (message):
+  The C++ compiler
+
+    "Q:/qt/Tools/mingw1310_64/bin/g++.exe"
+
+  is not able to compile a simple test program.
+
+  It fails with the following output:
+
+    Change Dir: 'E:/4G模块/batt-access/build-qt-m0/CMakeFiles/CMakeScratch/TryCompile-d55r6r'
+    
+    Run Build Command(s): E:/Visual_Studio_2026/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_791f9
+    [1/2] Q:\qt\Tools\mingw1310_64\bin\g++.exe    -o CMakeFiles/cmTC_791f9.dir/testCXXCompiler.cxx.obj -c E:/4G妯″潡/batt-access/build-qt-m0/CMakeFiles/CMakeScratch/TryCompile-d55r6r/testCXXCompiler.cxx
+    [2/2] C:\WINDOWS\system32\cmd.exe /C "cd . && Q:\qt\Tools\mingw1310_64\bin\g++.exe   CMakeFiles/cmTC_791f9.dir/testCXXCompiler.cxx.obj -o cmTC_791f9.exe -Wl,--out-implib,libcmTC_791f9.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+    FAILED: [code=1] cmTC_791f9.exe 
+    C:\WINDOWS\system32\cmd.exe /C "cd . && Q:\qt\Tools\mingw1310_64\bin\g++.exe   CMakeFiles/cmTC_791f9.dir/testCXXCompiler.cxx.obj -o cmTC_791f9.exe -Wl,--out-implib,libcmTC_791f9.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lkernel32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -luser32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lgdi32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lwinspool: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lshell32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lole32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -loleaut32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -luuid: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lcomdlg32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -ladvapi32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lstdc++: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lmingw32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lgcc_s: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lgcc: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lmoldname: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lmingwex: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lmsvcrt: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lkernel32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lpthread: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -ladvapi32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lshell32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -luser32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lkernel32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -liconv: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lmingw32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lgcc_s: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lgcc: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lmoldname: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lmingwex: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lmsvcrt: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lkernel32: No such file or directory
+    E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find E:/4G模块/batt-access/.local/qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o: No such file or directory
+    collect2.exe: error: ld returned 1 exit status
+    ninja: build stopped: subcommand failed.
+    
+    
+
+
+
+  CMake will not be able to correctly generate this project.
+Call Stack (most recent call first):
+  CMakeLists.txt:2 (project)
+
+
+-- Configuring incomplete, errors occurred!

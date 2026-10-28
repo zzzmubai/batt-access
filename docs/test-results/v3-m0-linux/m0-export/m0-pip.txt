@@ -1,0 +1,31 @@
+Collecting PyMySQL==1.2.3 (from PyMySQL[rsa]==1.2.3->-r tools/m0/requirements.txt (line 2))
+  Downloading pymysql-1.2.3-py3-none-any.whl.metadata (4.2 kB)
+Collecting cryptography>=46.0.7 (from PyMySQL[rsa]==1.2.3->-r tools/m0/requirements.txt (line 2))
+  Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.4 kB)
+INFO: pip is looking at multiple versions of cryptography to determine which version is compatible with other requirements. This could take a while.
+  Downloading cryptography-50.0.1-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.3 kB)
+  Downloading cryptography-50.0.0-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.3 kB)
+  WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='files.pythonhosted.org', port=443): Read timed out. (read timeout=15)")': /packages/a9/3c/f3ad17eecc1a57b0ba236dc01f90e783c51f4a2f35f64777cc4f47a184b2/cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl.metadata
+  Downloading cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.3 kB)
+  Downloading cryptography-48.0.1-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.3 kB)
+  Downloading cryptography-48.0.0-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.3 kB)
+  Downloading cryptography-47.0.0-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.5 kB)
+  Downloading cryptography-46.0.7-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+INFO: pip is still looking at multiple versions of cryptography to determine which version is compatible with other requirements. This could take a while.
+ERROR: Cannot install PyMySQL because these package versions have conflicting dependencies.
+
+The conflict is caused by:
+    cryptography 50.0.2 depends on cffi>=2.0.0; platform_python_implementation != "PyPy"
+    cryptography 50.0.1 depends on cffi>=2.0.0; platform_python_implementation != "PyPy"
+    cryptography 50.0.0 depends on cffi>=2.0.0; platform_python_implementation != "PyPy"
+    cryptography 49.0.0 depends on cffi>=2.0.0; platform_python_implementation != "PyPy"
+    cryptography 48.0.1 depends on cffi>=2.0.0; platform_python_implementation != "PyPy"
+    cryptography 48.0.0 depends on cffi>=2.0.0; platform_python_implementation != "PyPy"
+    cryptography 47.0.0 depends on cffi>=2.0.0; python_full_version >= "3.9" and platform_python_implementation != "PyPy"
+    cryptography 46.0.7 depends on cffi>=2.0.0; python_full_version >= "3.9" and platform_python_implementation != "PyPy"
+
+To fix this you could try to:
+1. loosen the range of package versions you've specified
+2. remove package versions to allow pip attempt to solve the dependency conflict
+
+ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts

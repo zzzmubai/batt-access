@@ -1,0 +1,1 @@
+M0_SEED_PASS public_key_only password_login_disabled no_automatic_upgrade

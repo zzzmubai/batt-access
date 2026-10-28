@@ -1,0 +1,5 @@
+[ 42%] Built target batt_mysql
+[ 57%] Building CXX object CMakeFiles/db_config_test.dir/home/book/batt-access-v3/tests/db_config_test.cpp.o
+[ 85%] Built target mysql_raii_test
+[100%] Linking CXX executable db_config_test
+[100%] Built target db_config_test

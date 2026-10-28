@@ -1,0 +1,82 @@
+Internal ctest changing into directory: /home/book/batt-access-v3/build-v3
+UpdateCTestConfiguration  from :/home/book/batt-access-v3/build-v3/DartConfiguration.tcl
+Parse Config file:/home/book/batt-access-v3/build-v3/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/book/batt-access-v3/build-v3/DartConfiguration.tcl
+Parse Config file:/home/book/batt-access-v3/build-v3/DartConfiguration.tcl
+Test project /home/book/batt-access-v3/build-v3
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start  1: core
+
+1: Test command: /home/book/batt-access-v3/build-v3/core_test
+1: Working Directory: /home/book/batt-access-v3/build-v3
+1: Test timeout computed to be: 15
+1: core_test: 402 checks passed
+1/7 Test  #1: core .............................   Passed    0.01 sec
+test 2
+    Start  2: query_unit
+
+2: Test command: /home/book/batt-access-v3/build-v3/query_test
+2: Working Directory: /home/book/batt-access-v3/build-v3
+2: Test timeout computed to be: 15
+2: query_test: 31 checks passed
+2/7 Test  #2: query_unit .......................   Passed    0.00 sec
+test 3
+    Start  3: storage_unit
+
+3: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/run_mysql_cpp.py" "/home/book/batt-access-v3/build-v3/store_test" "--databases" "2"
+3: Working Directory: /home/book/batt-access-v3/build-v3
+3: Test timeout computed to be: 15
+3: store_test: 42 checks passed
+3/7 Test  #3: storage_unit .....................   Passed    0.87 sec
+test 4
+    Start  4: api_unit
+
+4: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/run_mysql_cpp.py" "/home/book/batt-access-v3/build-v3/api_test"
+4: Working Directory: /home/book/batt-access-v3/build-v3
+4: Test timeout computed to be: 15
+4: api_test: 20 checks passed
+4/7 Test  #4: api_unit .........................   Passed    0.54 sec
+test 11
+    Start 11: database_configuration
+
+11: Test command: /home/book/batt-access-v3/build-v3/db_config_test
+11: Working Directory: /home/book/batt-access-v3/build-v3
+11: Test timeout computed to be: 30
+11: M2_CONFIG_PASS checks=51
+5/7 Test #11: database_configuration ...........   Passed    0.00 sec
+test 12
+    Start 12: mysql_resources
+
+12: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/run_mysql_cpp.py" "/home/book/batt-access-v3/build-v3/mysql_raii_test"
+12: Working Directory: /home/book/batt-access-v3/build-v3
+12: Test timeout computed to be: 30
+12: M2_MYSQL_RAII_PASS checks=53
+6/7 Test #12: mysql_resources ..................   Passed    0.56 sec
+test 13
+    Start 13: mysql_schema
+
+13: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/mysql_schema_test.py"
+13: Working Directory: /home/book/batt-access-v3/build-v3
+13: Test timeout computed to be: 30
+13: {"explain": {"query_block": {"select_id": 1, "cost_info": {"query_cost": "105.55"}, "ordering_operation": {"using_filesort": true, "table": {"table_name": "alarm", "access_type": "ref", "possible_keys": ["PRIMARY", "alarm_event", "one_open_alarm", "alarm_device_id", "alarm_device_status_id"], "key": "alarm_event", "used_key_parts": ["dev_id"], "key_length": "66", "ref": ["const"], "rows_examined_per_scan": 1003, "rows_produced_per_join": 99, "filtered": "9.93", "index_condition": "((`batt_test_b5446459cd97487aa982f738b4ca7921`.`alarm`.`dev_id` = 'BT') and (`batt_test_b5446459cd97487aa982f738b4ca7921`.`alarm`.`id` < 1000))", "cost_info": {"read_cost": "5.25", "eval_cost": "9.96", "prefix_cost": "105.55", "data_read_per_join": "24K"}, "used_columns": ["id", "dev_id", "status"], "attached_condition": "(`batt_test_b5446459cd97487aa982f738b4ca7921`.`alarm`.`status` = 'cleared')"}}}}}
+13: {"result": "M1_SCHEMA_PASS", "checks": 33}
+7/7 Test #13: mysql_schema .....................   Passed    4.55 sec
+
+The following tests passed:
+	core
+	query_unit
+	storage_unit
+	api_unit
+	database_configuration
+	mysql_resources
+	mysql_schema
+
+100% tests passed, 0 tests failed out of 7
+
+Total Test time (real) =   6.54 sec

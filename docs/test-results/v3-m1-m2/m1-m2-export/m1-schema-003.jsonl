@@ -1,0 +1,1 @@
+{"result": "FAIL", "category": "ValueError", "checks": 0, "detail": "generated guard mismatch: open_guard; extra=STORED GENERATED; expression=casewhenstatus=\\'open\\'then1elsenullend", "mysql_code": null}

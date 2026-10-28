@@ -1,0 +1,32 @@
+Internal ctest changing into directory: /home/book/batt-access-v3/build-m2
+UpdateCTestConfiguration  from :/home/book/batt-access-v3/build-m2/DartConfiguration.tcl
+Parse Config file:/home/book/batt-access-v3/build-m2/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/book/batt-access-v3/build-m2/DartConfiguration.tcl
+Parse Config file:/home/book/batt-access-v3/build-m2/DartConfiguration.tcl
+Test project /home/book/batt-access-v3/build-m2
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: database_configuration
+
+1: Test command: /home/book/batt-access-v3/build-m2/db_config_test
+1: Working Directory: /home/book/batt-access-v3/build-m2
+1: Test timeout computed to be: 30
+1: M2_CONFIG_PASS checks=51
+1/2 Test #1: database_configuration ...........   Passed    0.00 sec
+test 2
+    Start 2: mysql_resources
+
+2: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tools/m2/../../tests/run_mysql_cpp.py" "/home/book/batt-access-v3/build-m2/mysql_raii_test"
+2: Working Directory: /home/book/batt-access-v3/build-m2
+2: Test timeout computed to be: 30
+2: M2_MYSQL_RAII_PASS checks=53
+2/2 Test #2: mysql_resources ..................   Passed    0.61 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.62 sec

@@ -1,0 +1,4 @@
+-- Found Python3: /home/book/batt-access-v3/.local/venv/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/book/batt-access-v3/build-m2

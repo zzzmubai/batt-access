@@ -1,0 +1,209 @@
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found Python3: /home/book/batt-access-v3/.local/venv/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Configuring done (0.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/book/batt-access-v3/build-v3-tsan
+[  4%] Building CXX object CMakeFiles/batt_mysql.dir/src/db_config.cpp.o
+[  8%] Building CXX object CMakeFiles/batt_http.dir/src/http_api.cpp.o
+[ 12%] Building CXX object CMakeFiles/batt_mysql.dir/src/mysql_raii.cpp.o
+[ 16%] Building CXX object CMakeFiles/batt_mysql.dir/src/mysql_schema.cpp.o
+[ 20%] Linking CXX static library libbatt_mysql.a
+[ 20%] Built target batt_mysql
+[ 24%] Building CXX object CMakeFiles/batt-sim.dir/src/sim.cpp.o
+[ 28%] Linking CXX executable batt-sim
+[ 28%] Built target batt-sim
+[ 32%] Building CXX object CMakeFiles/db_config_test.dir/tests/db_config_test.cpp.o
+[ 36%] Linking CXX executable db_config_test
+[ 36%] Built target db_config_test
+[ 40%] Building CXX object CMakeFiles/mysql_raii_test.dir/tests/mysql_raii_test.cpp.o
+[ 44%] Linking CXX executable mysql_raii_test
+[ 44%] Built target mysql_raii_test
+[ 48%] Building CXX object CMakeFiles/batt_worker.dir/src/worker.cpp.o
+[ 52%] Linking CXX static library libbatt_http.a
+[ 52%] Built target batt_http
+[ 56%] Building CXX object CMakeFiles/batt_worker.dir/src/store.cpp.o
+[ 60%] Linking CXX static library libbatt_worker.a
+[ 60%] Built target batt_worker
+[ 68%] Building CXX object CMakeFiles/core_test.dir/tests/core_test.cpp.o
+[ 68%] Building CXX object CMakeFiles/batt-access.dir/src/access.cpp.o
+[ 72%] Linking CXX executable core_test
+[ 72%] Built target core_test
+[ 76%] Building CXX object CMakeFiles/query_test.dir/tests/query_test.cpp.o
+[ 80%] Linking CXX executable batt-access
+[ 80%] Built target batt-access
+[ 84%] Building CXX object CMakeFiles/store_test.dir/tests/store_test.cpp.o
+[ 88%] Linking CXX executable query_test
+[ 88%] Built target query_test
+[ 92%] Building CXX object CMakeFiles/api_test.dir/tests/api_test.cpp.o
+[ 96%] Linking CXX executable store_test
+[ 96%] Built target store_test
+[100%] Linking CXX executable api_test
+[100%] Built target api_test
+Internal ctest changing into directory: /home/book/batt-access-v3/build-v3-tsan
+Test project /home/book/batt-access-v3/build-v3-tsan
+      Start  1: core
+ 1/13 Test  #1: core .............................***Failed    0.02 sec
+FATAL: ThreadSanitizer: unexpected memory mapping 0x6096d35ee000-0x6096d35f2000
+
+      Start  2: query_unit
+ 2/13 Test  #2: query_unit .......................***Failed    0.01 sec
+FATAL: ThreadSanitizer: unexpected memory mapping 0x5f9caef13000-0x5f9caef17000
+
+      Start  3: storage_unit
+ 3/13 Test  #3: storage_unit .....................***Failed    0.65 sec
+FATAL: ThreadSanitizer: unexpected memory mapping 0x6460ae0fb000-0x6460ae101000
+
+      Start  4: api_unit
+ 4/13 Test  #4: api_unit .........................***Failed    0.44 sec
+FATAL: ThreadSanitizer: unexpected memory mapping 0x62821bcee000-0x62821bcf5000
+
+      Start  5: network
+ 5/13 Test  #5: network ..........................***Timeout 120.01 sec
+test_32_concurrent_independent_devices (__main__.NetworkTests.test_32_concurrent_independent_devices) ... FAIL
+test_balanced_bad_json_does_not_eat_next_login (__main__.NetworkTests.test_balanced_bad_json_does_not_eat_next_login) ... FAIL
+test_bound_connection_cannot_rebind_using_login (__main__.NetworkTests.test_bound_connection_cannot_rebind_using_login) ... FAIL
+test_bound_connection_cannot_spoof_other_device (__main__.NetworkTests.test_bound_connection_cannot_spoof_other_device) ... FAIL
+test_closed_oversized_object_is_rejected (__main__.NetworkTests.test_closed_oversized_object_is_rejected) ... FAIL
+test_connection_limit_does_not_stop_existing_clients (__main__.NetworkTests.test_connection_limit_does_not_stop_existing_clients) ... FAIL
+test_cpp_relogin_demo (__main__.NetworkTests.test_cpp_relogin_demo) ... FAIL
+test_cpp_simulator_32_simultaneous_connections (__main__.NetworkTests.test_cpp_simulator_32_simultaneous_connections) ... FAIL
+test_invalid_frame_is_atomic_and_does_not_ack (__main__.NetworkTests.test_invalid_frame_is_atomic_and_does_not_ack) ... FAIL
+test_invalid_new_login_does_not_kick_old_session (__main__.NetworkTests.test_invalid_new_login_does_not_kick_old_session) ... FAIL
+test_login_fragmented_then_glued_messages (__main__.NetworkTests.test_login_fragmented_then_glued_messages) ... FAIL
+test_real_fd_reuse_has_distinct_connection_ids (__main__.NetworkTests.test_real_fd_reuse_has_distinct_connection_ids) ... FAIL
+test_replacement_closes_only_old_connection (__main__.NetworkTests.test_replacement_closes_only_old_connection) ... FAIL
+test_same_connection_login_is_idempotent (__main__.NetworkTests.test_same_connection_login_is_idempotent) ... FAIL
+
+      Start  6: query_network
+ 6/13 Test  #6: query_network ....................***Timeout 120.01 sec
+test_cpp_persistent_simulator_answers_queries (__main__.QueryNetworkTests.test_cpp_persistent_simulator_answers_queries) ... FAIL
+test_full_queue_closes_sender_without_blocking_other_shard (__main__.QueryNetworkTests.test_full_queue_closes_sender_without_blocking_other_shard) ... FAIL
+test_half_close_keeps_admitted_ack_until_worker_finishes (__main__.QueryNetworkTests.test_half_close_keeps_admitted_ack_until_worker_finishes) ... FAIL
+test_interactive_terminal_automatically_uses_quiet_mode (__main__.QueryNetworkTests.test_interactive_terminal_automatically_uses_quiet_mode) ... FAIL
+test_invalid_response_does_not_complete_pending (__main__.QueryNetworkTests.test_invalid_response_does_not_complete_pending) ... FAIL
+test_offline_and_unknown_device_are_explicit (__main__.QueryNetworkTests.test_offline_and_unknown_device_are_explicit) ... FAIL
+test_pending_disconnect_becomes_link_lost (__main__.QueryNetworkTests.test_pending_disconnect_becomes_link_lost) ... FAIL
+test_queued_old_login_cannot_take_back_replaced_session (__main__.QueryNetworkTests.test_queued_old_login_cannot_take_back_replaced_session) ... FAIL
+test_quiet_console_keeps_status_and_query_results_visible (__main__.QueryNetworkTests.test_quiet_console_keeps_status_and_query_results_visible) ... FAIL
+test_relogin_and_old_response_do_not_complete_new_session (__main__.QueryNetworkTests.test_relogin_and_old_response_do_not_complete_new_session) ... FAIL
+test_same_device_second_pending_is_busy (__main__.QueryNetworkTests.test_same_device_second_pending_is_busy) ... FAIL
+test_same_device_work_order_is_preserved (__main__.QueryNetworkTests.test_same_device_work_order_is_preserved) ... FAIL
+test_shutdown_drains_admitted_work_and_finishes_pending (__main__.QueryNetworkTests.test_shutdown_drains_admitted_work_and_finishes_pending) ... FAIL
+test_stale_worker_send_result_cannot_reach_reused_socket (__main__.QueryNetworkTests.test_stale_worker_send_result_cannot_reach_reused_socket) ... FAIL
+
+      Start  7: persistence
+ 7/13 Test  #7: persistence ......................***Timeout 120.01 sec
+test_alarm_ack_means_committed_and_restart_keeps_open_only (__main__.PersistenceTests.test_alarm_ack_means_committed_and_restart_keeps_open_only) ... FAIL
+test_alarm_crash_before_during_and_after_commit_is_atomic (__main__.PersistenceTests.test_alarm_crash_before_during_and_after_commit_is_atomic) ... 
+  test_alarm_crash_before_during_and_after_commit_is_atomic (__main__.PersistenceTests.test_alarm_crash_before_during_and_after_commit_is_atomic) (phase='before_commit') ... FAIL
+  test_alarm_crash_before_during_and_after_commit_is_atomic (__main__.PersistenceTests.test_alarm_crash_before_during_and_after_commit_is_atomic) (phase='mid_alarm') ... FAIL
+  test_alarm_crash_before_during_and_after_commit_is_atomic (__main__.PersistenceTests.test_alarm_crash_before_during_and_after_commit_is_atomic) (phase='after_commit') ... FAIL
+test_autoincrement_not_reused_after_deleting_highest_history (__main__.PersistenceTests.test_autoincrement_not_reused_after_deleting_highest_history) ... FAIL
+test_complete_query_json_survives_restart_missing_and_empty_are_distinct (__main__.PersistenceTests.test_complete_query_json_survives_restart_missing_and_empty_are_distinct) ... FAIL
+test_external_writer_lock_has_bounded_failure (__main__.PersistenceTests.test_external_writer_lock_has_bounded_failure) ... FAIL
+test_failed_alarm_rolls_back_every_row_and_no_411_success (__main__.PersistenceTests.test_failed_alarm_rolls_back_every_row_and_no_411_success) ... FAIL
+test_failed_login_does_not_ack_or_replace_committed_identity (__main__.PersistenceTests.test_failed_login_does_not_ack_or_replace_committed_identity) ... FAIL
+test_failed_query_begin_does_not_send_910_or_publish_pending (__main__.PersistenceTests.test_failed_query_begin_does_not_send_910_or_publish_pending) ... FAIL
+test_failed_query_success_leaves_pending_for_recovery (__main__.PersistenceTests.test_failed_query_success_leaves_pending_for_recovery) ... FAIL
+test_normal_stop_commits_pending_terminal_state (__main__.PersistenceTests.test_normal_stop_commits_pending_terminal_state) ... FAIL
+test_old_db_option_is_explicitly_rejected (__main__.PersistenceTests.test_old_db_option_is_explicitly_rejected) ... FAIL
+test_query_allocation_crash_committed_pending_is_recovered (__main__.PersistenceTests.test_query_allocation_crash_committed_pending_is_recovered) ... 
+  test_query_allocation_crash_committed_pending_is_recovered (__main__.PersistenceTests.test_query_allocation_crash_committed_pending_is_recovered) (phase='before_commit') ... FAIL
+  test_query_allocation_crash_committed_pending_is_recovered (__main__.PersistenceTests.test_query_allocation_crash_committed_pending_is_recovered) (phase='after_commit') ... FAIL
+
+      Start  8: final_demo
+ 8/13 Test  #8: final_demo .......................***Failed    8.40 sec
+Traceback (most recent call last):
+  File "/home/book/batt-access-v3/scripts/demo-final.py", line 280, in <module>
+    main()
+  File "/home/book/batt-access-v3/scripts/demo-final.py", line 266, in main
+    demo.cpp_demo(cpp_database)
+  File "/home/book/batt-access-v3/scripts/demo-final.py", line 95, in cpp_demo
+    with self.service(database) as server:
+  File "/usr/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/book/batt-access-v3/scripts/demo-final.py", line 53, in service
+    server = Server('--database-fixture', str(database), *options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/book/batt-access-v3/tests/network_test.py", line 94, in __init__
+    self.port = self.event('ready')['port']
+                ^^^^^^^^^^^^^^^^^^^
+  File "/home/book/batt-access-v3/tests/network_test.py", line 117, in event
+    raise AssertionError('missing event %s; log=%r' % (kind, self.messages))
+AssertionError: missing event ready; log=[{'event': 'diagnostic', 'text': 'FATAL: ThreadSanitizer: unexpected memory mapping 0x622c64cc1000-0x622c64ccf000'}]
+
+      Start  9: http_network
+ 9/13 Test  #9: http_network .....................***Timeout 120.01 sec
+test_before_and_after_commit_crash_never_split_key_and_task (__main__.HttpRecoveryTests.test_before_and_after_commit_crash_never_split_key_and_task) ... 
+  test_before_and_after_commit_crash_never_split_key_and_task (__main__.HttpRecoveryTests.test_before_and_after_commit_crash_never_split_key_and_task) (phase='before_commit') ... FAIL
+  test_before_and_after_commit_crash_never_split_key_and_task (__main__.HttpRecoveryTests.test_before_and_after_commit_crash_never_split_key_and_task) (phase='after_commit') ... FAIL
+test_int64_task_and_first_page_cursor_are_exact (__main__.HttpRecoveryTests.test_int64_task_and_first_page_cursor_are_exact) ... FAIL
+test_restart_returns_same_request_and_preserves_completed_task (__main__.HttpRecoveryTests.test_restart_returns_same_request_and_preserves_completed_task) ... FAIL
+test_sql_failure_rolls_back_task_key_and_exits_nonzero (__main__.HttpRecoveryTests.test_sql_failure_rolls_back_task_key_and_exits_nonzero) ... FAIL
+test_uninitialized_and_wrong_schema_never_listen (__main__.HttpRecoveryTests.test_uninitialized_and_wrong_schema_never_listen) ... 
+  test_uninitialized_and_wrong_schema_never_listen (__main__.HttpRecoveryTests.test_uninitialized_and_wrong_schema_never_listen) (kind='empty') ... FAIL
+  test_uninitialized_and_wrong_schema_never_listen (__main__.HttpRecoveryTests.test_uninitialized_and_wrong_schema_never_listen) (kind='interrupted') ... FAIL
+  test_uninitialized_and_wrong_schema_never_listen (__main__.HttpRecoveryTests.test_uninitialized_and_wrong_schema_never_listen) (kind='missing_index') ... FAIL
+test_alarm_cursor_filters_and_new_insert_no_duplicate_ids (__main__.HttpTests.test_alarm_cursor_filters_and_new_insert_no_duplicate_ids) ... FAIL
+test_application_timeout_before_execution_skips_task_and_late_reply (__main__.HttpTests.test_application_timeout_before_execution_skips_task_and_late_reply) ... FAIL
+test_body_header_bounds_and_device_io_progress (__main__.HttpTests.test_body_header_bounds_and_device_io_progress) ... FAIL
+test_busy_rejection_does_not_reserve_request_key (__main__.HttpTests.test_busy_rejection_does_not_reserve_request_key) ... FAIL
+test_cli_and_http_have_one_pending_guard (__main__.HttpTests.test_cli_and_http_have_one_pending_guard) ... FAIL
+test_client_response_lost_keeps_task_and_deduplicates (__main__.HttpTests.test_client_response_lost_keeps_task_and_deduplicates) ... FAIL
+test_concurrent_results_have_unique_request_ids (__main__.HttpTests.test_concurrent_results_have_unique_request_ids) ... FAIL
+test_connection_queue_is_bounded_without_blocking_devices (__main__.HttpTests.test_connection_queue_is_bounded_without_blocking_devices) ... FAIL
+test_cross_shard_same_key_conflict_is_not_storage_failure (__main__.HttpTests.test_cross_shard_same_key_conflict_is_not_storage_failure) ... FAIL
+
+      Start 10: http_demo
+10/13 Test #10: http_demo ........................***Failed    8.41 sec
+Traceback (most recent call last):
+  File "/home/book/batt-access-v3/scripts/demo-http.py", line 49, in <module>
+    server=HttpServer('--database-fixture',database,'--test-api-reply-delay-ms','400')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/book/batt-access-v3/tests/http_test.py", line 23, in __init__
+    super().__init__('--http-port', '0', *args)
+  File "/home/book/batt-access-v3/tests/network_test.py", line 94, in __init__
+    self.port = self.event('ready')['port']
+                ^^^^^^^^^^^^^^^^^^^
+  File "/home/book/batt-access-v3/tests/network_test.py", line 117, in event
+    raise AssertionError('missing event %s; log=%r' % (kind, self.messages))
+AssertionError: missing event ready; log=[]
+
+      Start 11: database_configuration
+11/13 Test #11: database_configuration ...........***Failed    0.02 sec
+FATAL: ThreadSanitizer: unexpected memory mapping 0x5c468227b000-0x5c468227f000
+
+      Start 12: mysql_resources
+12/13 Test #12: mysql_resources ..................***Failed    0.38 sec
+FATAL: ThreadSanitizer: unexpected memory mapping 0x5a8abc10b000-0x5a8abc111000
+
+      Start 13: mysql_schema
+13/13 Test #13: mysql_schema .....................   Passed    3.86 sec
+
+8% tests passed, 12 tests failed out of 13
+
+Total Test time (real) = 502.25 sec
+
+The following tests FAILED:
+	  1 - core (Failed)
+	  2 - query_unit (Failed)
+	  3 - storage_unit (Failed)
+	  4 - api_unit (Failed)
+	  5 - network (Timeout)
+	  6 - query_network (Timeout)
+	  7 - persistence (Timeout)
+	  8 - final_demo (Failed)
+	  9 - http_network (Timeout)
+	 10 - http_demo (Failed)
+	 11 - database_configuration (Failed)
+	 12 - mysql_resources (Failed)
+Errors while running CTest

@@ -1,0 +1,234 @@
+Internal ctest changing into directory: /home/book/batt-access-v31-clean-039c2d2/build
+UpdateCTestConfiguration  from :/home/book/batt-access-v31-clean-039c2d2/build/DartConfiguration.tcl
+Parse Config file:/home/book/batt-access-v31-clean-039c2d2/build/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/book/batt-access-v31-clean-039c2d2/build/DartConfiguration.tcl
+Parse Config file:/home/book/batt-access-v31-clean-039c2d2/build/DartConfiguration.tcl
+Test project /home/book/batt-access-v31-clean-039c2d2/build
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+      Start  1: core
+
+1: Test command: /home/book/batt-access-v31-clean-039c2d2/build/core_test
+1: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+1: Test timeout computed to be: 15
+1: core_test: 402 checks passed
+ 1/13 Test  #1: core .............................   Passed    0.01 sec
+test 2
+      Start  2: query_unit
+
+2: Test command: /home/book/batt-access-v31-clean-039c2d2/build/query_test
+2: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+2: Test timeout computed to be: 15
+2: query_test: 31 checks passed
+ 2/13 Test  #2: query_unit .......................   Passed    0.00 sec
+test 3
+      Start  3: storage_unit
+
+3: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v31-clean-039c2d2/tests/run_mysql_cpp.py" "/home/book/batt-access-v31-clean-039c2d2/build/store_test" "--databases" "2"
+3: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+3: Test timeout computed to be: 15
+3: store_test: 42 checks passed
+ 3/13 Test  #3: storage_unit .....................   Passed    0.99 sec
+test 4
+      Start  4: api_unit
+
+4: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v31-clean-039c2d2/tests/run_mysql_cpp.py" "/home/book/batt-access-v31-clean-039c2d2/build/api_test"
+4: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+4: Test timeout computed to be: 15
+4: api_test: 20 checks passed
+ 4/13 Test  #4: api_unit .........................   Passed    0.63 sec
+test 5
+      Start  5: network
+
+5: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v31-clean-039c2d2/tests/network_test.py" "/home/book/batt-access-v31-clean-039c2d2/build/batt-access" "/home/book/batt-access-v31-clean-039c2d2/build/batt-sim"
+5: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+5: Test timeout computed to be: 120
+5: test_32_concurrent_independent_devices (__main__.NetworkTests.test_32_concurrent_independent_devices) ... ok
+5: test_balanced_bad_json_does_not_eat_next_login (__main__.NetworkTests.test_balanced_bad_json_does_not_eat_next_login) ... ok
+5: test_bound_connection_cannot_rebind_using_login (__main__.NetworkTests.test_bound_connection_cannot_rebind_using_login) ... ok
+5: test_bound_connection_cannot_spoof_other_device (__main__.NetworkTests.test_bound_connection_cannot_spoof_other_device) ... ok
+5: test_closed_oversized_object_is_rejected (__main__.NetworkTests.test_closed_oversized_object_is_rejected) ... ok
+5: test_connection_limit_does_not_stop_existing_clients (__main__.NetworkTests.test_connection_limit_does_not_stop_existing_clients) ... ok
+5: test_cpp_relogin_demo (__main__.NetworkTests.test_cpp_relogin_demo) ... ok
+5: test_cpp_simulator_32_simultaneous_connections (__main__.NetworkTests.test_cpp_simulator_32_simultaneous_connections) ... ok
+5: test_invalid_frame_is_atomic_and_does_not_ack (__main__.NetworkTests.test_invalid_frame_is_atomic_and_does_not_ack) ... ok
+5: test_invalid_new_login_does_not_kick_old_session (__main__.NetworkTests.test_invalid_new_login_does_not_kick_old_session) ... ok
+5: test_login_fragmented_then_glued_messages (__main__.NetworkTests.test_login_fragmented_then_glued_messages) ... ok
+5: test_real_fd_reuse_has_distinct_connection_ids (__main__.NetworkTests.test_real_fd_reuse_has_distinct_connection_ids) ... ok
+5: test_replacement_closes_only_old_connection (__main__.NetworkTests.test_replacement_closes_only_old_connection) ... ok
+5: test_same_connection_login_is_idempotent (__main__.NetworkTests.test_same_connection_login_is_idempotent) ... ok
+5: test_signal_exit_with_live_client (__main__.NetworkTests.test_signal_exit_with_live_client) ... ok
+5: test_simulator_alarm_lifecycle (__main__.NetworkTests.test_simulator_alarm_lifecycle) ... ok
+5: test_stale_state_retains_connection_and_alarm_does_not_refresh (__main__.NetworkTests.test_stale_state_retains_connection_and_alarm_does_not_refresh) ... ok
+5: test_unauthed_message_does_not_change_state (__main__.NetworkTests.test_unauthed_message_does_not_change_state) ... ok
+5: test_unclosed_frame_times_out_without_claiming_recovery (__main__.NetworkTests.test_unclosed_frame_times_out_without_claiming_recovery) ... ok
+5: 
+5: ----------------------------------------------------------------------
+5: Ran 19 tests in 17.032s
+5: 
+5: OK
+ 5/13 Test  #5: network ..........................   Passed   18.58 sec
+test 6
+      Start  6: query_network
+
+6: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v31-clean-039c2d2/tests/query_network_test.py" "/home/book/batt-access-v31-clean-039c2d2/build/batt-access" "/home/book/batt-access-v31-clean-039c2d2/build/batt-sim"
+6: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+6: Test timeout computed to be: 120
+6: test_cpp_persistent_simulator_answers_queries (__main__.QueryNetworkTests.test_cpp_persistent_simulator_answers_queries) ... ok
+6: test_full_queue_closes_sender_without_blocking_other_shard (__main__.QueryNetworkTests.test_full_queue_closes_sender_without_blocking_other_shard) ... ok
+6: test_half_close_keeps_admitted_ack_until_worker_finishes (__main__.QueryNetworkTests.test_half_close_keeps_admitted_ack_until_worker_finishes) ... ok
+6: test_interactive_terminal_automatically_uses_quiet_mode (__main__.QueryNetworkTests.test_interactive_terminal_automatically_uses_quiet_mode) ... ok
+6: test_invalid_response_does_not_complete_pending (__main__.QueryNetworkTests.test_invalid_response_does_not_complete_pending) ... ok
+6: test_offline_and_unknown_device_are_explicit (__main__.QueryNetworkTests.test_offline_and_unknown_device_are_explicit) ... ok
+6: test_pending_disconnect_becomes_link_lost (__main__.QueryNetworkTests.test_pending_disconnect_becomes_link_lost) ... ok
+6: test_queued_old_login_cannot_take_back_replaced_session (__main__.QueryNetworkTests.test_queued_old_login_cannot_take_back_replaced_session) ... ok
+6: test_quiet_console_keeps_status_and_query_results_visible (__main__.QueryNetworkTests.test_quiet_console_keeps_status_and_query_results_visible) ... ok
+6: test_relogin_and_old_response_do_not_complete_new_session (__main__.QueryNetworkTests.test_relogin_and_old_response_do_not_complete_new_session) ... ok
+6: test_same_device_second_pending_is_busy (__main__.QueryNetworkTests.test_same_device_second_pending_is_busy) ... ok
+6: test_same_device_work_order_is_preserved (__main__.QueryNetworkTests.test_same_device_work_order_is_preserved) ... ok
+6: test_shutdown_drains_admitted_work_and_finishes_pending (__main__.QueryNetworkTests.test_shutdown_drains_admitted_work_and_finishes_pending) ... ok
+6: test_stale_worker_send_result_cannot_reach_reused_socket (__main__.QueryNetworkTests.test_stale_worker_send_result_cannot_reach_reused_socket) ... ok
+6: test_success_task_lookup_and_duplicate (__main__.QueryNetworkTests.test_success_task_lookup_and_duplicate) ... ok
+6: test_timeout_late_frames_cannot_reverse_terminal_state (__main__.QueryNetworkTests.test_timeout_late_frames_cannot_reverse_terminal_state) ... ok
+6: test_worker_isolation_comparison (__main__.QueryNetworkTests.test_worker_isolation_comparison) ... ok
+6: 
+6: ----------------------------------------------------------------------
+6: Ran 17 tests in 13.287s
+6: 
+6: OK
+6: WORKER_COMPARISON [{"BT001_ms": 299.76, "BT002_ms": 299.0, "slow_worker": 0, "workers": 1}, {"BT001_ms": 11.51, "BT002_ms": 307.88, "slow_worker": 1, "workers": 2}]
+ 6/13 Test  #6: query_network ....................   Passed   14.92 sec
+test 7
+      Start  7: persistence
+
+7: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v31-clean-039c2d2/tests/persistence_test.py" "/home/book/batt-access-v31-clean-039c2d2/build/batt-access" "/home/book/batt-access-v31-clean-039c2d2/build/batt-sim"
+7: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+7: Test timeout computed to be: 120
+7: test_alarm_ack_means_committed_and_restart_keeps_open_only (__main__.PersistenceTests.test_alarm_ack_means_committed_and_restart_keeps_open_only) ... ok
+7: test_alarm_crash_before_during_and_after_commit_is_atomic (__main__.PersistenceTests.test_alarm_crash_before_during_and_after_commit_is_atomic) ... ok
+7: test_autoincrement_not_reused_after_deleting_highest_history (__main__.PersistenceTests.test_autoincrement_not_reused_after_deleting_highest_history) ... ok
+7: test_complete_query_json_survives_restart_missing_and_empty_are_distinct (__main__.PersistenceTests.test_complete_query_json_survives_restart_missing_and_empty_are_distinct) ... ok
+7: test_external_writer_lock_has_bounded_failure (__main__.PersistenceTests.test_external_writer_lock_has_bounded_failure) ... ok
+7: test_failed_alarm_rolls_back_every_row_and_no_411_success (__main__.PersistenceTests.test_failed_alarm_rolls_back_every_row_and_no_411_success) ... ok
+7: test_failed_login_does_not_ack_or_replace_committed_identity (__main__.PersistenceTests.test_failed_login_does_not_ack_or_replace_committed_identity) ... ok
+7: test_failed_query_begin_does_not_send_910_or_publish_pending (__main__.PersistenceTests.test_failed_query_begin_does_not_send_910_or_publish_pending) ... ok
+7: test_failed_query_success_leaves_pending_for_recovery (__main__.PersistenceTests.test_failed_query_success_leaves_pending_for_recovery) ... ok
+7: test_normal_stop_commits_pending_terminal_state (__main__.PersistenceTests.test_normal_stop_commits_pending_terminal_state) ... ok
+7: test_old_db_option_is_explicitly_rejected (__main__.PersistenceTests.test_old_db_option_is_explicitly_rejected) ... ok
+7: test_query_allocation_crash_committed_pending_is_recovered (__main__.PersistenceTests.test_query_allocation_crash_committed_pending_is_recovered) ... ok
+7: test_query_success_crash_does_not_publish_uncommitted_result (__main__.PersistenceTests.test_query_success_crash_does_not_publish_uncommitted_result) ... ok
+7: test_recovery_failure_never_listens_or_partially_changes_pending (__main__.PersistenceTests.test_recovery_failure_never_listens_or_partially_changes_pending) ... ok
+7: test_replacement_login_and_old_pending_are_one_transaction (__main__.PersistenceTests.test_replacement_login_and_old_pending_are_one_transaction) ... ok
+7: test_runtime_connection_kill_is_fatal_without_login_success (__main__.PersistenceTests.test_runtime_connection_kill_is_fatal_without_login_success) ... ok
+7: test_same_database_cannot_be_owned_by_two_servers (__main__.PersistenceTests.test_same_database_cannot_be_owned_by_two_servers) ... ok
+7: test_same_database_different_cwd_rejected_before_recovery (__main__.PersistenceTests.test_same_database_different_cwd_rejected_before_recovery) ... ok
+7: test_schema_constraints_and_invalid_database_startup (__main__.PersistenceTests.test_schema_constraints_and_invalid_database_startup) ... ok
+7: test_shutdown_deadline_exits_nonzero_with_unfinished_statistics (__main__.PersistenceTests.test_shutdown_deadline_exits_nonzero_with_unfinished_statistics) ... ok
+7: test_sigkill_pending_recovers_once_and_old_answer_is_orphan (__main__.PersistenceTests.test_sigkill_pending_recovers_once_and_old_answer_is_orphan) ... ok
+7: test_timeout_and_disconnect_are_persisted_and_late_cannot_change_them (__main__.PersistenceTests.test_timeout_and_disconnect_are_persisted_and_late_cannot_change_them) ... ok
+7: 
+7: ----------------------------------------------------------------------
+7: Ran 22 tests in 22.695s
+7: 
+7: OK
+ 7/13 Test  #7: persistence ......................   Passed   24.87 sec
+test 8
+      Start  8: final_demo
+
+8: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v31-clean-039c2d2/scripts/demo-final.py" "--build-dir" "/home/book/batt-access-v31-clean-039c2d2/build"
+8: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+8: Test timeout computed to be: 90
+8: {"acknowledgements": 256, "alarm_history": 96, "devices": 32, "step": "1/7 C++模拟器32终端闭环通过"}
+8: {"current_a": -1.25, "devices": 32, "invalid_frame": "整帧拒绝", "step": "2/7 独立固定样例与32条连接通过", "voltage_v": 52.8}
+8: {"first_id": 1, "new_id": 2, "open_alarms": 1, "step": "3/7 告警持续、恢复、再次触发通过"}
+8: {"freshness_test_ms": 2000, "old_task_state": "link_lost", "replaced_device": "BT002", "stale_device": "BT001", "step": "4/7 数据过期与会话替换通过"}
+8: {"query_timeout_ms": 3000, "scheduled_response_ms": 5000, "step": "5/7 查询成功、3秒超时、5秒迟到通过", "success_id": 2, "timeout_id": 3}
+8: {"devices": 32, "pending_id": 4, "reason": "server_restart", "recovered_state": "link_lost", "step": "6/7 崩溃后32设备离线，告警及终态保留"}
+8: {"database_integrity": "ok", "devices": 32, "new_id": 5, "previous_id": 4, "step": "7/7 32设备重新采集，编号继续增长"}
+8: {"evidence_dir": "临时库已清理", "result": "PASS", "step": "最终验收完成"}
+ 8/13 Test  #8: final_demo .......................   Passed   15.53 sec
+test 9
+      Start  9: http_network
+
+9: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v31-clean-039c2d2/tests/http_test.py" "/home/book/batt-access-v31-clean-039c2d2/build/batt-access" "/home/book/batt-access-v31-clean-039c2d2/build/batt-sim"
+9: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+9: Test timeout computed to be: 120
+9: test_before_and_after_commit_crash_never_split_key_and_task (__main__.HttpRecoveryTests.test_before_and_after_commit_crash_never_split_key_and_task) ... ok
+9: test_int64_task_and_first_page_cursor_are_exact (__main__.HttpRecoveryTests.test_int64_task_and_first_page_cursor_are_exact) ... ok
+9: test_restart_returns_same_request_and_preserves_completed_task (__main__.HttpRecoveryTests.test_restart_returns_same_request_and_preserves_completed_task) ... ok
+9: test_sql_failure_rolls_back_task_key_and_exits_nonzero (__main__.HttpRecoveryTests.test_sql_failure_rolls_back_task_key_and_exits_nonzero) ... ok
+9: test_uninitialized_and_wrong_schema_never_listen (__main__.HttpRecoveryTests.test_uninitialized_and_wrong_schema_never_listen) ... ok
+9: test_alarm_cursor_filters_and_new_insert_no_duplicate_ids (__main__.HttpTests.test_alarm_cursor_filters_and_new_insert_no_duplicate_ids) ... ok
+9: test_application_timeout_before_execution_skips_task_and_late_reply (__main__.HttpTests.test_application_timeout_before_execution_skips_task_and_late_reply) ... ok
+9: test_body_header_bounds_and_device_io_progress (__main__.HttpTests.test_body_header_bounds_and_device_io_progress) ... ok
+9: test_busy_rejection_does_not_reserve_request_key (__main__.HttpTests.test_busy_rejection_does_not_reserve_request_key) ... ok
+9: test_cli_and_http_have_one_pending_guard (__main__.HttpTests.test_cli_and_http_have_one_pending_guard) ... ok
+9: test_client_response_lost_keeps_task_and_deduplicates (__main__.HttpTests.test_client_response_lost_keeps_task_and_deduplicates) ... ok
+9: test_concurrent_results_have_unique_request_ids (__main__.HttpTests.test_concurrent_results_have_unique_request_ids) ... ok
+9: test_connection_queue_is_bounded_without_blocking_devices (__main__.HttpTests.test_connection_queue_is_bounded_without_blocking_devices) ... ok
+9: test_cross_shard_same_key_conflict_is_not_storage_failure (__main__.HttpTests.test_cross_shard_same_key_conflict_is_not_storage_failure) ... ok
+9: test_disabled_by_default_and_fixed_loopback (__main__.HttpTests.test_disabled_by_default_and_fixed_loopback) ... ok
+9: test_full_worker_queue_rejects_post_without_reserving_key (__main__.HttpTests.test_full_worker_queue_rejects_post_without_reserving_key) ... ok
+9: test_occupied_http_port_fails_startup_without_ready (__main__.HttpTests.test_occupied_http_port_fails_startup_without_ready) ... ok
+9: test_offline_is_durable_terminal_unknown_is_not_persisted (__main__.HttpTests.test_offline_is_durable_terminal_unknown_is_not_persisted) ... ok
+9: test_post_commit_location_and_complete_result (__main__.HttpTests.test_post_commit_location_and_complete_result) ... ok
+9: test_replay_before_busy_and_after_terminal_does_not_resend (__main__.HttpTests.test_replay_before_busy_and_after_terminal_does_not_resend) ... ok
+9: test_simultaneous_same_key_only_one_task (__main__.HttpTests.test_simultaneous_same_key_only_one_task) ... ok
+9: test_state_and_cli_share_snapshot (__main__.HttpTests.test_state_and_cli_share_snapshot) ... ok
+9: test_stopping_with_slow_drip_body_releases_http_threads (__main__.HttpTests.test_stopping_with_slow_drip_body_releases_http_threads) ... ok
+9: test_timeout_during_sql_commit_can_be_recovered_by_same_key (__main__.HttpTests.test_timeout_during_sql_commit_can_be_recovered_by_same_key) ... ok
+9: test_timeout_late_and_polling_preserve_terminal_state (__main__.HttpTests.test_timeout_late_and_polling_preserve_terminal_state) ... ok
+9: test_validation_method_and_media_errors_are_nonfatal (__main__.HttpTests.test_validation_method_and_media_errors_are_nonfatal) ... ok
+9: 
+9: ----------------------------------------------------------------------
+9: Ran 26 tests in 15.980s
+9: 
+9: OK
+ 9/13 Test  #9: http_network .....................   Passed   18.00 sec
+test 10
+      Start 10: http_demo
+
+10: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v31-clean-039c2d2/scripts/demo-http.py" "--build-dir" "/home/book/batt-access-v31-clean-039c2d2/build"
+10: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+10: Test timeout computed to be: 30
+10: {"step": "1/5 HTTP读取设备与告警", "state": "online_fresh", "voltage_v": 52.8, "alarms": {"items": [{"clear_ms": null, "desc": "03", "devId": "BT000", "event_no": 1, "first_ms": 1793241989889, "id": 1, "last_ms": 1793241989889, "state": "open"}], "nextBeforeId": null, "requestId": 2}}
+10: {"step": "2/5 HTTP响应丢失，同号重试返回原任务", "status": 200, "txnNo": 1, "replayed": true}
+10: {"step": "3/5 原任务成功，重复请求不重发910", "task": {"clientRequestId": "lost-response", "connection_id": "e4ab02fb-3442-4810-94f7-cbbc0c4bef0d:1", "created_ms": 1793241989934, "devId": "BT000", "event": "task", "finished_ms": 1793241990054, "reason": "", "requestId": 5, "response": {"attrList": [{"delay": 1000, "id": "8001", "protect": 4150, "recovery": 4100}], "devId": "BT000", "msgType": 911, "txnNo": 1}, "state": "success", "txnNo": 1}}
+10: {"step": "4/5 重启后仍按原请求号找回任务", "task": {"clientRequestId": "restart-pending", "connection_id": "e4ab02fb-3442-4810-94f7-cbbc0c4bef0d:1", "created_ms": 1793241990086, "devId": "BT000", "event": "task", "finished_ms": 1793241990572, "reason": "server_restart", "replayed": true, "requestId": 1, "response": null, "state": "link_lost", "txnNo": 2}}
+10: {"step": "5/5 跨设备请求号冲突被拒绝，记录数保持2", "http_status": 409, "error": {"code": "request_id_conflict", "message": "Query not created"}}
+10: {"step": "HTTP演示全部通过", "result": "PASS", "evidence_dir": "临时库已清理"}
+10/13 Test #10: http_demo ........................   Passed    1.43 sec
+test 11
+      Start 11: database_configuration
+
+11: Test command: /home/book/batt-access-v31-clean-039c2d2/build/db_config_test
+11: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+11: Test timeout computed to be: 30
+11: M2_CONFIG_PASS checks=51
+11/13 Test #11: database_configuration ...........   Passed    0.00 sec
+test 12
+      Start 12: mysql_resources
+
+12: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v31-clean-039c2d2/tests/run_mysql_cpp.py" "/home/book/batt-access-v31-clean-039c2d2/build/mysql_raii_test"
+12: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+12: Test timeout computed to be: 30
+12: M2_MYSQL_RAII_PASS checks=61
+12/13 Test #12: mysql_resources ..................   Passed    0.73 sec
+test 13
+      Start 13: mysql_schema
+
+13: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v31-clean-039c2d2/tests/mysql_schema_test.py"
+13: Working Directory: /home/book/batt-access-v31-clean-039c2d2/build
+13: Test timeout computed to be: 30
+13: {"explain": {"query_block": {"select_id": 1, "cost_info": {"query_cost": "105.55"}, "ordering_operation": {"using_filesort": true, "table": {"table_name": "alarm", "access_type": "ref", "possible_keys": ["PRIMARY", "alarm_event", "one_open_alarm", "alarm_device_id", "alarm_device_status_id"], "key": "alarm_event", "used_key_parts": ["dev_id"], "key_length": "66", "ref": ["const"], "rows_examined_per_scan": 1003, "rows_produced_per_join": 99, "filtered": "9.93", "index_condition": "((`batt_test_bd7c753022f64b529bfc273eb9b76ffd`.`alarm`.`dev_id` = 'BT') and (`batt_test_bd7c753022f64b529bfc273eb9b76ffd`.`alarm`.`id` < 1000))", "cost_info": {"read_cost": "5.25", "eval_cost": "9.96", "prefix_cost": "105.55", "data_read_per_join": "24K"}, "used_columns": ["id", "dev_id", "status"], "attached_condition": "(`batt_test_bd7c753022f64b529bfc273eb9b76ffd`.`alarm`.`status` = 'cleared')"}}}}}
+13: {"result": "M1_SCHEMA_PASS", "checks": 33}
+13/13 Test #13: mysql_schema .....................   Passed    4.07 sec
+
+100% tests passed, 0 tests failed out of 13
+
+Total Test time (real) =  99.76 sec

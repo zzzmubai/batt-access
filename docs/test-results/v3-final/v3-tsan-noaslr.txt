@@ -1,0 +1,440 @@
+Internal ctest changing into directory: /home/book/batt-access-v3/build-v3-tsan
+UpdateCTestConfiguration  from :/home/book/batt-access-v3/build-v3-tsan/DartConfiguration.tcl
+Parse Config file:/home/book/batt-access-v3/build-v3-tsan/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/book/batt-access-v3/build-v3-tsan/DartConfiguration.tcl
+Parse Config file:/home/book/batt-access-v3/build-v3-tsan/DartConfiguration.tcl
+Test project /home/book/batt-access-v3/build-v3-tsan
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+      Start  1: core
+
+1: Test command: /home/book/batt-access-v3/build-v3-tsan/core_test
+1: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+1: Environment variables: 
+1:  TSAN_OPTIONS=halt_on_error=1
+1: Test timeout computed to be: 15
+1: core_test: 402 checks passed
+ 1/13 Test  #1: core .............................   Passed    0.06 sec
+test 2
+      Start  2: query_unit
+
+2: Test command: /home/book/batt-access-v3/build-v3-tsan/query_test
+2: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+2: Environment variables: 
+2:  TSAN_OPTIONS=halt_on_error=1
+2: Test timeout computed to be: 15
+2: query_test: 31 checks passed
+ 2/13 Test  #2: query_unit .......................   Passed    0.03 sec
+test 3
+      Start  3: storage_unit
+
+3: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/run_mysql_cpp.py" "/home/book/batt-access-v3/build-v3-tsan/store_test" "--databases" "2"
+3: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+3: Environment variables: 
+3:  TSAN_OPTIONS=halt_on_error=1
+3: Test timeout computed to be: 15
+3: ==================
+3: WARNING: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) (pid=6544)
+3:     #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)
+3:     #1 __gthread_mutex_unlock(pthread_mutex_t*) <null> (store_test+0x79843) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (store_test+0x7b943) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (store_test+0x7fcae) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (store_test+0x7d0c1) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (store_test+0x6edd7) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (store_test+0x6f22c) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #7 transactions /home/book/batt-access-v3/tests/store_test.cpp:35 (store_test+0x9d25) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #8 main /home/book/batt-access-v3/tests/store_test.cpp:133 (store_test+0xe9e4) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3: 
+3:   Location is stack of main thread.
+3: 
+3:   Location is global '<null>' at 0x000000000000 ([stack]+0x200a0)
+3: 
+3:   Mutex M0 (0x7fffffffe0a0) created at:
+3:     #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)
+3:     #1 __gthread_mutex_unlock(pthread_mutex_t*) <null> (store_test+0x79843) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (store_test+0x7b943) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (store_test+0x7fcae) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (store_test+0x7d0c1) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (store_test+0x6edd7) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (store_test+0x6f22c) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #7 transactions /home/book/batt-access-v3/tests/store_test.cpp:35 (store_test+0x9d25) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3:     #8 main /home/book/batt-access-v3/tests/store_test.cpp:133 (store_test+0xe9e4) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+3: 
+3: SUMMARY: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) (/home/book/batt-access-v3/build-v3-tsan/store_test+0x79843) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32) in __gthread_mutex_unlock(pthread_mutex_t*)
+3: ==================
+ 3/13 Test  #3: storage_unit .....................***Failed    0.92 sec
+==================
+WARNING: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) (pid=6544)
+    #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)
+    #1 __gthread_mutex_unlock(pthread_mutex_t*) <null> (store_test+0x79843) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (store_test+0x7b943) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (store_test+0x7fcae) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (store_test+0x7d0c1) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (store_test+0x6edd7) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (store_test+0x6f22c) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #7 transactions /home/book/batt-access-v3/tests/store_test.cpp:35 (store_test+0x9d25) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #8 main /home/book/batt-access-v3/tests/store_test.cpp:133 (store_test+0xe9e4) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x200a0)
+
+  Mutex M0 (0x7fffffffe0a0) created at:
+    #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)
+    #1 __gthread_mutex_unlock(pthread_mutex_t*) <null> (store_test+0x79843) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (store_test+0x7b943) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (store_test+0x7fcae) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (store_test+0x7d0c1) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (store_test+0x6edd7) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (store_test+0x6f22c) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #7 transactions /home/book/batt-access-v3/tests/store_test.cpp:35 (store_test+0x9d25) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+    #8 main /home/book/batt-access-v3/tests/store_test.cpp:133 (store_test+0xe9e4) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32)
+
+SUMMARY: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) (/home/book/batt-access-v3/build-v3-tsan/store_test+0x79843) (BuildId: 1f303d37534945c3e077876af7d9a537e3bcec32) in __gthread_mutex_unlock(pthread_mutex_t*)
+==================
+
+test 4
+      Start  4: api_unit
+
+4: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/run_mysql_cpp.py" "/home/book/batt-access-v3/build-v3-tsan/api_test"
+4: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+4: Environment variables: 
+4:  TSAN_OPTIONS=halt_on_error=1
+4: Test timeout computed to be: 15
+4: ==================
+4: WARNING: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) (pid=6546)
+4:     #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)
+4:     #1 __gthread_mutex_unlock(pthread_mutex_t*) <null> (api_test+0x5375b) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (api_test+0x55d39) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (api_test+0x5b7f6) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (api_test+0x57cfb) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (api_test+0x48e83) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (api_test+0x492d8) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #7 admission /home/book/batt-access-v3/tests/api_test.cpp:55 (api_test+0xb048) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #8 main /home/book/batt-access-v3/tests/api_test.cpp:94 (api_test+0xcc30) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4: 
+4:   Location is stack of main thread.
+4: 
+4:   Location is global '<null>' at 0x000000000000 ([stack]+0x1fb40)
+4: 
+4:   Mutex M0 (0x7fffffffdb40) created at:
+4:     #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)
+4:     #1 __gthread_mutex_unlock(pthread_mutex_t*) <null> (api_test+0x5375b) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (api_test+0x55d39) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (api_test+0x5b7f6) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (api_test+0x57cfb) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (api_test+0x48e83) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (api_test+0x492d8) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #7 admission /home/book/batt-access-v3/tests/api_test.cpp:55 (api_test+0xb048) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4:     #8 main /home/book/batt-access-v3/tests/api_test.cpp:94 (api_test+0xcc30) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+4: 
+4: SUMMARY: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) (/home/book/batt-access-v3/build-v3-tsan/api_test+0x5375b) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba) in __gthread_mutex_unlock(pthread_mutex_t*)
+4: ==================
+ 4/13 Test  #4: api_unit .........................***Failed    0.65 sec
+==================
+WARNING: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) (pid=6546)
+    #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)
+    #1 __gthread_mutex_unlock(pthread_mutex_t*) <null> (api_test+0x5375b) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (api_test+0x55d39) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (api_test+0x5b7f6) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (api_test+0x57cfb) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (api_test+0x48e83) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (api_test+0x492d8) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #7 admission /home/book/batt-access-v3/tests/api_test.cpp:55 (api_test+0xb048) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #8 main /home/book/batt-access-v3/tests/api_test.cpp:94 (api_test+0xcc30) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x1fb40)
+
+  Mutex M0 (0x7fffffffdb40) created at:
+    #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)
+    #1 __gthread_mutex_unlock(pthread_mutex_t*) <null> (api_test+0x5375b) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (api_test+0x55d39) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (api_test+0x5b7f6) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (api_test+0x57cfb) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (api_test+0x48e83) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (api_test+0x492d8) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #7 admission /home/book/batt-access-v3/tests/api_test.cpp:55 (api_test+0xb048) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+    #8 main /home/book/batt-access-v3/tests/api_test.cpp:94 (api_test+0xcc30) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba)
+
+SUMMARY: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) (/home/book/batt-access-v3/build-v3-tsan/api_test+0x5375b) (BuildId: 0467a92a46145d61f6752699d0660b89b97263ba) in __gthread_mutex_unlock(pthread_mutex_t*)
+==================
+
+test 5
+      Start  5: network
+
+5: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/network_test.py" "/home/book/batt-access-v3/build-v3-tsan/batt-access" "/home/book/batt-access-v3/build-v3-tsan/batt-sim"
+5: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+5: Environment variables: 
+5:  TSAN_OPTIONS=halt_on_error=1
+5: Test timeout computed to be: 120
+5: test_32_concurrent_independent_devices (__main__.NetworkTests.test_32_concurrent_independent_devices) ... FAIL
+5: test_balanced_bad_json_does_not_eat_next_login (__main__.NetworkTests.test_balanced_bad_json_does_not_eat_next_login) ... FAIL
+5: test_bound_connection_cannot_rebind_using_login (__main__.NetworkTests.test_bound_connection_cannot_rebind_using_login) ... FAIL
+5: test_bound_connection_cannot_spoof_other_device (__main__.NetworkTests.test_bound_connection_cannot_spoof_other_device) ... FAIL
+5: test_closed_oversized_object_is_rejected (__main__.NetworkTests.test_closed_oversized_object_is_rejected) ... FAIL
+5: test_connection_limit_does_not_stop_existing_clients (__main__.NetworkTests.test_connection_limit_does_not_stop_existing_clients) ... FAIL
+5: test_cpp_relogin_demo (__main__.NetworkTests.test_cpp_relogin_demo) ... FAIL
+5: test_cpp_simulator_32_simultaneous_connections (__main__.NetworkTests.test_cpp_simulator_32_simultaneous_connections) ... FAIL
+5: test_invalid_frame_is_atomic_and_does_not_ack (__main__.NetworkTests.test_invalid_frame_is_atomic_and_does_not_ack) ... FAIL
+5: test_invalid_new_login_does_not_kick_old_session (__main__.NetworkTests.test_invalid_new_login_does_not_kick_old_session) ... FAIL
+5: test_login_fragmented_then_glued_messages (__main__.NetworkTests.test_login_fragmented_then_glued_messages) ... FAIL
+5: test_real_fd_reuse_has_distinct_connection_ids (__main__.NetworkTests.test_real_fd_reuse_has_distinct_connection_ids) ... FAIL
+5: test_replacement_closes_only_old_connection (__main__.NetworkTests.test_replacement_closes_only_old_connection) ... FAIL
+5: test_same_connection_login_is_idempotent (__main__.NetworkTests.test_same_connection_login_is_idempotent) ... FAIL
+ 5/13 Test  #5: network ..........................***Timeout 120.03 sec
+test_32_concurrent_independent_devices (__main__.NetworkTests.test_32_concurrent_independent_devices) ... FAIL
+test_balanced_bad_json_does_not_eat_next_login (__main__.NetworkTests.test_balanced_bad_json_does_not_eat_next_login) ... FAIL
+test_bound_connection_cannot_rebind_using_login (__main__.NetworkTests.test_bound_connection_cannot_rebind_using_login) ... FAIL
+test_bound_connection_cannot_spoof_other_device (__main__.NetworkTests.test_bound_connection_cannot_spoof_other_device) ... FAIL
+test_closed_oversized_object_is_rejected (__main__.NetworkTests.test_closed_oversized_object_is_rejected) ... FAIL
+test_connection_limit_does_not_stop_existing_clients (__main__.NetworkTests.test_connection_limit_does_not_stop_existing_clients) ... FAIL
+test_cpp_relogin_demo (__main__.NetworkTests.test_cpp_relogin_demo) ... FAIL
+test_cpp_simulator_32_simultaneous_connections (__main__.NetworkTests.test_cpp_simulator_32_simultaneous_connections) ... FAIL
+test_invalid_frame_is_atomic_and_does_not_ack (__main__.NetworkTests.test_invalid_frame_is_atomic_and_does_not_ack) ... FAIL
+test_invalid_new_login_does_not_kick_old_session (__main__.NetworkTests.test_invalid_new_login_does_not_kick_old_session) ... FAIL
+test_login_fragmented_then_glued_messages (__main__.NetworkTests.test_login_fragmented_then_glued_messages) ... FAIL
+test_real_fd_reuse_has_distinct_connection_ids (__main__.NetworkTests.test_real_fd_reuse_has_distinct_connection_ids) ... FAIL
+test_replacement_closes_only_old_connection (__main__.NetworkTests.test_replacement_closes_only_old_connection) ... FAIL
+test_same_connection_login_is_idempotent (__main__.NetworkTests.test_same_connection_login_is_idempotent) ... FAIL
+
+test 6
+      Start  6: query_network
+
+6: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/query_network_test.py" "/home/book/batt-access-v3/build-v3-tsan/batt-access" "/home/book/batt-access-v3/build-v3-tsan/batt-sim"
+6: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+6: Environment variables: 
+6:  TSAN_OPTIONS=halt_on_error=1
+6: Test timeout computed to be: 120
+6: test_cpp_persistent_simulator_answers_queries (__main__.QueryNetworkTests.test_cpp_persistent_simulator_answers_queries) ... FAIL
+6: test_full_queue_closes_sender_without_blocking_other_shard (__main__.QueryNetworkTests.test_full_queue_closes_sender_without_blocking_other_shard) ... ok
+6: test_half_close_keeps_admitted_ack_until_worker_finishes (__main__.QueryNetworkTests.test_half_close_keeps_admitted_ack_until_worker_finishes) ... ok
+6: test_interactive_terminal_automatically_uses_quiet_mode (__main__.QueryNetworkTests.test_interactive_terminal_automatically_uses_quiet_mode) ... ok
+6: test_invalid_response_does_not_complete_pending (__main__.QueryNetworkTests.test_invalid_response_does_not_complete_pending) ... ok
+6: test_offline_and_unknown_device_are_explicit (__main__.QueryNetworkTests.test_offline_and_unknown_device_are_explicit) ... ok
+6: test_pending_disconnect_becomes_link_lost (__main__.QueryNetworkTests.test_pending_disconnect_becomes_link_lost) ... ok
+6: test_queued_old_login_cannot_take_back_replaced_session (__main__.QueryNetworkTests.test_queued_old_login_cannot_take_back_replaced_session) ... ok
+6: test_quiet_console_keeps_status_and_query_results_visible (__main__.QueryNetworkTests.test_quiet_console_keeps_status_and_query_results_visible) ... ok
+6: test_relogin_and_old_response_do_not_complete_new_session (__main__.QueryNetworkTests.test_relogin_and_old_response_do_not_complete_new_session) ... ok
+6: test_same_device_second_pending_is_busy (__main__.QueryNetworkTests.test_same_device_second_pending_is_busy) ... ok
+6: test_same_device_work_order_is_preserved (__main__.QueryNetworkTests.test_same_device_work_order_is_preserved) ... ok
+6: test_shutdown_drains_admitted_work_and_finishes_pending (__main__.QueryNetworkTests.test_shutdown_drains_admitted_work_and_finishes_pending) ... ok
+6: test_stale_worker_send_result_cannot_reach_reused_socket (__main__.QueryNetworkTests.test_stale_worker_send_result_cannot_reach_reused_socket) ... ok
+6: test_success_task_lookup_and_duplicate (__main__.QueryNetworkTests.test_success_task_lookup_and_duplicate) ... ok
+6: test_timeout_late_frames_cannot_reverse_terminal_state (__main__.QueryNetworkTests.test_timeout_late_frames_cannot_reverse_terminal_state) ... ok
+6: test_worker_isolation_comparison (__main__.QueryNetworkTests.test_worker_isolation_comparison) ... ok
+6: 
+6: ======================================================================
+6: FAIL: test_cpp_persistent_simulator_answers_queries (__main__.QueryNetworkTests.test_cpp_persistent_simulator_answers_queries)
+6: ----------------------------------------------------------------------
+6: Traceback (most recent call last):
+6:   File "/home/book/batt-access-v3/tests/query_network_test.py", line 272, in test_cpp_persistent_simulator_answers_queries
+6:     with Server() as server:
+6:          ^^^^^^^^
+6:   File "/home/book/batt-access-v3/tests/network_test.py", line 94, in __init__
+6:     self.port = self.event('ready')['port']
+6:                 ^^^^^^^^^^^^^^^^^^^
+6:   File "/home/book/batt-access-v3/tests/network_test.py", line 117, in event
+6:     raise AssertionError('missing event %s; log=%r' % (kind, self.messages))
+6: AssertionError: missing event ready; log=[{'event': 'diagnostic', 'text': '=================='}, {'event': 'diagnostic', 'text': 'WARNING: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) (pid=7002)'}, {'event': 'diagnostic', 'text': '    #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)'}, {'event': 'diagnostic', 'text': '    #1 __gthread_mutex_unlock /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:779 (batt-access+0xf6c49) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (batt-access+0xf6d43) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (batt-access+0xf7eb0) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (batt-access+0xf72c3) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (batt-access+0xed3bd) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (batt-access+0xed812) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #7 batt::Workers::Workers(batt::WorkerConfig const&) /home/book/batt-access-v3/src/worker.cpp:232 (batt-access+0xb5a87) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #8 Server /home/book/batt-access-v3/src/access.cpp:67 (batt-access+0x11633) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #9 main /home/book/batt-access-v3/src/access.cpp:544 (batt-access+0x22cb6) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': ''}, {'event': 'diagnostic', 'text': '  Location is stack of main thread.'}, {'event': 'diagnostic', 'text': ''}, {'event': 'diagnostic', 'text': "  Location is global '<null>' at 0x000000000000 ([stack]+0x20590)"}, {'event': 'diagnostic', 'text': ''}, {'event': 'diagnostic', 'text': '  Mutex M0 (0x7fffffffe590) created at:'}, {'event': 'diagnostic', 'text': '    #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)'}, {'event': 'diagnostic', 'text': '    #1 __gthread_mutex_unlock /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:779 (batt-access+0xf6c49) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (batt-access+0xf6d43) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (batt-access+0xf7eb0) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (batt-access+0xf72c3) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (batt-access+0xed3bd) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (batt-access+0xed812) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #7 batt::Workers::Workers(batt::WorkerConfig const&) /home/book/batt-access-v3/src/worker.cpp:232 (batt-access+0xb5a87) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #8 Server /home/book/batt-access-v3/src/access.cpp:67 (batt-access+0x11633) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #9 main /home/book/batt-access-v3/src/access.cpp:544 (batt-access+0x22cb6) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': ''}, {'event': 'diagnostic', 'text': 'SUMMARY: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:779 in __gthread_mutex_unlock'}, {'event': 'diagnostic', 'text': '=================='}]
+6: 
+6: ----------------------------------------------------------------------
+6: Ran 17 tests in 26.824s
+6: 
+6: FAILED (failures=1)
+6: WORKER_COMPARISON [{"BT001_ms": 304.41, "BT002_ms": 304.02, "slow_worker": 0, "workers": 1}, {"BT001_ms": 4.74, "BT002_ms": 298.12, "slow_worker": 1, "workers": 2}]
+ 6/13 Test  #6: query_network ....................***Failed   28.53 sec
+test_cpp_persistent_simulator_answers_queries (__main__.QueryNetworkTests.test_cpp_persistent_simulator_answers_queries) ... FAIL
+test_full_queue_closes_sender_without_blocking_other_shard (__main__.QueryNetworkTests.test_full_queue_closes_sender_without_blocking_other_shard) ... ok
+test_half_close_keeps_admitted_ack_until_worker_finishes (__main__.QueryNetworkTests.test_half_close_keeps_admitted_ack_until_worker_finishes) ... ok
+test_interactive_terminal_automatically_uses_quiet_mode (__main__.QueryNetworkTests.test_interactive_terminal_automatically_uses_quiet_mode) ... ok
+test_invalid_response_does_not_complete_pending (__main__.QueryNetworkTests.test_invalid_response_does_not_complete_pending) ... ok
+test_offline_and_unknown_device_are_explicit (__main__.QueryNetworkTests.test_offline_and_unknown_device_are_explicit) ... ok
+test_pending_disconnect_becomes_link_lost (__main__.QueryNetworkTests.test_pending_disconnect_becomes_link_lost) ... ok
+test_queued_old_login_cannot_take_back_replaced_session (__main__.QueryNetworkTests.test_queued_old_login_cannot_take_back_replaced_session) ... ok
+test_quiet_console_keeps_status_and_query_results_visible (__main__.QueryNetworkTests.test_quiet_console_keeps_status_and_query_results_visible) ... ok
+test_relogin_and_old_response_do_not_complete_new_session (__main__.QueryNetworkTests.test_relogin_and_old_response_do_not_complete_new_session) ... ok
+test_same_device_second_pending_is_busy (__main__.QueryNetworkTests.test_same_device_second_pending_is_busy) ... ok
+test_same_device_work_order_is_preserved (__main__.QueryNetworkTests.test_same_device_work_order_is_preserved) ... ok
+test_shutdown_drains_admitted_work_and_finishes_pending (__main__.QueryNetworkTests.test_shutdown_drains_admitted_work_and_finishes_pending) ... ok
+test_stale_worker_send_result_cannot_reach_reused_socket (__main__.QueryNetworkTests.test_stale_worker_send_result_cannot_reach_reused_socket) ... ok
+test_success_task_lookup_and_duplicate (__main__.QueryNetworkTests.test_success_task_lookup_and_duplicate) ... ok
+test_timeout_late_frames_cannot_reverse_terminal_state (__main__.QueryNetworkTests.test_timeout_late_frames_cannot_reverse_terminal_state) ... ok
+test_worker_isolation_comparison (__main__.QueryNetworkTests.test_worker_isolation_comparison) ... ok
+
+======================================================================
+FAIL: test_cpp_persistent_simulator_answers_queries (__main__.QueryNetworkTests.test_cpp_persistent_simulator_answers_queries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/book/batt-access-v3/tests/query_network_test.py", line 272, in test_cpp_persistent_simulator_answers_queries
+    with Server() as server:
+         ^^^^^^^^
+  File "/home/book/batt-access-v3/tests/network_test.py", line 94, in __init__
+    self.port = self.event('ready')['port']
+                ^^^^^^^^^^^^^^^^^^^
+  File "/home/book/batt-access-v3/tests/network_test.py", line 117, in event
+    raise AssertionError('missing event %s; log=%r' % (kind, self.messages))
+AssertionError: missing event ready; log=[{'event': 'diagnostic', 'text': '=================='}, {'event': 'diagnostic', 'text': 'WARNING: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) (pid=7002)'}, {'event': 'diagnostic', 'text': '    #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)'}, {'event': 'diagnostic', 'text': '    #1 __gthread_mutex_unlock /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:779 (batt-access+0xf6c49) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (batt-access+0xf6d43) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (batt-access+0xf7eb0) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (batt-access+0xf72c3) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (batt-access+0xed3bd) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (batt-access+0xed812) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #7 batt::Workers::Workers(batt::WorkerConfig const&) /home/book/batt-access-v3/src/worker.cpp:232 (batt-access+0xb5a87) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #8 Server /home/book/batt-access-v3/src/access.cpp:67 (batt-access+0x11633) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #9 main /home/book/batt-access-v3/src/access.cpp:544 (batt-access+0x22cb6) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': ''}, {'event': 'diagnostic', 'text': '  Location is stack of main thread.'}, {'event': 'diagnostic', 'text': ''}, {'event': 'diagnostic', 'text': "  Location is global '<null>' at 0x000000000000 ([stack]+0x20590)"}, {'event': 'diagnostic', 'text': ''}, {'event': 'diagnostic', 'text': '  Mutex M0 (0x7fffffffe590) created at:'}, {'event': 'diagnostic', 'text': '    #0 pthread_mutex_unlock ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1375 (libtsan.so.2+0x57063) (BuildId: 2a13a7710e361d06f7babbea53065ca2be93f738)'}, {'event': 'diagnostic', 'text': '    #1 __gthread_mutex_unlock /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:779 (batt-access+0xf6c49) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #2 std::timed_mutex::unlock() /usr/include/c++/13/mutex:281 (batt-access+0xf6d43) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #3 std::unique_lock<std::timed_mutex>::unlock() /usr/include/c++/13/bits/unique_lock.h:200 (batt-access+0xf7eb0) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #4 std::unique_lock<std::timed_mutex>::~unique_lock() /usr/include/c++/13/bits/unique_lock.h:106 (batt-access+0xf72c3) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #5 batt::Store::write(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void ()> const&) /home/book/batt-access-v3/src/store.cpp:49 (batt-access+0xed3bd) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #6 batt::Store::initialize() /home/book/batt-access-v3/src/store.cpp:54 (batt-access+0xed812) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #7 batt::Workers::Workers(batt::WorkerConfig const&) /home/book/batt-access-v3/src/worker.cpp:232 (batt-access+0xb5a87) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #8 Server /home/book/batt-access-v3/src/access.cpp:67 (batt-access+0x11633) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': '    #9 main /home/book/batt-access-v3/src/access.cpp:544 (batt-access+0x22cb6) (BuildId: 449af5594d52d23343d622a4f53d3cf524415505)'}, {'event': 'diagnostic', 'text': ''}, {'event': 'diagnostic', 'text': 'SUMMARY: ThreadSanitizer: unlock of an unlocked mutex (or by a wrong thread) /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:779 in __gthread_mutex_unlock'}, {'event': 'diagnostic', 'text': '=================='}]
+
+----------------------------------------------------------------------
+Ran 17 tests in 26.824s
+
+FAILED (failures=1)
+WORKER_COMPARISON [{"BT001_ms": 304.41, "BT002_ms": 304.02, "slow_worker": 0, "workers": 1}, {"BT001_ms": 4.74, "BT002_ms": 298.12, "slow_worker": 1, "workers": 2}]
+
+test 7
+      Start  7: persistence
+
+7: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/persistence_test.py" "/home/book/batt-access-v3/build-v3-tsan/batt-access" "/home/book/batt-access-v3/build-v3-tsan/batt-sim"
+7: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+7: Environment variables: 
+7:  TSAN_OPTIONS=halt_on_error=1
+7: Test timeout computed to be: 120
+7: test_alarm_ack_means_committed_and_restart_keeps_open_only (__main__.PersistenceTests.test_alarm_ack_means_committed_and_restart_keeps_open_only) ... ok
+7: test_alarm_crash_before_during_and_after_commit_is_atomic (__main__.PersistenceTests.test_alarm_crash_before_during_and_after_commit_is_atomic) ... ok
+7: test_autoincrement_not_reused_after_deleting_highest_history (__main__.PersistenceTests.test_autoincrement_not_reused_after_deleting_highest_history) ... ok
+7: test_complete_query_json_survives_restart_missing_and_empty_are_distinct (__main__.PersistenceTests.test_complete_query_json_survives_restart_missing_and_empty_are_distinct) ... ok
+7: test_external_writer_lock_has_bounded_failure (__main__.PersistenceTests.test_external_writer_lock_has_bounded_failure) ... ok
+7: test_failed_alarm_rolls_back_every_row_and_no_411_success (__main__.PersistenceTests.test_failed_alarm_rolls_back_every_row_and_no_411_success) ... ok
+7: test_failed_login_does_not_ack_or_replace_committed_identity (__main__.PersistenceTests.test_failed_login_does_not_ack_or_replace_committed_identity) ... ok
+7: test_failed_query_begin_does_not_send_910_or_publish_pending (__main__.PersistenceTests.test_failed_query_begin_does_not_send_910_or_publish_pending) ... ok
+7: test_failed_query_success_leaves_pending_for_recovery (__main__.PersistenceTests.test_failed_query_success_leaves_pending_for_recovery) ... ok
+7: test_normal_stop_commits_pending_terminal_state (__main__.PersistenceTests.test_normal_stop_commits_pending_terminal_state) ... ok
+7: test_old_db_option_is_explicitly_rejected (__main__.PersistenceTests.test_old_db_option_is_explicitly_rejected) ... ok
+7: test_query_allocation_crash_committed_pending_is_recovered (__main__.PersistenceTests.test_query_allocation_crash_committed_pending_is_recovered) ... ok
+7: test_query_success_crash_does_not_publish_uncommitted_result (__main__.PersistenceTests.test_query_success_crash_does_not_publish_uncommitted_result) ... ok
+7: test_recovery_failure_never_listens_or_partially_changes_pending (__main__.PersistenceTests.test_recovery_failure_never_listens_or_partially_changes_pending) ... ok
+7: test_replacement_login_and_old_pending_are_one_transaction (__main__.PersistenceTests.test_replacement_login_and_old_pending_are_one_transaction) ... ok
+7: test_runtime_connection_kill_is_fatal_without_login_success (__main__.PersistenceTests.test_runtime_connection_kill_is_fatal_without_login_success) ... ok
+7: test_same_database_cannot_be_owned_by_two_servers (__main__.PersistenceTests.test_same_database_cannot_be_owned_by_two_servers) ... ok
+7: test_same_database_different_cwd_rejected_before_recovery (__main__.PersistenceTests.test_same_database_different_cwd_rejected_before_recovery) ... ok
+7: test_schema_constraints_and_invalid_database_startup (__main__.PersistenceTests.test_schema_constraints_and_invalid_database_startup) ... ok
+7: test_shutdown_deadline_exits_nonzero_with_unfinished_statistics (__main__.PersistenceTests.test_shutdown_deadline_exits_nonzero_with_unfinished_statistics) ... ok
+7: test_sigkill_pending_recovers_once_and_old_answer_is_orphan (__main__.PersistenceTests.test_sigkill_pending_recovers_once_and_old_answer_is_orphan) ... ok
+7: test_timeout_and_disconnect_are_persisted_and_late_cannot_change_them (__main__.PersistenceTests.test_timeout_and_disconnect_are_persisted_and_late_cannot_change_them) ... ok
+7: 
+7: ----------------------------------------------------------------------
+7: Ran 22 tests in 51.261s
+7: 
+7: OK
+ 7/13 Test  #7: persistence ......................   Passed   53.48 sec
+test 8
+      Start  8: final_demo
+
+8: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/scripts/demo-final.py" "--build-dir" "/home/book/batt-access-v3/build-v3-tsan"
+8: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+8: Environment variables: 
+8:  TSAN_OPTIONS=halt_on_error=1
+8: Test timeout computed to be: 90
+8: {"acknowledgements": 256, "alarm_history": 96, "devices": 32, "step": "1/7 C++模拟器32终端闭环通过"}
+8: {"current_a": -1.25, "devices": 32, "invalid_frame": "整帧拒绝", "step": "2/7 独立固定样例与32条连接通过", "voltage_v": 52.8}
+8: {"first_id": 1, "new_id": 2, "open_alarms": 1, "step": "3/7 告警持续、恢复、再次触发通过"}
+8: {"freshness_test_ms": 2000, "old_task_state": "link_lost", "replaced_device": "BT002", "stale_device": "BT001", "step": "4/7 数据过期与会话替换通过"}
+8: {"query_timeout_ms": 3000, "scheduled_response_ms": 5000, "step": "5/7 查询成功、3秒超时、5秒迟到通过", "success_id": 2, "timeout_id": 3}
+8: {"devices": 32, "pending_id": 4, "reason": "server_restart", "recovered_state": "link_lost", "step": "6/7 崩溃后32设备离线，告警及终态保留"}
+8: {"database_integrity": "ok", "devices": 32, "new_id": 5, "previous_id": 4, "step": "7/7 32设备重新采集，编号继续增长"}
+8: {"evidence_dir": "临时库已清理", "result": "PASS", "step": "最终验收完成"}
+ 8/13 Test  #8: final_demo .......................   Passed   17.80 sec
+test 9
+      Start  9: http_network
+
+9: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/http_test.py" "/home/book/batt-access-v3/build-v3-tsan/batt-access" "/home/book/batt-access-v3/build-v3-tsan/batt-sim"
+9: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+9: Environment variables: 
+9:  TSAN_OPTIONS=halt_on_error=1
+9: Test timeout computed to be: 120
+9: test_before_and_after_commit_crash_never_split_key_and_task (__main__.HttpRecoveryTests.test_before_and_after_commit_crash_never_split_key_and_task) ... ok
+9: test_int64_task_and_first_page_cursor_are_exact (__main__.HttpRecoveryTests.test_int64_task_and_first_page_cursor_are_exact) ... ok
+9: test_restart_returns_same_request_and_preserves_completed_task (__main__.HttpRecoveryTests.test_restart_returns_same_request_and_preserves_completed_task) ... ok
+9: test_sql_failure_rolls_back_task_key_and_exits_nonzero (__main__.HttpRecoveryTests.test_sql_failure_rolls_back_task_key_and_exits_nonzero) ... ok
+9: test_uninitialized_and_wrong_schema_never_listen (__main__.HttpRecoveryTests.test_uninitialized_and_wrong_schema_never_listen) ... ok
+9: test_alarm_cursor_filters_and_new_insert_no_duplicate_ids (__main__.HttpTests.test_alarm_cursor_filters_and_new_insert_no_duplicate_ids) ... ok
+9: test_application_timeout_before_execution_skips_task_and_late_reply (__main__.HttpTests.test_application_timeout_before_execution_skips_task_and_late_reply) ... ok
+9: test_body_header_bounds_and_device_io_progress (__main__.HttpTests.test_body_header_bounds_and_device_io_progress) ... ok
+9: test_busy_rejection_does_not_reserve_request_key (__main__.HttpTests.test_busy_rejection_does_not_reserve_request_key) ... ok
+9: test_cli_and_http_have_one_pending_guard (__main__.HttpTests.test_cli_and_http_have_one_pending_guard) ... ok
+9: test_client_response_lost_keeps_task_and_deduplicates (__main__.HttpTests.test_client_response_lost_keeps_task_and_deduplicates) ... ok
+9: test_concurrent_results_have_unique_request_ids (__main__.HttpTests.test_concurrent_results_have_unique_request_ids) ... ok
+9: test_connection_queue_is_bounded_without_blocking_devices (__main__.HttpTests.test_connection_queue_is_bounded_without_blocking_devices) ... ok
+9: test_cross_shard_same_key_conflict_is_not_storage_failure (__main__.HttpTests.test_cross_shard_same_key_conflict_is_not_storage_failure) ... ok
+9: test_disabled_by_default_and_fixed_loopback (__main__.HttpTests.test_disabled_by_default_and_fixed_loopback) ... ok
+9: test_full_worker_queue_rejects_post_without_reserving_key (__main__.HttpTests.test_full_worker_queue_rejects_post_without_reserving_key) ... ok
+9: test_occupied_http_port_fails_startup_without_ready (__main__.HttpTests.test_occupied_http_port_fails_startup_without_ready) ... ok
+9: test_offline_is_durable_terminal_unknown_is_not_persisted (__main__.HttpTests.test_offline_is_durable_terminal_unknown_is_not_persisted) ... ok
+9: test_post_commit_location_and_complete_result (__main__.HttpTests.test_post_commit_location_and_complete_result) ... ok
+9: test_replay_before_busy_and_after_terminal_does_not_resend (__main__.HttpTests.test_replay_before_busy_and_after_terminal_does_not_resend) ... ok
+9: test_simultaneous_same_key_only_one_task (__main__.HttpTests.test_simultaneous_same_key_only_one_task) ... ok
+9: test_state_and_cli_share_snapshot (__main__.HttpTests.test_state_and_cli_share_snapshot) ... ok
+9: test_stopping_with_slow_drip_body_releases_http_threads (__main__.HttpTests.test_stopping_with_slow_drip_body_releases_http_threads) ... ok
+9: test_timeout_during_sql_commit_can_be_recovered_by_same_key (__main__.HttpTests.test_timeout_during_sql_commit_can_be_recovered_by_same_key) ... ok
+9: test_timeout_late_and_polling_preserve_terminal_state (__main__.HttpTests.test_timeout_late_and_polling_preserve_terminal_state) ... ok
+9: test_validation_method_and_media_errors_are_nonfatal (__main__.HttpTests.test_validation_method_and_media_errors_are_nonfatal) ... ok
+9: 
+9: ----------------------------------------------------------------------
+9: Ran 26 tests in 30.206s
+9: 
+9: OK
+ 9/13 Test  #9: http_network .....................   Passed   32.28 sec
+test 10
+      Start 10: http_demo
+
+10: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/scripts/demo-http.py" "--build-dir" "/home/book/batt-access-v3/build-v3-tsan"
+10: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+10: Environment variables: 
+10:  TSAN_OPTIONS=halt_on_error=1
+10: Test timeout computed to be: 30
+10: {"step": "1/5 HTTP读取设备与告警", "state": "online_fresh", "voltage_v": 52.8, "alarms": {"items": [{"clear_ms": null, "desc": "03", "devId": "BT000", "event_no": 1, "first_ms": 1793240116057, "id": 1, "last_ms": 1793240116057, "state": "open"}], "nextBeforeId": null, "requestId": 2}}
+10: {"step": "2/5 HTTP响应丢失，同号重试返回原任务", "status": 200, "txnNo": 1, "replayed": true}
+10: {"step": "3/5 原任务成功，重复请求不重发910", "task": {"clientRequestId": "lost-response", "connection_id": "f8f4136c-4deb-47b1-951c-c08d30f9c85a:1", "created_ms": 1793240116092, "devId": "BT000", "event": "task", "finished_ms": 1793240116220, "reason": "", "requestId": 5, "response": {"attrList": [{"delay": 1000, "id": "8001", "protect": 4150, "recovery": 4100}], "devId": "BT000", "msgType": 911, "txnNo": 1}, "state": "success", "txnNo": 1}}
+10: {"step": "4/5 重启后仍按原请求号找回任务", "task": {"clientRequestId": "restart-pending", "connection_id": "f8f4136c-4deb-47b1-951c-c08d30f9c85a:1", "created_ms": 1793240116251, "devId": "BT000", "event": "task", "finished_ms": 1793240116871, "reason": "server_restart", "replayed": true, "requestId": 1, "response": null, "state": "link_lost", "txnNo": 2}}
+10: {"step": "5/5 跨设备请求号冲突被拒绝，记录数保持2", "http_status": 409, "error": {"code": "request_id_conflict", "message": "Query not created"}}
+10: {"step": "HTTP演示全部通过", "result": "PASS", "evidence_dir": "临时库已清理"}
+10/13 Test #10: http_demo ........................   Passed    2.11 sec
+test 11
+      Start 11: database_configuration
+
+11: Test command: /home/book/batt-access-v3/build-v3-tsan/db_config_test
+11: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+11: Environment variables: 
+11:  TSAN_OPTIONS=halt_on_error=1
+11: Test timeout computed to be: 30
+11: M2_CONFIG_PASS checks=51
+11/13 Test #11: database_configuration ...........   Passed    0.03 sec
+test 12
+      Start 12: mysql_resources
+
+12: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/run_mysql_cpp.py" "/home/book/batt-access-v3/build-v3-tsan/mysql_raii_test"
+12: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+12: Environment variables: 
+12:  TSAN_OPTIONS=halt_on_error=1
+12: Test timeout computed to be: 30
+12: M2_MYSQL_RAII_PASS checks=61
+12/13 Test #12: mysql_resources ..................   Passed    1.65 sec
+test 13
+      Start 13: mysql_schema
+
+13: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/mysql_schema_test.py"
+13: Working Directory: /home/book/batt-access-v3/build-v3-tsan
+13: Environment variables: 
+13:  TSAN_OPTIONS=halt_on_error=1
+13: Test timeout computed to be: 30
+13: {"explain": {"query_block": {"select_id": 1, "cost_info": {"query_cost": "105.55"}, "ordering_operation": {"using_filesort": true, "table": {"table_name": "alarm", "access_type": "ref", "possible_keys": ["PRIMARY", "alarm_event", "one_open_alarm", "alarm_device_id", "alarm_device_status_id"], "key": "alarm_event", "used_key_parts": ["dev_id"], "key_length": "66", "ref": ["const"], "rows_examined_per_scan": 1003, "rows_produced_per_join": 99, "filtered": "9.93", "index_condition": "((`batt_test_6441b225a061431ea79ce01f2506da71`.`alarm`.`dev_id` = 'BT') and (`batt_test_6441b225a061431ea79ce01f2506da71`.`alarm`.`id` < 1000))", "cost_info": {"read_cost": "5.25", "eval_cost": "9.96", "prefix_cost": "105.55", "data_read_per_join": "24K"}, "used_columns": ["id", "dev_id", "status"], "attached_condition": "(`batt_test_6441b225a061431ea79ce01f2506da71`.`alarm`.`status` = 'cleared')"}}}}}
+13: {"result": "M1_SCHEMA_PASS", "checks": 33}
+13/13 Test #13: mysql_schema .....................   Passed    4.56 sec
+
+69% tests passed, 4 tests failed out of 13
+
+Total Test time (real) = 262.11 sec
+
+The following tests FAILED:
+	  3 - storage_unit (Failed)
+	  4 - api_unit (Failed)
+	  5 - network (Timeout)
+	  6 - query_network (Failed)
+Errors while running CTest

@@ -1,6 +1,10 @@
 # 第三版 MySQL 实现与验收
 
-本记录对应 2026-10-29 的 M3/M4 工作。最终通过结果与原始日志核对后填写；完整 Qt 客户端属于 M5。
+本记录对应 2026-10-29 的 M3/M4 工作。完整 Qt 客户端已另外完成 M5 测试和真实联调，结果见第三版验收记录。
+
+初始回归：[原始失败](test-results/v3-m3/initial.txt)、[首次全量 Debug](test-results/v3-m3/debug.txt)、[首次 ASan](test-results/v3-m3/asan.txt)、[大编号边界](test-results/v3-m3/http-int64.txt)。最终版本和干净源码构建的原始日志在 `test-results/v3-final/`，对应提交 `039c2d2` 的实现代码。
+
+最终 V3.1：Debug 13/13（93.04 秒）、ASan/UBSan 13/13（135.05 秒）、TSan 13/13（148.86 秒）；纯源码新目录构建及 CTest 13/13（99.76 秒）。检测结论只覆盖执行到的应用路径和下面明确的范围。
 
 ## 实现
 

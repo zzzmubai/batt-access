@@ -1,0 +1,49 @@
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found Python3: /home/book/batt-access-v3/.local/venv/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Configuring done (1.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/book/batt-access-v31-clean-039c2d2/build
+[  4%] Building CXX object CMakeFiles/batt_mysql.dir/src/db_config.cpp.o
+[  8%] Building CXX object CMakeFiles/batt_http.dir/src/http_api.cpp.o
+[ 12%] Building CXX object CMakeFiles/batt_mysql.dir/src/mysql_raii.cpp.o
+[ 16%] Building CXX object CMakeFiles/batt_mysql.dir/src/mysql_schema.cpp.o
+[ 20%] Linking CXX static library libbatt_mysql.a
+[ 20%] Built target batt_mysql
+[ 24%] Building CXX object CMakeFiles/batt-sim.dir/src/sim.cpp.o
+[ 28%] Linking CXX executable batt-sim
+[ 28%] Built target batt-sim
+[ 32%] Building CXX object CMakeFiles/db_config_test.dir/tests/db_config_test.cpp.o
+[ 36%] Linking CXX executable db_config_test
+[ 36%] Built target db_config_test
+[ 40%] Building CXX object CMakeFiles/mysql_raii_test.dir/tests/mysql_raii_test.cpp.o
+[ 44%] Linking CXX executable mysql_raii_test
+[ 48%] Linking CXX static library libbatt_http.a
+[ 48%] Built target batt_http
+[ 52%] Building CXX object CMakeFiles/batt_worker.dir/src/worker.cpp.o
+[ 52%] Built target mysql_raii_test
+[ 56%] Building CXX object CMakeFiles/batt_worker.dir/src/store.cpp.o
+[ 60%] Linking CXX static library libbatt_worker.a
+[ 60%] Built target batt_worker
+[ 64%] Building CXX object CMakeFiles/batt-access.dir/src/access.cpp.o
+[ 68%] Building CXX object CMakeFiles/core_test.dir/tests/core_test.cpp.o
+[ 72%] Linking CXX executable core_test
+[ 72%] Built target core_test
+[ 76%] Building CXX object CMakeFiles/query_test.dir/tests/query_test.cpp.o
+[ 80%] Linking CXX executable batt-access
+[ 80%] Built target batt-access
+[ 84%] Building CXX object CMakeFiles/store_test.dir/tests/store_test.cpp.o
+[ 88%] Linking CXX executable query_test
+[ 88%] Built target query_test
+[ 92%] Building CXX object CMakeFiles/api_test.dir/tests/api_test.cpp.o
+[ 96%] Linking CXX executable store_test
+[ 96%] Built target store_test
+[100%] Linking CXX executable api_test
+[100%] Built target api_test

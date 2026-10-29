@@ -1,0 +1,21 @@
+[ 12%] Building CXX object CMakeFiles/batt_mysql.dir/src/mysql_schema.cpp.o
+[ 12%] Built target batt_http
+[ 20%] Built target batt-sim
+[ 24%] Linking CXX static library libbatt_mysql.a
+[ 32%] Built target batt_mysql
+[ 36%] Linking CXX executable db_config_test
+[ 48%] Built target batt_worker
+[ 52%] Linking CXX executable mysql_raii_test
+[ 56%] Built target db_config_test
+[ 60%] Building CXX object CMakeFiles/batt-access.dir/src/access.cpp.o
+[ 64%] Built target mysql_raii_test
+[ 68%] Linking CXX executable core_test
+[ 72%] Built target core_test
+[ 76%] Linking CXX executable query_test
+[ 80%] Built target query_test
+[ 84%] Linking CXX executable store_test
+[ 88%] Built target store_test
+[ 92%] Linking CXX executable api_test
+[ 96%] Built target api_test
+[100%] Linking CXX executable batt-access
+[100%] Built target batt-access

@@ -46,7 +46,7 @@ def log(server,index):
 
 with tempfile.TemporaryDirectory(prefix='batt-http-demo-') as folder:
     database=str(Path(folder)/'demo.db')
-    server=HttpServer('--db',database,'--test-api-reply-delay-ms','400')
+    server=HttpServer('--database-fixture',database,'--test-api-reply-delay-ms','400')
     peer=Peer(server.port)
     try:
         fresh(peer); peer.send(alarm('03')); peer.receive()
@@ -73,7 +73,7 @@ with tempfile.TemporaryDirectory(prefix='batt-http-demo-') as folder:
         server.process.kill(); check(server.process.wait(timeout=4)==-9,'Owned process kill')
     finally:
         peer.close(); server.stop(); log(server,1)
-    with HttpServer('--db',database) as server:
+    with HttpServer('--database-fixture',database) as server:
         code,recovered,_=post(server,'restart-pending')
         check((code,recovered['txnNo'],recovered['state'],recovered['reason'])==
               (200,pending['txnNo'],'link_lost','server_restart'),'Restart replay')
@@ -86,7 +86,6 @@ with tempfile.TemporaryDirectory(prefix='batt-http-demo-') as folder:
         emit('5/5 跨设备请求号冲突被拒绝，记录数保持2',http_status=code,error=conflict['error'])
     log(server,2)
     if output:
-        target=output/'demo.db'
-        subprocess.run([str(build/'batt-db'),'-readonly',database,'.backup '+json.dumps(str(target),ensure_ascii=False)],check=True,timeout=10)
-        check(sql(str(target),'PRAGMA integrity_check')==[('ok',)],'Backup integrity')
+        rows = {table: sql(database, 'SELECT * FROM ' + table) for table in ('device','alarm','query_task')}
+        (output/'simulated-rows.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2),encoding='utf-8')
 emit('HTTP演示全部通过',result='PASS',evidence_dir=str(output) if output else '临时库已清理')

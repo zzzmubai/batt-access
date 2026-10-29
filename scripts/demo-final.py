@@ -5,7 +5,7 @@ import copy
 from contextlib import contextmanager
 import json
 from pathlib import Path
-import sqlite3
+
 import subprocess
 import sys
 import tempfile
@@ -20,6 +20,7 @@ BUILD = (ROOT / args.build_dir).resolve()
 sys.path.insert(0, str(ROOT / 'tests'))
 sys.argv = [sys.argv[0], str(BUILD / 'batt-access'), str(BUILD / 'batt-sim')]
 from network_test import Server, Peer
+from mysql_probe import fixture, sql as mysql_sql
 
 SAMPLES = json.loads((ROOT / 'docs/fixtures/protocol-samples.json').read_text(encoding='utf-8'))
 
@@ -49,7 +50,7 @@ class Demo:
     def service(self, database, *options):
         self.service_count += 1
         index = self.service_count
-        server = Server('--db', str(database), *options)
+        server = Server('--database-fixture', str(database), *options)
         server.expected_exit = 0
         try:
             yield server
@@ -62,11 +63,7 @@ class Demo:
             check(code == server.expected_exit, '服务退出码 %s，预期 %s' % (code, server.expected_exit))
 
     def rows(self, database, sql):
-        connection = sqlite3.connect(Path(database).resolve().as_uri() + '?mode=ro', uri=True)
-        try:
-            return connection.execute(sql).fetchall()
-        finally:
-            connection.close()
+        return mysql_sql(database, sql)
 
     def snapshot(self, server, dev):
         server.command('status ' + dev)
@@ -227,7 +224,9 @@ class Demo:
                 again, request = self.query(server, terminals[3]); self.answer(terminals[3], request)
                 server.event('query_state', lambda e: e['txnNo'] == again['txnNo'] and e['state'] == 'success')
                 check(again['txnNo'] > pending['txnNo'], '重启后编号回退')
-                check(self.rows(database, 'PRAGMA integrity_check') == [('ok',)], '数据库完整性')
+                with fixture(database).connect() as current:
+                    from mysql_probe import schema
+                    schema.validate(current)
                 self.emit('7/7 32设备重新采集，编号继续增长', previous_id=pending['txnNo'], new_id=again['txnNo'], devices=32, database_integrity='ok')
             finally:
                 for terminal in terminals: terminal.close()
@@ -267,15 +266,10 @@ def main():
         demo.cpp_demo(cpp_database)
         demo.full_demo(database)
         if demo.output:
-            # SQLite Backup API includes committed WAL pages; do not copy a lone db file.
+            # Export simulated rows as JSON evidence, not a database backup.
             for path in (database, cpp_database):
-                target = demo.output / path.name
-                command = '.backup ' + json.dumps(str(target), ensure_ascii=False)
-                result = subprocess.run([str(BUILD / 'batt-db'), '-readonly', str(path), command],
-                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, timeout=10)
-                check(result.returncode == 0, 'SQLite备份失败：' + result.stdout)
-                check(demo.rows(target, 'PRAGMA integrity_check') == [('ok',)], '备份完整性')
-                check(demo.rows(target, 'SELECT COUNT(*) FROM device') == [(32,)], '备份设备数')
+                rows = {table: demo.rows(path, 'SELECT * FROM ' + table) for table in ('device','alarm','query_task')}
+                (demo.output / (path.stem + '-rows.json')).write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding='utf-8')
             (demo.output / 'summary.json').write_text(json.dumps(dict(result='PASS', steps=demo.events,
                 evidence='模拟数据；过期使用2000ms测试钩子，查询为默认3000ms；不是吞吐压测或现场验证'),
                 ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

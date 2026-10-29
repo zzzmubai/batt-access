@@ -3,7 +3,7 @@
  * 主线程独占监听 socket、epoll、各连接的收发缓冲和控制台输入。
  * 收包主线：receive -> JsonSlice::feed -> process_object -> worker 输入队列。
  * 返回主线：drain_outputs -> SendBuffer::enqueue -> send_pending -> socket send。
- * 业务状态由固定设备分片 worker 管理；运行中的 I/O 循环不执行 SQLite 操作。
+ * 业务状态由固定设备分片 worker 管理；运行中的 I/O 循环不执行数据库操作。
  * 本文件还处理连接替换、容量限制、登录/残帧/发送期限和正常退出。
  * 建议先读 protocol/session/worker，再从 main 和 Server::run 串起完整链路。
  */
@@ -12,6 +12,7 @@
 #include "send_buffer.hpp"
 #include "console.hpp"
 #include "http_api.hpp"
+#include "mysql_runtime.hpp"
 #include <csignal>
 #include <fcntl.h>
 #include <fstream>
@@ -90,8 +91,8 @@ public:
              {"milestone", 4}, {"workers", workers_.count()}, {"max_clients", max_clients_},
              {"boot_id", boot_}, {"freshness_ms", config.freshness.count()},
              {"query_timeout_ms", config.query_timeout.count()}, {"cli", cli_enabled_},
-             {"persistence", "sqlite"}, {"database", config.storage.path},
-             {"sqlite_version", sqlite3_libversion()}, {"quiet", quiet_}, {"version","2.0.0"},
+             {"persistence", "mysql"}, {"database", config.storage.db.database},
+             {"mysql_client_version", batt::mysql_client_version()}, {"quiet", quiet_}, {"version",BATT_VERSION},
              {"http_port",http_ ? batt::Json(http_->port()) : batt::Json(nullptr)}});
         if (quiet_) log({{"event", "console_mode"}, {"quiet", true}});
     }
@@ -480,7 +481,7 @@ private:
 };
 } // namespace
 
-// 读取参数 -> 规范化库路径并加独占文件锁 -> 注册停止信号 -> 构造并运行服务。
+// 配置 -> 固定目录/schema 锁 -> 主线程初始化客户端库 -> 恢复 -> Worker ready -> 监听。
 // --test-* 是显式故障/期限测试入口；正常业务参数保留默认值即可。
 int main(int argc, char** argv) {
     try {
@@ -491,17 +492,18 @@ int main(int argc, char** argv) {
         for (int i = 1; i < argc; ++i) {
             const std::string arg = argv[i];
             if (arg == "--help") {
-                std::cout << "batt-access [--bind IPv4] [--port 19001] [--http-port 19002] [--max-clients 128] [--workers 2] [--db access.db] [--quiet|--verbose]\n"
+                std::cout << "batt-access --db-config /absolute/private/mysql.ini [--bind IPv4] [--port 19001] [--http-port 19002] [--max-clients 128] [--workers 2] [--quiet|--verbose]\n"
                              "  Test hooks: --test-send-chunk N --test-freshness-ms N --test-query-timeout-ms N\n"
                              "              --test-queue-capacity N --test-slow-device DEV --test-slow-ms N\n"
                              "              --test-storage-fail OP | --test-storage-crash OP --test-storage-crash-phase PHASE\n"; return 0;
             }
             if (arg == "--quiet") { quiet = true; continue; }
             if (arg == "--verbose") { quiet = false; continue; }
+            if (arg == "--db") throw std::invalid_argument("V3 uses MySQL: replace --db with --db-config /absolute/private/mysql.ini");
             if (i + 1 >= argc) throw std::invalid_argument("missing option value");
             const std::string value = argv[++i];
             if (arg == "--bind") { host = value; continue; }
-            if (arg == "--db") { config.storage.path = value; continue; }
+            if (arg == "--db-config") { config.storage.config_path = value; continue; }
             if (arg == "--test-storage-fail") { config.storage.fail_operation = value; continue; }
             if (arg == "--test-storage-crash") { config.storage.crash_operation = value; continue; }
             if (arg == "--test-storage-crash-phase") { config.storage.crash_phase = value; continue; }
@@ -529,12 +531,13 @@ int main(int argc, char** argv) {
         if (!config.storage.crash_operation.empty() && config.storage.crash_phase != "before_commit" &&
             config.storage.crash_phase != "after_commit" && config.storage.crash_phase != "mid_alarm" && config.storage.crash_phase != "mid_migration")
             throw std::invalid_argument("invalid storage crash phase");
-        config.storage.path = batt::canonical_database(config.storage.path);
+        config.storage.db = batt::load_db_config(config.storage.config_path);
         config.storage.boot_id = boot_identity();
-        const auto lock_path = config.storage.path + ".lock";
+        const auto lock_path = config.storage.db.runtime_dir + "/mysql-" + std::to_string(config.storage.db.port) + "-" + config.storage.db.database + ".lock";
         batt::Fd database_lock(::open(lock_path.c_str(), O_CREAT | O_RDWR | O_CLOEXEC, 0600));
         if (!database_lock || ::flock(database_lock.get(), LOCK_EX | LOCK_NB) < 0)
             throw batt::StorageError("database already in use, or lock file unavailable");
+        batt::MysqlLibrary mysql_library; // Outlives Server/Workers and closes before the instance lock.
         struct sigaction action{}; action.sa_handler = request_stop; ::sigemptyset(&action.sa_mask);
         if (::sigaction(SIGINT, &action, nullptr) < 0 || ::sigaction(SIGTERM, &action, nullptr) < 0)
             throw batt::sys_error("sigaction");

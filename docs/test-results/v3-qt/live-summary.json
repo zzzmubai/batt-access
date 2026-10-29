@@ -1,0 +1,7 @@
+{
+  "result": "QT_LIVE_PASS",
+  "chain": "Qt -> SSH -> HTTP -> Worker -> MySQL / C++ simulator",
+  "qt_build": "E:\\batt-v3-tools\\ops-build-46d8183a4fff4d0cb3654527dcda9f29",
+  "local_port": 2417,
+  "remote_port": 40219
+}

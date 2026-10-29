@@ -1,5 +1,7 @@
 #include "api.hpp"
 #include "store.hpp"
+#include "mysql_runtime.hpp"
+#include <cstdlib>
 #include <iostream>
 #include <thread>
 #include <unistd.h>
@@ -38,12 +40,17 @@ void contexts() {
     check(bridge.stats()["queue_peak"]==1,"bridge capacity exceeded");
 }
 struct Temp {
-    std::string dir,path;
-    Temp() { char name[]="/tmp/batt-api-XXXXXX"; auto value=::mkdtemp(name); if (!value) throw std::runtime_error("mkdtemp"); dir=value; path=dir+"/test.db"; }
-    ~Temp() { for (auto suffix : {"","-wal","-shm"}) ::unlink((path+suffix).c_str()); ::rmdir(dir.c_str()); }
+    std::string path;
+    Temp() {
+        static unsigned next = 0;
+        const auto name = std::string("BATT_TEST_DB_CONFIG_") + std::to_string(next++);
+        const auto* value = std::getenv(name.c_str());
+        if (!value) throw std::runtime_error("isolated MySQL test configuration missing");
+        path = value;
+    }
 };
 void admission() {
-    Temp temp; batt::StoreOptions options; options.path=temp.path; options.boot_id="unit";
+    Temp temp; batt::StoreOptions options; options.db=batt::load_db_config(temp.path); options.boot_id="unit";
     batt::StoreShared shared; std::atomic<bool> cancelled{false};
     batt::Store store(options,shared,cancelled); store.initialize(); store.login("BT000","SIM",{}); store.login("BT001","SIM",{});
     std::atomic<std::int64_t> unused{1}; batt::Queries queries(unused);
@@ -84,6 +91,6 @@ void admission() {
 }
 }
 int main() {
-    try { contexts(); admission(); std::cout<<"api_test: "<<checks<<" checks passed\n"; return 0; }
+    try { batt::MysqlLibrary mysql_library; contexts(); admission(); std::cout<<"api_test: "<<checks<<" checks passed\n"; return 0; }
     catch (const std::exception& error) { std::cerr<<"api_test failed after "<<checks<<": "<<error.what()<<'\n'; return 1; }
 }

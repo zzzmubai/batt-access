@@ -1,0 +1,41 @@
+Warning: Translations will not be available due to the following error.
+Cannot open E:/batt-v3-tools/6.8.3/mingw_64/translations/catalogs.json
+Warning: Cannot find any version of the dxcompiler.dll and dxil.dll.
+E:\batt-v3-tools\ops-package-2aac39e502c74953bc62818073e9185d\batt-ops.exe 64 bit, release executable
+Adding in plugin type generic for module: Qt6Gui
+Adding in plugin type imageformats for module: Qt6Gui
+Adding in plugin type networkinformation for module: Qt6Network
+Adding in plugin type platforms for module: Qt6Gui
+Adding in plugin type styles for module: Qt6Widgets
+Adding in plugin type tls for module: Qt6Network
+Skipping plugin qopensslbackend.dll. Use -force-openssl or specify -openssl-root if you want to use it.
+Direct dependencies: Qt6Core Qt6Gui Qt6Network Qt6Widgets
+All dependencies   : Qt6Core Qt6Gui Qt6Network Qt6Widgets
+To be deployed     : Qt6Core Qt6Gui Qt6Network Qt6Widgets
+Warning: Runtime libraries not found in Qt binary folder, defaulting to looking in path
+Updating Qt6Core.dll.
+Updating Qt6Gui.dll.
+Updating Qt6Network.dll.
+Updating Qt6Widgets.dll.
+Updating D3Dcompiler_47.dll.
+Updating libgcc_s_seh-1.dll.
+Updating libstdc++-6.dll.
+Updating libwinpthread-1.dll.
+Creating directory E:/batt-v3-tools/ops-package-2aac39e502c74953bc62818073e9185d/generic.
+Updating qtuiotouchplugin.dll.
+Creating directory E:/batt-v3-tools/ops-package-2aac39e502c74953bc62818073e9185d/imageformats.
+Updating qgif.dll.
+Updating qico.dll.
+Updating qjpeg.dll.
+Creating directory E:/batt-v3-tools/ops-package-2aac39e502c74953bc62818073e9185d/networkinformation.
+Updating qnetworklistmanager.dll.
+Creating directory E:/batt-v3-tools/ops-package-2aac39e502c74953bc62818073e9185d/platforms.
+Updating qwindows.dll.
+Creating directory E:/batt-v3-tools/ops-package-2aac39e502c74953bc62818073e9185d/styles.
+Updating qmodernwindowsstyle.dll.
+Creating directory E:/batt-v3-tools/ops-package-2aac39e502c74953bc62818073e9185d/tls.
+Updating qcertonlybackend.dll.
+Updating qschannelbackend.dll.
+Creating E:\batt-v3-tools\ops-package-2aac39e502c74953bc62818073e9185d\translations...
+Warning: Could not find any translations in E:\batt-v3-tools\6.8.3\mingw_64\translations (developer build?)
+.

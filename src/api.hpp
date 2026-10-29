@@ -11,7 +11,7 @@ enum class CommandKind { status, query, task, alarms, devices, stats };
 struct Command {
     CommandKind kind = CommandKind::status;
     std::string device, client_request_id, alarm_status;
-    std::int64_t task_id = 0, before_id = std::numeric_limits<std::int64_t>::max();
+    std::int64_t task_id = 0, before_id = 0; // zero means first page; INT64_MAX is a valid explicit cursor.
     unsigned limit = 20;
 };
 struct ApiReply {

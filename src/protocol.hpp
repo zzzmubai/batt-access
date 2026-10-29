@@ -121,12 +121,18 @@ public:
     // 内部保留整数原始值；输出时电压、电流除以 100，SOC 和温度直接使用原值。
     Json snapshot(Time now) const {
         Json out = {{"devId", device_}, {"state", status(now)}};
+        std::int64_t oldest = 0;
+        bool complete = true;
         static const std::array<const char*, 4> names{{"voltage_v", "current_a", "soc", "temperature_c"}};
         for (std::size_t i = 0; i < readings_.size(); ++i) {
+            complete = complete && readings_[i].valid;
+            if (readings_[i].valid) oldest = std::max(oldest,
+                static_cast<std::int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(now - readings_[i].updated).count()));
             if (!readings_[i].valid) out[names[i]] = nullptr;
             else if (i < 2) out[names[i]] = static_cast<double>(readings_[i].raw) / 100.0;
             else out[names[i]] = readings_[i].raw;
         }
+        out["data_age_ms"] = complete ? Json(oldest) : Json(nullptr);
         return out;
     }
 

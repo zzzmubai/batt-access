@@ -1,25 +1,27 @@
 /*
- * 文件作用：声明 SQLite 持久化边界，供 worker.cpp 使用，实现见 store.cpp。
+ * 文件作用：声明 MySQL 持久化边界，供 worker.cpp 使用，实现见 store.cpp。
  * 保存 device 设备档案、alarm 告警生命周期、query_task 查询记录；属性快照只在内存中。
- * 启动初始化连接先建表并结束旧 pending，之后每个 worker 持有自己的连接。
- * StoreShared 的写锁串行化本进程写事务；独立连接不意味着可以并行写 SQLite。
+ * 启动连接核验已初始化结构并结束旧 pending，之后每个 worker 持有自己的连接。
+ * StoreShared 的写锁串行化本进程关键写事务。
  * 存储错误通过 StorageError 向上传播，服务停止受理并失败退出。
  */
 #pragma once
 #include "query_task.hpp"
-#include <sqlite3.h>
+#include "storage_error.hpp"
+#include "db_config.hpp"
+#include <memory>
 #include <mutex>
 
 namespace batt {
-struct StorageError : std::runtime_error { using std::runtime_error::runtime_error; };
 // boot_id 与连接 token 组合成可跨进程区分的 connection_id；fail/crash 字段仅用于故障测试。
 struct StoreOptions {
-    std::string path = "access.db", boot_id;
+    DbConfig db;
+    std::string config_path, boot_id;
     std::string fail_operation, crash_operation, crash_phase;
 };
 // 所有 Store 共享有限时写锁和失败标记；任一写入失败后，其他写入也不再继续受理。
 struct StoreShared {
-    std::timed_mutex writer;
+    std::mutex writer;
     std::atomic<bool> failed{false};
     std::atomic<unsigned> fail_hits{0}, crash_hits{0};
 };
@@ -35,13 +37,14 @@ struct ApiAdmission {
     std::string rejected;
 };
 
+class MysqlConnection;
 class Store {
 public:
     Store(const StoreOptions& options, StoreShared& shared, const std::atomic<bool>& cancel);
     ~Store();
     Store(const Store&) = delete;
     Store& operator=(const Store&) = delete;
-    // 服务启动前执行：创建/检查表结构，把历史 pending 结束为 link_lost/server_restart。
+    // 服务启动前执行：核验外部初始化的结构，把旧 pending 结束为 link_lost/server_restart。
     void initialize();
     // 合法接管时，新登记和旧查询结束由一次事务提交。
     void login(const std::string& dev, const std::string& imsi, const std::vector<QueryTask>& replaced);
@@ -54,7 +57,7 @@ public:
     std::vector<RecoveredDevice> recover_devices();
     std::optional<Json> task(std::int64_t id);
     std::vector<Json> alarm_rows(const std::string& dev);
-    std::string version() const { return sqlite3_libversion(); }
+    std::string version() const;
 private:
     // 统一写事务入口，负责锁等待、BEGIN/COMMIT、失败回滚以及测试故障注入。
     void write(const std::string& operation, const std::function<void()>& body);
@@ -64,14 +67,11 @@ private:
     void checkpoint(const std::string& phase);
     void exec(const std::string& sql);
     std::int64_t scalar(const std::string& sql);
-    static int busy(void* context, int);
-    static int progress(void* context);
-    sqlite3* db_ = nullptr;
+    std::unique_ptr<MysqlConnection> db_;
     StoreOptions options_;
     StoreShared& shared_;
     const std::atomic<bool>& cancel_;
-    Time operation_end_{};
+    Time lock_end_{};
     bool crash_this_ = false;
 };
-std::string canonical_database(const std::string& path);
 } // namespace batt

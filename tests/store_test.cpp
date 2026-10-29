@@ -1,4 +1,6 @@
 #include "store.hpp"
+#include "mysql_runtime.hpp"
+#include <cstdlib>
 #include <iostream>
 #include <unistd.h>
 
@@ -11,16 +13,13 @@ template<class F> void rejected(F body) {
     check(threw, "storage error was not raised");
 }
 struct Temp {
-    std::string dir, path;
+    std::string path;
     Temp() {
-        char name[] = "/tmp/batt-store-XXXXXX";
-        const auto value = ::mkdtemp(name);
-        if (!value) throw std::runtime_error("mkdtemp failed");
-        dir = value; path = dir + "/test.db";
-    }
-    ~Temp() {
-        for (const auto& suffix : {"", "-wal", "-shm"}) ::unlink((path + suffix).c_str());
-        ::rmdir(dir.c_str());
+        static unsigned next = 0;
+        const auto name = std::string("BATT_TEST_DB_CONFIG_") + std::to_string(next++);
+        const auto* value = std::getenv(name.c_str());
+        if (!value) throw std::runtime_error("isolated MySQL test configuration missing");
+        path = value;
     }
 };
 batt::Json hello() { return {{"msgType",110},{"devId","BT000"},{"imsi","SIM000"},{"devType",1},{"txnNo",1}}; }
@@ -31,7 +30,7 @@ batt::Json alarms(std::initializer_list<const char*> descriptions) {
     return {{"msgType",410},{"devId","BT000"},{"txnNo",2},{"alarmList",list}};
 }
 void transactions() {
-    Temp tmp; batt::StoreOptions options; options.path = tmp.path; options.boot_id = "boot-A";
+    Temp tmp; batt::StoreOptions options; options.db = batt::load_db_config(tmp.path); options.boot_id = "boot-A";
     batt::StoreShared shared; std::atomic<bool> cancel{false};
     batt::Store store(options, shared, cancel); store.initialize();
     batt::Sessions sessions;
@@ -91,7 +90,7 @@ void transactions() {
     check(!store.task(9999), "unknown task exists");
 }
 void failures() {
-    Temp tmp; batt::StoreOptions options; options.path = tmp.path;
+    Temp tmp; batt::StoreOptions options; options.db = batt::load_db_config(tmp.path);
     batt::StoreShared shared; std::atomic<bool> cancel{false};
     { batt::Store store(options, shared, cancel); store.initialize(); store.login("BT000", "SIM000", {}); }
     options.fail_operation = "alarm";
@@ -127,10 +126,10 @@ void failures() {
             [](const batt::Sessions&, const batt::SessionReply&) { throw batt::StorageError("injected"); });
     });
     check(sessions.device_for(1).has_value() && !sessions.device_for(2), "failed login replaced current session");
-    rejected([] { batt::canonical_database(":memory:"); });
+    rejected([] { batt::load_db_config(":memory:"); });
 }
 }
 int main() {
-    try { transactions(); failures(); std::cout << "store_test: " << checks << " checks passed\n"; return 0; }
+    try { batt::MysqlLibrary mysql_library; transactions(); failures(); std::cout << "store_test: " << checks << " checks passed\n"; return 0; }
     catch (const std::exception& error) { std::cerr << "store_test failed after " << checks << ": " << error.what() << '\n'; return 1; }
 }

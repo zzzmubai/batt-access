@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Independent SQLite/socket/crash tests; all databases live in owned temp dirs."""
+"""Independent MySQL/socket/crash tests; only process-owned schemas are cleaned."""
 import json
 import os
-import sqlite3
+import pymysql
+from mysql_probe import fixture, sql as mysql_sql
 import subprocess
 import tempfile
 import time
@@ -24,7 +25,7 @@ class PersistenceTests(unittest.TestCase):
         self.db = os.path.join(self.temp.name, 'state.db')
 
     def server(self, *args, **kwargs):
-        server = Server('--db', self.db, *args, **kwargs)
+        server = Server('--database-fixture', self.db, *args, **kwargs)
         self.addCleanup(server.stop)
         return server
 
@@ -34,13 +35,7 @@ class PersistenceTests(unittest.TestCase):
         return peer
 
     def sql(self, statement, params=()):
-        db = sqlite3.connect(self.db)
-        try:
-            result = db.execute(statement, params).fetchall()
-            db.commit()
-            return result
-        finally:
-            db.close()
+        return mysql_sql(self.db, statement, params)
 
     def seed(self, codes=('03', '06')):
         server = self.server()
@@ -179,7 +174,9 @@ class PersistenceTests(unittest.TestCase):
                 server = self.server(); peer = self.peer(server); fresh(peer); peer.send(alarm('01')); peer.receive()
                 self.assertEqual(self.sql('SELECT COUNT(*) FROM alarm'), [(3,)])
                 self.assertEqual(self.sql("SELECT alarm_desc FROM alarm WHERE status='open'"), [('01',)])
-                self.assertEqual(self.sql('PRAGMA integrity_check'), [('ok',)])
+                with fixture(self.db).connect() as check_connection:
+                    from mysql_probe import schema
+                    schema.validate(check_connection)
                 self.assertEqual(server.stop(), 0)
 
     def test_query_allocation_crash_committed_pending_is_recovered(self):
@@ -226,9 +223,11 @@ class PersistenceTests(unittest.TestCase):
     def test_external_writer_lock_has_bounded_failure(self):
         self.seed(); before = self.sql('SELECT * FROM alarm ORDER BY id')
         server = self.server(); peer = self.peer(server); fresh(peer)
-        writer = sqlite3.connect(self.db)
+        writer = fixture(self.db).connect()
         try:
-            writer.execute('BEGIN IMMEDIATE')
+            writer.begin()
+            with writer.cursor() as lock:
+                lock.execute("SELECT id FROM alarm WHERE dev_id='BT000' FOR UPDATE")
             started = time.monotonic(); peer.send(alarm('01')); self.crash(server, 1)
             self.assertLess(time.monotonic() - started, 2.5)
             self.assertEqual(peer.socket.recv(4096), b'')
@@ -239,7 +238,7 @@ class PersistenceTests(unittest.TestCase):
     def test_recovery_failure_never_listens_or_partially_changes_pending(self):
         server = self.server(); peer = self.peer(server); fresh(peer); begin(server, peer)
         server.process.kill(); self.crash(server, -9)
-        output = subprocess.run([ACCESS, '--port', '0', '--db', self.db, '--test-storage-fail', 'recovery'],
+        output = subprocess.run([ACCESS, '--port', '0', '--db-config', fixture(self.db).config, '--test-storage-fail', 'recovery'],
                                 stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                 universal_newlines=True, timeout=4)
         self.assertEqual(output.returncode, 1); self.assertNotIn('"event":"ready"', output.stdout)
@@ -270,33 +269,60 @@ class PersistenceTests(unittest.TestCase):
 
     def test_schema_constraints_and_invalid_database_startup(self):
         self.seed()
-        db = sqlite3.connect(self.db)
+        db = fixture(self.db).connect()
         try:
-            db.execute('PRAGMA foreign_keys=ON')
-            statements = [
-                "INSERT INTO device VALUES('BT000','x',1,1)",
-                "INSERT INTO alarm(dev_id,event_no,alarm_id,alarm_desc,status,first_ms,last_ms) VALUES('BT000',99,'01003001','03','open',1,1)",
-                "INSERT INTO alarm(dev_id,event_no,alarm_id,alarm_desc,status,first_ms,last_ms) VALUES('UNKNOWN',99,'01003001','01','open',1,1)",
-                "INSERT INTO query_task(dev_id,status,created_ms) VALUES('BT000','success',1)"]
-            for sql in statements:
-                with self.assertRaises(sqlite3.IntegrityError): db.execute(sql)
-                db.rollback()
-            db.execute("INSERT INTO query_task(dev_id,status,created_ms) VALUES('BT000','pending',1)"); db.commit()
-            with self.assertRaises(sqlite3.IntegrityError):
-                db.execute("INSERT INTO query_task(dev_id,status,created_ms) VALUES('BT000','pending',1)")
-            db.rollback()
+            with db.cursor() as cursor:
+                statements = [
+                    "INSERT INTO device VALUES('BT000','x',1,1)",
+                    "INSERT INTO alarm(dev_id,event_no,alarm_id,alarm_desc,status,first_ms,last_ms) VALUES('BT000',99,'01003001','03','open',1,1)",
+                    "INSERT INTO alarm(dev_id,event_no,alarm_id,alarm_desc,status,first_ms,last_ms) VALUES('UNKNOWN',99,'01003001','01','open',1,1)",
+                    "INSERT INTO query_task(dev_id,status,created_ms) VALUES('BT000','success',1)"]
+                for statement, expected in zip(statements, (1062,1062,1452,3819)):
+                    with self.assertRaises(pymysql.MySQLError) as caught: cursor.execute(statement)
+                    self.assertEqual(caught.exception.args[0], expected)
+                cursor.execute("INSERT INTO query_task(dev_id,status,created_ms) VALUES('BT000','pending',1)")
+                with self.assertRaises(pymysql.IntegrityError):
+                    cursor.execute("INSERT INTO query_task(dev_id,status,created_ms) VALUES('BT000','pending',1)")
         finally: db.close()
         for path in (':memory:', os.path.join(self.temp.name, 'missing', 'test.db'), self.temp.name):
-            output = subprocess.run([ACCESS, '--port', '0', '--db', path], stdin=subprocess.DEVNULL,
+            output = subprocess.run([ACCESS, '--port', '0', '--db-config', path], stdin=subprocess.DEVNULL,
                                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, timeout=5)
             self.assertNotEqual(output.returncode, 0); self.assertNotIn('"event":"ready"', output.stdout)
 
     def test_same_database_cannot_be_owned_by_two_servers(self):
         server = self.server(); peer = self.peer(server); fresh(peer); begin(server, peer)
-        output = subprocess.run([ACCESS, '--port', '0', '--db', self.db], stdin=subprocess.DEVNULL,
+        output = subprocess.run([ACCESS, '--port', '0', '--db-config', fixture(self.db).config], stdin=subprocess.DEVNULL,
                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, timeout=4)
         self.assertEqual(output.returncode, 1); self.assertIn('database already in use', output.stdout)
         self.assertEqual(self.sql('SELECT status FROM query_task'), [('pending',)])
+
+    def test_same_database_different_cwd_rejected_before_recovery(self):
+        server = self.server(); peer = self.peer(server); fresh(peer); begin(server, peer)
+        output = subprocess.run([os.path.abspath(ACCESS), '--port', '0', '--db-config', fixture(self.db).config],
+            cwd=self.temp.name, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+            text=True, timeout=5)
+        self.assertEqual(output.returncode, 1)
+        self.assertIn('database already in use', output.stdout)
+        self.assertEqual(self.sql('SELECT status FROM query_task'), [('pending',)])
+
+    def test_runtime_connection_kill_is_fatal_without_login_success(self):
+        server = self.server(); peer = self.peer(server); fresh(peer)
+        database = fixture(self.db)
+        with database.connect(runtime=True) as killer, killer.cursor() as cursor:
+            cursor.execute('SELECT ID FROM information_schema.PROCESSLIST WHERE DB=%s AND ID<>CONNECTION_ID()', (database.name,))
+            victims = [row[0] for row in cursor.fetchall()]
+            self.assertGreaterEqual(len(victims), 2)
+            for identifier in victims: cursor.execute('KILL CONNECTION %s', (identifier,))
+        peer.send(login(30))
+        self.crash(server, 1)
+        self.assertEqual(peer.socket.recv(4096), b'')
+        self.assertTrue(any(row.get('event') == 'storage_error' for row in server.messages))
+
+    def test_old_db_option_is_explicitly_rejected(self):
+        output = subprocess.run([ACCESS, '--db', '/tmp/unused-v2.db'], stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=5)
+        self.assertEqual(output.returncode, 1)
+        self.assertIn('replace --db with --db-config', output.stdout)
 
 
 if __name__ == '__main__':

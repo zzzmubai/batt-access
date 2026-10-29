@@ -6,7 +6,8 @@ import json
 import os
 import select
 import socket
-import sqlite3
+import pymysql
+from mysql_probe import fixture, sql as mysql_sql
 import subprocess
 import tempfile
 import threading
@@ -40,10 +41,7 @@ def post(server, key, dev='BT000', **kwargs):
 
 
 def sql(path, query, params=()):
-    connection = sqlite3.connect(path)
-    try:
-        rows = connection.execute(query, params).fetchall(); connection.commit(); return rows
-    finally: connection.close()
+    return mysql_sql(path, query, params)
 
 
 class HttpTests(unittest.TestCase):
@@ -66,7 +64,7 @@ class HttpTests(unittest.TestCase):
     def test_occupied_http_port_fails_startup_without_ready(self):
         server=self.server()
         with tempfile.TemporaryDirectory(prefix='batt-http-bind-') as folder:
-            result=subprocess.run([ACCESS,'--port','0','--http-port',str(server.http_port),'--db',os.path.join(folder,'test.db')],
+            result=subprocess.run([ACCESS,'--port','0','--http-port',str(server.http_port),'--db-config',fixture(os.path.join(folder,'bind')).config],
                 stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,universal_newlines=True,timeout=5)
         self.assertEqual(result.returncode,1); self.assertIn('HTTP bind failed',result.stdout)
         self.assertNotIn('"event":"ready"',result.stdout)
@@ -245,7 +243,9 @@ class HttpTests(unittest.TestCase):
 
     def test_timeout_during_sql_commit_can_be_recovered_by_same_key(self):
         server=self.server('--test-api-timeout-ms','100'); self.peer(server)
-        writer=sqlite3.connect(server.db_path); writer.execute('BEGIN IMMEDIATE')
+        writer=fixture(server.db_path).connect(); writer.begin()
+        with writer.cursor() as lock:
+            lock.execute("SELECT dev_id FROM device WHERE dev_id='BT000' FOR UPDATE")
         try:
             code,row,_=post(server,'commit-wait'); self.assertEqual((code,row['outcome']),(503,'unknown'))
         finally: writer.rollback(); writer.close()
@@ -310,7 +310,7 @@ class HttpRecoveryTests(unittest.TestCase):
         self.path=os.path.join(self.temp.name,'test.db')
 
     def server(self,*args):
-        server=HttpServer('--db',self.path,*args); self.addCleanup(server.stop); return server
+        server=HttpServer('--database-fixture',self.path,*args); self.addCleanup(server.stop); return server
 
     def peer(self,server):
         peer=Peer(server.port); self.addCleanup(peer.close); fresh(peer); return peer
@@ -350,44 +350,34 @@ class HttpRecoveryTests(unittest.TestCase):
         self.assertEqual(sql(self.path,'SELECT COUNT(*) FROM query_task'),[(0,)])
         server=self.server(); self.assertEqual(post(server,'rollback')[0],201)
 
-    def legacy(self):
-        # Independent schema-1 fixture, not produced by the new migration code.
-        connection=sqlite3.connect(self.path)
-        connection.executescript('''
-        CREATE TABLE device(dev_id TEXT PRIMARY KEY,imsi TEXT NOT NULL,first_seen_ms INTEGER NOT NULL,last_login_ms INTEGER NOT NULL);
-        CREATE TABLE alarm(id INTEGER PRIMARY KEY,dev_id TEXT NOT NULL REFERENCES device(dev_id),event_no INTEGER NOT NULL CHECK(event_no>0),alarm_id TEXT NOT NULL,alarm_desc TEXT NOT NULL,status TEXT NOT NULL CHECK(status IN ('open','cleared')),first_ms INTEGER NOT NULL,last_ms INTEGER NOT NULL,clear_ms INTEGER,UNIQUE(dev_id,event_no),CHECK((status='open' AND clear_ms IS NULL) OR (status='cleared' AND clear_ms IS NOT NULL)));
-        CREATE UNIQUE INDEX one_open_alarm ON alarm(dev_id,alarm_id,alarm_desc) WHERE status='open';
-        CREATE TABLE query_task(txn_no INTEGER PRIMARY KEY AUTOINCREMENT,dev_id TEXT NOT NULL REFERENCES device(dev_id),connection_id TEXT,status TEXT NOT NULL CHECK(status IN ('pending','success','timeout','link_lost')),reason TEXT,created_ms INTEGER NOT NULL,finished_ms INTEGER,response_json TEXT,CHECK((status='pending' AND finished_ms IS NULL) OR (status<>'pending' AND finished_ms IS NOT NULL)));
-        CREATE UNIQUE INDEX one_pending_query ON query_task(dev_id) WHERE status='pending';
-        INSERT INTO device VALUES('BT000','old-sim',100,100);
-        INSERT INTO alarm VALUES(7,'BT000',2,'01003001','03','open',100,200,NULL);
-        INSERT INTO query_task VALUES(41,'BT000','old:1','pending','',100,NULL,NULL);
-        PRAGMA application_id=1111577684; PRAGMA user_version=1;
-        '''); connection.commit(); connection.close()
+    def test_uninitialized_and_wrong_schema_never_listen(self):
+        from mysql_probe import TestDatabase, schema
+        for kind in ('empty', 'interrupted', 'wrong_version', 'missing_index'):
+            with self.subTest(kind=kind), TestDatabase(initialize=False) as database:
+                with database.connect() as current:
+                    if kind == 'interrupted':
+                        with self.assertRaises(RuntimeError): schema.initialize(current, stop_after=2)
+                    elif kind != 'empty':
+                        schema.initialize(current)
+                        with current.cursor() as cursor:
+                            cursor.execute("UPDATE schema_meta SET schema_version=2" if kind == 'wrong_version'
+                                else "ALTER TABLE query_task DROP INDEX unique_client_request")
+                result=subprocess.run([ACCESS,'--port','0','--http-port','0','--db-config',database.config],
+                    stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=8)
+                self.assertEqual(result.returncode,1)
+                self.assertNotIn('"event":"ready"',result.stdout)
 
-    def test_schema_one_migrates_without_losing_records_or_sequence(self):
-        self.legacy(); server=self.server()
-        self.assertEqual(sql(self.path,'PRAGMA user_version'),[(2,)])
-        row=request(server,'GET','/v1/queries/41')[1]
-        self.assertEqual((row['state'],row['reason'],row['clientRequestId']),('link_lost','server_restart',None))
-        self.assertEqual(post(server,'after-migration')[1]['txnNo'],42)
-        self.assertEqual(sql(self.path,'SELECT id,first_ms,last_ms FROM alarm'),[(7,100,200)])
-        self.assertEqual(server.stop(),0)
-        server=self.server(); self.assertEqual(post(server,'after-migration')[1]['txnNo'],42)
-
-    def test_migration_failure_and_mid_ddl_crash_are_atomic(self):
-        for crash in (False,True):
-            with self.subTest(crash=crash):
-                self.path=os.path.join(self.temp.name,'migration-%s.db' % crash); self.legacy()
-                options=['--test-storage-crash','recovery','--test-storage-crash-phase','mid_migration'] if crash else ['--test-storage-fail','recovery']
-                result=subprocess.run([ACCESS,'--port','0','--http-port','0','--db',self.path]+options,
-                    stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,universal_newlines=True,timeout=5)
-                self.assertEqual(result.returncode,86 if crash else 1); self.assertNotIn('"event":"ready"',result.stdout)
-                self.assertEqual(sql(self.path,'PRAGMA user_version'),[(1,)])
-                self.assertNotIn('client_request_id',[r[1] for r in sql(self.path,'PRAGMA table_info(query_task)')])
-                self.assertEqual(sql(self.path,'SELECT status FROM query_task'),[('pending',)])
-                server=self.server(); self.assertEqual(sql(self.path,'PRAGMA user_version'),[(2,)])
-                self.assertEqual(server.stop(),0)
+    def test_int64_task_and_first_page_cursor_are_exact(self):
+        server=self.server(); self.peer(server)
+        large=9223372036854775807
+        sql(self.path,"INSERT INTO query_task(txn_no,dev_id,status,created_ms,finished_ms) VALUES(?,'BT000','success',1,2)",(large,))
+        sql(self.path,"INSERT INTO alarm(id,dev_id,event_no,alarm_id,alarm_desc,status,first_ms,last_ms) VALUES(?,'BT000',1,'01003001','03','open',1,1)",(large,))
+        code,row,_=request(server,'GET','/v1/queries/%d' % large)
+        self.assertEqual((code,row['txnNo']),(200,large))
+        code,page,_=request(server,'GET','/v1/alarms?devId=BT000')
+        self.assertEqual((code,page['items'][0]['id']),(200,large))
+        _,page,_=request(server,'GET','/v1/alarms?devId=BT000&beforeId=%d' % large)
+        self.assertEqual(page['items'],[])
 
 
 if __name__=='__main__': unittest.main(verbosity=2)

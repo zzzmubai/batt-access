@@ -1,0 +1,57 @@
+Internal ctest changing into directory: /home/book/batt-access-v3/build-v3
+UpdateCTestConfiguration  from :/home/book/batt-access-v3/build-v3/DartConfiguration.tcl
+Parse Config file:/home/book/batt-access-v3/build-v3/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/book/batt-access-v3/build-v3/DartConfiguration.tcl
+Parse Config file:/home/book/batt-access-v3/build-v3/DartConfiguration.tcl
+Test project /home/book/batt-access-v3/build-v3
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 9
+    Start 9: http_network
+
+9: Test command: /home/book/batt-access-v3/.local/venv/bin/python3 "/home/book/batt-access-v3/tests/http_test.py" "/home/book/batt-access-v3/build-v3/batt-access" "/home/book/batt-access-v3/build-v3/batt-sim"
+9: Working Directory: /home/book/batt-access-v3/build-v3
+9: Test timeout computed to be: 120
+9: test_before_and_after_commit_crash_never_split_key_and_task (__main__.HttpRecoveryTests.test_before_and_after_commit_crash_never_split_key_and_task) ... ok
+9: test_int64_task_and_first_page_cursor_are_exact (__main__.HttpRecoveryTests.test_int64_task_and_first_page_cursor_are_exact) ... ok
+9: test_restart_returns_same_request_and_preserves_completed_task (__main__.HttpRecoveryTests.test_restart_returns_same_request_and_preserves_completed_task) ... ok
+9: test_sql_failure_rolls_back_task_key_and_exits_nonzero (__main__.HttpRecoveryTests.test_sql_failure_rolls_back_task_key_and_exits_nonzero) ... ok
+9: test_uninitialized_and_wrong_schema_never_listen (__main__.HttpRecoveryTests.test_uninitialized_and_wrong_schema_never_listen) ... ok
+9: test_alarm_cursor_filters_and_new_insert_no_duplicate_ids (__main__.HttpTests.test_alarm_cursor_filters_and_new_insert_no_duplicate_ids) ... ok
+9: test_application_timeout_before_execution_skips_task_and_late_reply (__main__.HttpTests.test_application_timeout_before_execution_skips_task_and_late_reply) ... ok
+9: test_body_header_bounds_and_device_io_progress (__main__.HttpTests.test_body_header_bounds_and_device_io_progress) ... ok
+9: test_busy_rejection_does_not_reserve_request_key (__main__.HttpTests.test_busy_rejection_does_not_reserve_request_key) ... ok
+9: test_cli_and_http_have_one_pending_guard (__main__.HttpTests.test_cli_and_http_have_one_pending_guard) ... ok
+9: test_client_response_lost_keeps_task_and_deduplicates (__main__.HttpTests.test_client_response_lost_keeps_task_and_deduplicates) ... ok
+9: test_concurrent_results_have_unique_request_ids (__main__.HttpTests.test_concurrent_results_have_unique_request_ids) ... ok
+9: test_connection_queue_is_bounded_without_blocking_devices (__main__.HttpTests.test_connection_queue_is_bounded_without_blocking_devices) ... ok
+9: test_cross_shard_same_key_conflict_is_not_storage_failure (__main__.HttpTests.test_cross_shard_same_key_conflict_is_not_storage_failure) ... ok
+9: test_disabled_by_default_and_fixed_loopback (__main__.HttpTests.test_disabled_by_default_and_fixed_loopback) ... ok
+9: test_full_worker_queue_rejects_post_without_reserving_key (__main__.HttpTests.test_full_worker_queue_rejects_post_without_reserving_key) ... ok
+9: test_occupied_http_port_fails_startup_without_ready (__main__.HttpTests.test_occupied_http_port_fails_startup_without_ready) ... ok
+9: test_offline_is_durable_terminal_unknown_is_not_persisted (__main__.HttpTests.test_offline_is_durable_terminal_unknown_is_not_persisted) ... ok
+9: test_post_commit_location_and_complete_result (__main__.HttpTests.test_post_commit_location_and_complete_result) ... ok
+9: test_replay_before_busy_and_after_terminal_does_not_resend (__main__.HttpTests.test_replay_before_busy_and_after_terminal_does_not_resend) ... ok
+9: test_simultaneous_same_key_only_one_task (__main__.HttpTests.test_simultaneous_same_key_only_one_task) ... ok
+9: test_state_and_cli_share_snapshot (__main__.HttpTests.test_state_and_cli_share_snapshot) ... ok
+9: test_stopping_with_slow_drip_body_releases_http_threads (__main__.HttpTests.test_stopping_with_slow_drip_body_releases_http_threads) ... ok
+9: test_timeout_during_sql_commit_can_be_recovered_by_same_key (__main__.HttpTests.test_timeout_during_sql_commit_can_be_recovered_by_same_key) ... ok
+9: test_timeout_late_and_polling_preserve_terminal_state (__main__.HttpTests.test_timeout_late_and_polling_preserve_terminal_state) ... ok
+9: test_validation_method_and_media_errors_are_nonfatal (__main__.HttpTests.test_validation_method_and_media_errors_are_nonfatal) ... ok
+9: 
+9: ----------------------------------------------------------------------
+9: Ran 26 tests in 15.867s
+9: 
+9: OK
+1/1 Test #9: http_network .....................   Passed   18.07 sec
+
+The following tests passed:
+	http_network
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =  18.07 sec

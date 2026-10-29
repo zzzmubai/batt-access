@@ -6,6 +6,7 @@ import stat
 import sys
 import tempfile
 import uuid
+import atexit
 
 import pymysql
 
@@ -13,6 +14,31 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "database" / "mysql
 import schema
 
 _created = set()
+_fixtures = {}
+
+
+def fixture(key):
+    """A logical scenario key reuses an owned schema across service restarts."""
+    key = str(key)
+    if key not in _fixtures:
+        _fixtures[key] = TestDatabase()
+    return _fixtures[key]
+
+
+def sql(key, statement, parameters=()):
+    with fixture(key).connect() as current, current.cursor() as cursor:
+        cursor.execute(statement.replace('?', '%s'), parameters)
+        rows = cursor.fetchall() if cursor.description else []
+        return [tuple(value.decode('utf-8') if isinstance(value, bytes) else value for value in row) for row in rows]
+
+
+def cleanup_fixtures():
+    for value in list(_fixtures.values()):
+        value.close()
+    _fixtures.clear()
+
+
+atexit.register(cleanup_fixtures)
 
 
 def options():

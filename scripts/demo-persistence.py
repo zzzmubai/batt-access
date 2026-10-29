@@ -24,7 +24,7 @@ def emit(step, **values):
 
 with tempfile.TemporaryDirectory(prefix='batt-demo-') as folder:
     database = str(Path(folder) / 'demo.db')
-    first = Server('--db', database)
+    first = Server('--database-fixture', database)
     peer = Peer(first.port)
     try:
         fresh(peer); peer.send(alarm('03')); peer.receive()
@@ -36,7 +36,7 @@ with tempfile.TemporaryDirectory(prefix='batt-demo-') as folder:
         assert first.process.wait(timeout=4) == -9
     finally:
         peer.close(); first.stop()
-    with Server('--db', database) as second:
+    with Server('--database-fixture', database) as second:
         second.command('status BT000'); status = second.event('status')
         second.command('task %d' % done['txnNo']); success = second.event('task')
         second.command('task %d' % pending['txnNo']); recovered = second.event('task')

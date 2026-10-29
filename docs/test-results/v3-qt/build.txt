@@ -1,0 +1,14 @@
+[1/14] Automatic MOC for target batt_ops_lib
+[2/14] Building CXX object CMakeFiles/batt_ops_lib.dir/batt_ops_lib_autogen/mocs_compilation.cpp.obj
+[3/14] Building CXX object CMakeFiles/batt_ops_lib.dir/api_client.cpp.obj
+[4/14] Building CXX object CMakeFiles/batt_ops_lib.dir/controller.cpp.obj
+[5/14] Building CXX object CMakeFiles/batt_ops_lib.dir/window.cpp.obj
+[6/14] Linking CXX static library libbatt_ops_lib.a
+[7/14] Automatic MOC for target batt-ops
+[8/14] Building CXX object CMakeFiles/batt-ops.dir/batt-ops_autogen/mocs_compilation.cpp.obj
+[9/14] Automatic MOC for target ops_test
+[10/14] Building CXX object CMakeFiles/ops_test.dir/ops_test_autogen/mocs_compilation.cpp.obj
+[11/14] Building CXX object CMakeFiles/batt-ops.dir/main.cpp.obj
+[12/14] Linking CXX executable batt-ops.exe
+[13/14] Building CXX object CMakeFiles/ops_test.dir/tests.cpp.obj
+[14/14] Linking CXX executable ops_test.exe

@@ -1,11 +1,12 @@
 /*
  * 文件作用：实现设备分片内的业务执行，是网络层与状态机/存储层的连接点。
- * run 在所属线程打开 SQLite、恢复本分片设备、等待输入并检查查询期限和数据年龄。
+ * run 在所属线程打开 MySQL 连接、恢复本分片设备、等待输入并检查查询期限和数据年龄。
  * process 处理协议帧及断开通知，command 处理 status/query/task 等 CLI 请求。
  * 所有结果经过 WorkerOutput 返回 I/O；本文件不直接调用 send 或关闭业务 socket。
  * 阅读重点：110/410 的提交边界、911 的当前会话检查、正常排空和失败退出。
  */
 #include "worker.hpp"
+#include "mysql_runtime.hpp"
 
 namespace batt {
 Worker::Worker(std::size_t index, const WorkerConfig& config, BoundedQueue<WorkerOutput>& output,
@@ -33,10 +34,12 @@ void Worker::one(Json event, Token token) {
     WorkerOutput out; out.token = token; out.logs.push_back(std::move(event)); emit(std::move(out));
 }
 
-// SQLite 连接在实际使用它的线程中创建与释放；只恢复哈希归属本分片的设备。
+// 连接在所属线程创建和释放；线程 TLS 在全部连接关闭后清理。
 void Worker::run() {
     bool started = false;
+    std::optional<MysqlThread> mysql_thread;
     try {
+        mysql_thread.emplace();
         store_ = std::make_unique<Store>(config_.storage, storage_shared_, aborted_);
         for (auto& device : store_->recover_devices()) {
             if (device_shard(device.name, config_.workers) == index_)
@@ -70,7 +73,7 @@ void Worker::run() {
         else try { logs({{{"event", "storage_error"}, {"reason", error.what()}}}); } catch (...) {}
         failed_.store(true);
     }
-    store_.reset(); // SQLite connection is closed by its owning worker.
+    store_.reset(); // Closed before mysql_thread's destructor, including exception paths.
     done_.store(true);
 }
 

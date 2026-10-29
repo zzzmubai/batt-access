@@ -7,6 +7,7 @@
 #include <limits>
 #include <sstream>
 #include <thread>
+#include <future>
 
 namespace {
 unsigned checks = 0;
@@ -80,6 +81,44 @@ void resources(const batt::DbConfig& config) {
     unsigned rows = 0;
     while (outer.row()) { require(count(connection, outer.text(0)) == 1, "nested result lifetime"); ++rows; }
     require(rows == 2, "unexpected resource-test device count");
+    insert(connection, "deadlock-a"); insert(connection, "deadlock-b");
+    std::promise<void> locked[2];
+    auto ready0 = locked[0].get_future().share(), ready1 = locked[1].get_future().share();
+    unsigned outcomes[2] = {0, 0};
+    std::exception_ptr errors[2];
+    auto contender = [&](unsigned index) {
+        try {
+            batt::MysqlThread thread;
+            batt::MysqlConnection own(config);
+            batt::MysqlTransaction transaction(own);
+            const auto first = index ? "deadlock-b" : "deadlock-a";
+            const auto second = index ? "deadlock-a" : "deadlock-b";
+            batt::MysqlStatement lock(own, "UPDATE device SET last_login_ms=3 WHERE dev_id=?");
+            lock.text(1, first); lock.done();
+            locked[index].set_value();
+            (index ? ready0 : ready1).wait();
+            batt::MysqlStatement other(own, "UPDATE device SET last_login_ms=4 WHERE dev_id=?");
+            other.text(1, second); other.done(); transaction.commit();
+        } catch (const batt::StorageError& error) { outcomes[index] = error.code; }
+        catch (...) { errors[index] = std::current_exception(); }
+    };
+    std::thread first(contender, 0), second(contender, 1); first.join(); second.join();
+    for (auto error : errors) if (error) std::rethrow_exception(error);
+    require((outcomes[0] == 1213 && outcomes[1] == 0) || (outcomes[1] == 1213 && outcomes[0] == 0),
+        "deadlock code missing or transaction replayed");
+    {
+        batt::MysqlConnection victim(config), killer(config);
+        batt::MysqlStatement identity(victim, "SELECT CONNECTION_ID()");
+        require(identity.row(), "connection identity missing");
+        batt::MysqlTransaction transaction(victim); insert(victim, "commit-disconnected");
+        killer.exec("KILL CONNECTION " + std::to_string(identity.number(0)));
+        bool unknown = false;
+        try { transaction.commit(); } catch (const batt::StorageError& error) {
+            unknown = error.commit_unknown && std::string(error.what()).find("transaction_not_replayed") != std::string::npos;
+        }
+        require(unknown, "lost COMMIT was not classified unknown");
+        require(count(observer, "commit-disconnected") == 0, "killed uncommitted transaction persisted");
+    }
 }
 }
 int main() {

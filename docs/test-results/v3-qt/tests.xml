@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCase name="Operations">
+  <Environment>
+    <QtVersion>6.8.3</QtVersion>
+    <QtBuild>Qt 6.8.3 (x86_64&#x002D;little_endian&#x002D;llp64 shared (dynamic) release build; by GCC 13.1.0)</QtBuild>
+    <QTestVersion>6.8.3</QTestVersion>
+  </Environment>
+  <TestFunction name="initTestCase">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="7.2278"/>
+  </TestFunction>
+  <TestFunction name="integerPrecisionAndInvalidIds">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="0.3704"/>
+  </TestFunction>
+  <TestFunction name="statusFactsAndTransportFailure">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="694.826"/>
+  </TestFunction>
+  <TestFunction name="slowResponseDoesNotFreezeOrPileUp">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="423.8"/>
+  </TestFunction>
+  <TestFunction name="lateDeviceAndInvalidAddressCannotOverwrite">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="593.718"/>
+  </TestFunction>
+  <TestFunction name="unknownPostRecoversSameRequestAcrossDeviceSwitch">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="794.648"/>
+  </TestFunction>
+  <TestFunction name="lostPostAndExplicitRejection">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="232.356"/>
+  </TestFunction>
+  <TestFunction name="acceptedAndTerminalStates">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="2059.27"/>
+  </TestFunction>
+  <TestFunction name="observationTimeoutIsNotServerTimeout">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="488.372"/>
+  </TestFunction>
+  <TestFunction name="alarmPagingPrecisionFilterAndReset">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="283.637"/>
+  </TestFunction>
+  <TestFunction name="invalidJsonFieldsDeadlineAndClose">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="795.449"/>
+  </TestFunction>
+  <TestFunction name="encodedDevicePath">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="113.05"/>
+  </TestFunction>
+  <TestFunction name="delayedAlarmFilterCannotPolluteNewPage">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="461.808"/>
+  </TestFunction>
+  <TestFunction name="realServiceThroughSsh">
+    <Incident type="skip" file="E:/batt&#x002D;v3&#x002D;tools/ops&#x002D;source&#x002D;46d8183a4fff4d0cb3654527dcda9f29/tests.cpp" line="196">
+      <Description><![CDATA[Run separately with the owned simulator and SSH fixture]]></Description>
+    </Incident>
+    <Duration msecs="0.0804"/>
+  </TestFunction>
+  <TestFunction name="windowPreview">
+  <Message type="qwarn" file="" line="0">
+    <Description><![CDATA[QFontDatabase: Cannot find font directory E:/batt-v3-tools/6.8.3/mingw_64/lib/fonts.
+Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.]]></Description>
+  </Message>
+  <Message type="qwarn" file="" line="0">
+    <Description><![CDATA[This plugin does not support propagateSizeHints()]]></Description>
+  </Message>
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="124.82"/>
+  </TestFunction>
+  <TestFunction name="cleanupTestCase">
+    <Incident type="pass" file="" line="0" />
+    <Duration msecs="0.0426"/>
+  </TestFunction>
+  <Duration msecs="7076.31"/>
+</TestCase>

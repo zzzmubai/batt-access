@@ -11,6 +11,7 @@ import threading
 import tempfile
 import time
 import unittest
+from mysql_probe import fixture
 
 ACCESS, SIM = sys.argv[1:3]
 sys.argv = sys.argv[:1]
@@ -69,10 +70,14 @@ class Server:
     def __init__(self, *args, terminal=False):
         self.temp = tempfile.TemporaryDirectory(prefix='batt-network-')
         self.db_path = os.path.join(self.temp.name, 'test.db')
-        if '--db' in args:
-            self.db_path = args[args.index('--db') + 1]
+        if '--database-fixture' in args:
+            self.db_path = args[args.index('--database-fixture') + 1]
+        arguments = list(args)
+        if '--database-fixture' in arguments:
+            at = arguments.index('--database-fixture'); del arguments[at:at+2]
+        self.database = fixture(self.db_path)
         master, slave = pty.openpty() if terminal else (None, None)
-        self.process = subprocess.Popen([ACCESS, '--port', '0', '--db', self.db_path] + list(args),
+        self.process = subprocess.Popen([ACCESS, '--port', '0', '--db-config', self.database.config] + arguments,
                                         stdin=slave if terminal else subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                         universal_newlines=True, bufsize=1)
         if terminal:
@@ -85,7 +90,11 @@ class Server:
         self.reader = threading.Thread(target=self._read)
         self.reader.daemon = True
         self.reader.start()
-        self.port = self.event('ready')['port']
+        try:
+            self.port = self.event('ready')['port']
+        except BaseException:
+            self.stop()
+            raise
 
     def _read(self):
         for line in self.process.stdout:
